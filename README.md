@@ -20,7 +20,7 @@ Features van de gebruiker:
 ## Minimale vereisten en optimalisaties
 
 Minimale vereisten:
-1. Er is een poppetje waarin niveau's veranderd kunnen worden.
+1. Er is een poppetje waarin niveaus veranderd kunnen worden (als een soort schuifbalk).
 2. Er is een grafiek die specifieke waardes aangeeft die overeenkomen met het niveau van het poppetje.
 3. Er is een correlatiediagram.
 4. Er is een lijndiagram die de gezondheid van Nederland over de jaren weergeeft.
