@@ -22,6 +22,6 @@ Alle data staat in 1 bestand en kan gevonden worden op:
 https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004
 
 ### Vergelijkbare data visualisaties
-![Alt text](/doc/example)
+![Alt text](https://www.bakemag.com/ext/resources/images/r/h/y/t/h/d/o/o/o/f/2016/RhythmofFood.jpg)
 
 ### Moeilijkheden
