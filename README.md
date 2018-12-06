@@ -12,8 +12,7 @@ Optimalisatie: smooth transition van de linechart (of barchart) naar de sunburst
 
 
 ## Minimale vereisten en optimalisaties
-
-
+--
 
 ### Externe componenten
 D3
