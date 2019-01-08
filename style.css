@@ -29,21 +29,23 @@ header {
 }
 
 .sunburstsvg {
-  background: darkblue;
+  background: mediumpurple;
   float: left;
   width: 50%;
-  height: 800px;
+  height: 1000px;
 }
 
 .datasvg {
-  background: skyblue;
+  background: indigo;
   position: absolute;
   width: 50%;
-  height: 800px;
+  height: 1000px;
+  color: white;
 }
 
-.test {
-  color: black;
+.datatext {
+  fill: #fff;
+  font-size: 20px;
 }
 
 
