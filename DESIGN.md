@@ -4,8 +4,10 @@
 Data kan gedownload worden van https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004.
 De dataset is bewaard in de folder 'data' onder de naam 'foodvalues.csv'.
 De dataset moet omgezet worden in een json format waarbij de voedingsmiddelen de keys zijn en de values zijn de opzoekwaardes per week, waarvan er dus 52 zijn per jaar.
+Om het document om te zetten naar een json format zal ik een python script gebruiken, te vinden onder de naam 'converter.py' in de folder 'scripts'. 
 Het json format moet er qua structuur uiteindelijk zo uitzien:
 ![Alt text](doc/json_example.jpeg)
+
 
 ## Pagina design
 Bij het openen van de pagina wordt een begintekst weergegeven over de doel en opzet van het project en alle overige informatie om het project te begrijpen.
