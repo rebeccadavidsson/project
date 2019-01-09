@@ -6,7 +6,7 @@
 body {
   font-family: Geneva;
   color: white;
-  height: 2000px;
+  height: 900px;
   background-image: linear-gradient(to bottom, #000058 , #00003D);
   margin: auto;
 }
@@ -29,23 +29,57 @@ header {
 }
 
 .sunburstsvg {
-  background: mediumpurple;
+  background: darkgray;
   float: left;
-  width: 50%;
-  height: 1000px;
+  width: 60%;
+  height: 1100px;
+}
+
+.sunburst {
+  box-shadow: 5px 10px;
 }
 
 .datasvg {
-  background: indigo;
+  background: silver;
   position: absolute;
-  width: 50%;
-  height: 1000px;
+  width: 40%;
+  height: 1100px;
   color: white;
 }
 
 .datatext {
   fill: #fff;
   font-size: 20px;
+}
+
+.betweenline {
+  background: grey;
+  width: 100%;
+  height: 50px;
+}
+
+.barchart {
+  background: #111E6C;
+  width: 100%;
+  height: 800px;
+}
+
+.foodname {
+  fill: dimgray;
+  position: absolute;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 15px;
+}
+
+.axisBar {
+  stroke-width: 4;
+  font: 16px sans-serif;
+}
+
+.storysvg {
+  /* background-image: linear-gradient(to bottom, #000058 , grey); */
+  width: 100%;
+  height: 800px;
 }
 
 
@@ -87,6 +121,21 @@ section h1 {
   text-decoration: none;
   transition: opacity .3s;
 }
+
+.demo2 a {
+  position: relative;
+  top: 1000px;
+  left: 50%;
+  z-index: 2;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  color: #fff;
+  font : normal 400 20px/1 'Josefin Sans', sans-serif;
+  letter-spacing: .1em;
+  text-decoration: none;
+  transition: opacity .3s;
+}
+
 .demo a:hover {
   opacity: .5;
 }

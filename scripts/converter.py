@@ -3,25 +3,17 @@ This script converts data from csv to json.
 Name: Rebecca Davidsson, student number: 11252138.
 """
 
+import json
 import csv
-import pandas as pd
+from nested_dict import nested_dict
 
-df = pd.read_csv("data/foodvalues.csv")
+with open("../data/foodvalues.csv") as csvfile:
+    foodvalues = csv.reader(csvfile, delimiter=',')
 
-export = df.to_json("test.json", orient='table')
+    nd = nested_dict()
+    for row in foodvalues:
+        year = row[2].split("-")[0]
+        nd[row[0]][year][row[2].split("-")[-1]] = row[3]
 
-
-#
-# with open("data/foodvalues.csv") as csvfile:
-#     foodvalues = csv.reader(csvfile, delimiter=',')
-#
-#     df = pd.DataFrame(foodvalues)
-#     print(df)
-#
-#     dict = {}
-#     for row in foodvalues:
-#         dict.update({row[0]: ([row[2].split("-")[0], [row[2].split("-")[-1], row[3]]] )})
-#
-#     # print(dict)
-#
-#     # jsonfile = open('file.json', 'w')
+    with open("result.json", "w") as fp:
+        json.dump(nd, fp)
