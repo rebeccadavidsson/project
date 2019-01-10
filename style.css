@@ -6,9 +6,10 @@
 body {
   font-family: Geneva;
   color: white;
-  height: 900px;
+  height: 100;
   background-image: linear-gradient(to bottom, #000058 , #00003D);
   margin: auto;
+  max-width: 93%;
 }
 
 header {
@@ -31,8 +32,9 @@ header {
 .sunburstsvg {
   background: darkgray;
   float: left;
-  width: 60%;
-  height: 1100px;
+  width: 58%;
+  height: 1000px;
+  overflow: hidden;
 }
 
 .sunburst {
@@ -42,14 +44,27 @@ header {
 .datasvg {
   background: silver;
   position: absolute;
-  width: 40%;
-  height: 1100px;
+  width: 39.2%;
+  height: 1000px;
   color: white;
+  z-index: -1;
 }
 
 .datatext {
   fill: #fff;
   font-size: 20px;
+}
+
+.foodname {
+  fill: dimgray;
+  position: absolute;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 13px;
+}
+
+.axisBar {
+  stroke-width: 3;
+  font: 16px sans-serif;
 }
 
 .betweenline {
@@ -58,22 +73,20 @@ header {
   height: 50px;
 }
 
-.barchart {
-  background: #111E6C;
+.linechart {
+  background: #000033;
   width: 100%;
-  height: 800px;
+  height: 1000px;
 }
 
-.foodname {
-  fill: dimgray;
-  position: absolute;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  font-size: 15px;
+.line {
+  stroke-width: 2px;
+  stroke: #009900;
 }
 
-.axisBar {
-  stroke-width: 4;
-  font: 16px sans-serif;
+.linechartTitle {
+  font-size: 24px;
+  fill: white;
 }
 
 .storysvg {
@@ -82,10 +95,74 @@ header {
   height: 800px;
 }
 
+.story {
+  background: silver;
+  padding-top: 150px;
+  padding-bottom: 600px;
+  padding-left: 100px;
+  font-size: 20px;
+  color: white;
+}
+
+.sliderdiv {
+  width: 40%;
+  height: 60px;
+  float: right;
+  z-index: 0;
+  display: inline-block;
+  background-color: silver;
+  position: relative;
+  padding-top: 10px;
+}
+
+.sliderAxis {
+  font-size: 10px;
+}
+/*  Slide bar: source: https://www.w3schools.com/howto/howto_js_rangeslider.asp*/
+.slidecontainer {
+  width: 400px; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: grey; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
 
 
 
-/* resource: https://codepen.io/priyankal/pen/zRvNyV */
+
+
+/* Source: https://codepen.io/priyankal/pen/zRvNyV */
 section::after {
   bottom: 0;
   left: 0;
@@ -124,7 +201,21 @@ section h1 {
 
 .demo2 a {
   position: relative;
-  top: 1000px;
+  top: 930px;
+  left: 50%;
+  z-index: 2;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  color: #fff;
+  font : normal 400 20px/1 'Josefin Sans', sans-serif;
+  letter-spacing: .1em;
+  text-decoration: none;
+  transition: opacity .3s;
+}
+
+.demo3 a {
+  position: relative;
+  top: 900px;
   left: 50%;
   z-index: 2;
   -webkit-transform: translate(0, -50%);

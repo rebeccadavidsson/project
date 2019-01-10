@@ -13,7 +13,13 @@ with open("../data/foodvalues.csv") as csvfile:
     nd = nested_dict()
     for row in foodvalues:
         year = row[2].split("-")[0]
-        nd[row[0]][year][row[2].split("-")[-1]] = row[3]
+        week = row[2].split("-")[-1]
 
-    with open("result.json", "w") as fp:
+        # Filter out all '01', '02' etc.
+        if week[0] == "0":
+            week = week[1]
+
+        nd[row[0]][year][week] = row[3]
+
+    with open("../data/result.json", "w") as fp:
         json.dump(nd, fp)
