@@ -3,6 +3,11 @@
   margin:0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 body {
   font-family: Geneva;
   color: white;
@@ -33,26 +38,29 @@ header {
   background: darkgray;
   float: left;
   width: 58%;
-  height: 1000px;
+  height: 1080px;
   overflow: hidden;
-}
-
-.sunburst {
-  box-shadow: 5px 10px;
+  display: flex;
+  /* font-size: 0 */
 }
 
 .datasvg {
   background: silver;
-  position: absolute;
-  width: 39.2%;
-  height: 1000px;
+  /* position: absolute; */
+  border: 0px;
+  display: flex;
+  width: 42%;
+  height: 1010px;
   color: white;
-  z-index: -1;
+  /* z-index: -1; */
+  /* font-size: 0 */
 }
 
 .datatext {
   fill: #fff;
-  font-size: 20px;
+  font-size: 30px;
+  text-anchor: middle;
+  font-weight: bold
 }
 
 .foodname {
@@ -70,7 +78,8 @@ header {
 .betweenline {
   background: grey;
   width: 100%;
-  height: 50px;
+  height: 80px;
+  display: flex;
 }
 
 .linechart {
@@ -102,13 +111,15 @@ header {
   padding-left: 100px;
   font-size: 20px;
   color: white;
+  /* box-shadow: 2px 20px grey; */
 }
 
 .sliderdiv {
-  width: 40%;
+  width: 42%;
   height: 60px;
   float: right;
-  z-index: 0;
+  border: 0px;
+  /* z-index: 0; */
   display: inline-block;
   background-color: silver;
   position: relative;
@@ -116,7 +127,7 @@ header {
 }
 
 .sliderAxis {
-  font-size: 10px;
+  font-size: 8.8px;
 }
 /*  Slide bar: source: https://www.w3schools.com/howto/howto_js_rangeslider.asp*/
 .slidecontainer {
@@ -128,9 +139,9 @@ header {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
   width: 100%; /* Full-width */
-  height: 25px; /* Specified height */
+  height: 10px; /* Specified height */
   background: #d3d3d3; /* Grey background */
-  outline: none; /* Remove outline */
+  outline: none;
   opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
   transition: opacity .2s;
@@ -145,9 +156,9 @@ header {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: grey; /* Green background */
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: grey; /* grey background */
   cursor: pointer; /* Cursor on hover */
 }
 
@@ -157,6 +168,98 @@ header {
   background: #4CAF50; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+.dropdown > a, .dropdown > button {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 6px 20px 6px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  color: black;
+  text-decoration: none;
+}
+
+.dropdown > a:before, .dropdown > button:before {
+  position: absolute;
+  right: 7px;
+  top: 12px;
+  content: ' ';
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+}
+
+.dropdown input[type=checkbox] {
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  opacity: 0;
+}
+
+.dropdown input[type=checkbox]:checked {
+  position: fixed;
+  z-index:+0;
+  top: 0px; left: 0px;
+  right: 0px; bottom: 0px;
+}
+
+.dropdown ul {
+  position: absolute;
+  top: 18px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  left: 0px;
+  list-style: none;
+  padding: 4px 0px;
+  display: none;
+  background-color: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,.175);
+}
+
+.dropdown input[type=checkbox]:checked + ul {
+  display: block;
+}
+
+.dropdown ul li {
+  display: block;
+  padding: 6px 20px;
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+.dropdown ul li:hover {
+  background-color: #F5F5F5;
+  cursor: pointer;
+}
+
+.dropdown ul li a {
+  text-decoration: none;
+  display: block;
+  color: black
+}
+
+.dropdown .divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+  font-size: 1px;
+  padding: 0;
+}
+
+
 
 
 
@@ -201,8 +304,8 @@ section h1 {
 
 .demo2 a {
   position: relative;
-  top: 930px;
-  left: 50%;
+  top: 1000px;
+  left: 28%;
   z-index: 2;
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);

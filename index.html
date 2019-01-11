@@ -8,9 +8,11 @@
   <meta charset="utf-8">
   <title>Final Project</title>
     <link rel="stylesheet" href="style.css"></link>
+    <script rel="stylesheet" type="text/css" src="bootstrap/css/bootstrap.min.css"></script>
     <script src="d3/d3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script> -->
-    <script src="script.js"></script>
+    <script src="scripts/script.js"></script>
 </head>
 <body onload="onload()">
   <p style="font-size:10px" class="name">Rebecca Davidsson || Data Processing 2019 || Food searching trends</p>
@@ -22,21 +24,31 @@
   <p style="font-size:16px">Moet hier ook nog wat staan</p>
   <p style="font-size:16px">Oh nee dit moet natuurlijk in het Engels!!! Sorry</p>
 <section id="section07" class="demo">
-  <a href="#sunburstsvg"><span></span><span></span><span></span></a>
+  <a href="#" onclick="MyFunction();"><span></span><span></span><span></span></a>
 </section>
 </header>
-  <div class="sliderdiv" id="sliderdiv"> </div>
-<svg class="sunburstsvg" id="sunburstsvg"></svg>
-<svg class="datasvg" id="datasvg"></svg>
+  <div class="sliderdiv" id="sliderdiv">
+    <div class="dropdown">
+        <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown" id="button">Choose category:
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" id="dropdown-menu">
+          <li><a href="#">2014</a></li>
+          <li><a href="#">2015</a></li>
+          <li><a href="#">2016</a></li>
+        </ul>
+      </div>
+    </div>
 <section id="section07" class="demo2">
   <a href="#linechart"><span></span><span></span><span></span></a>
 </section>
-<svg class="betweenline" id="betweenline"></svg>
+<svg class="sunburstsvg" id="sunburstsvg"></svg>
+<svg class="datasvg" id="datasvg"></svg>
+
+<!-- <svg class="betweenline" id="betweenline"></svg> -->
 <section id="section07" class="demo3">
   <a href="#story"><span></span><span></span><span></span></a>
 </section>
 <svg class="linechart" id="linechart"></svg>
-
 <!-- <svg class="storysvg" id="storysvg"></svg> -->
 <p class="story" id="story"> Hier komt ook iets</p>
 </body>
