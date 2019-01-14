@@ -1,9 +1,15 @@
 function onload() {
-
 // Open file
 fetch('data/result.json').then(response => {
   return response.json();
 }).then(data => {
+
+test(data)
+
+}).catch(err => {
+  // TODO
+});
+
 
 d3.select("#sunburstsvg")
   .append("text")
@@ -13,12 +19,6 @@ d3.select("#sunburstsvg")
     .attr('y', 70)
     .attr('x', 390)
 
-// d3.select("#datasvg")
-//   .append("text")
-//   .text("Title")
-//   .attr("class", "datatext")
-//   .attr('y', 50)
-//   .attr('x', 20)
 
 // Source: http://2ality.com/2013/11/initializing-arrays.html
 function fillArrayWithNumbers(n) {
@@ -74,7 +74,7 @@ function fillArrayWithNumbers(n) {
 
      // Loop through every value of that year
      for (var i = 1; i < weeks + 1; i++) {
-       array.push(keys[key][i])
+       array.push(parseInt(keys[key][i]))
      }
    }
    return array
@@ -203,10 +203,10 @@ d3.selectAll("#datasvg")
 }
 
 var sliderAxis = d3.scalePoint()
-    .domain(["2004 ", " | ", "2005", " |", " 2006 ", " | ", "2007 ", "|",
-             " 2008 ",  "| ", " 2009",  " | ", " 2010 ",  " | ", " 2011 ",
-               " | ", " 2012 ",  " | ", " 2013 ",  " | ", " 2014 ",  " | ", " 2015 ",
-               " | ", " 2016 ",  " | ", " 2017 "])
+    // .domain(["2004 ", " | ", "2005", " |", " 2006 ", " | ", "2007 ", "|",
+    //          " 2008 ",  "| ", " 2009",  " | ", " 2010 ",  " | ", " 2011 ",
+    //            " | ", " 2012 ",  " | ", " 2013 ",  " | ", " 2014 ",  " | ", " 2015 ",
+    //            " | ", " 2016 ",  " | ", " 2017 "])
     .range([barPadding ,graphWidth + barPadding]);
 
 // Add slide bar
@@ -222,29 +222,52 @@ slider.append("input")
           .attr("class", "slider")
           .attr("id", "year")
           .on("input", function input() {
-					updateYear(bar);
+					updateYear(data, bar);
+          updateUnderBarChart("frozen-yogurt")
 				});
+
+//
+// var dataTime = d3.range(0, 11).map(function(d) {
+//     return new Date(2004 + d, 2, 3);
+//   });
+//
+//   var sliderTime = d3
+//       .sliderBottom()
+//       .min(2004)
+//       .max(2016)
+//       .step(1000 * 60 * 60 * 24 * 365)
+//       .width(300)
+//       .tickFormat(d3.timeFormat('%Y'))
+//       .tickValues(dataTime)
+//       .default(new Date(2016, 2, 3))
+//       .on('onchange', val => {
+//         d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
+//       });
+//
+//   var gTime = d3
+//       .select('#sunburstsvg')
+//       .attr('width', 500)
+//       .attr('height', 100)
+//       .append('g')
+//       .attr('transform', 'translate(30,30)');
+//
+//     gTime.call(sliderTime);
+//
+//     d3.select('p#value-time').text(d3.timeFormat('%Y')(sliderTime.value()));
+
 
 slider.append("g")
       .attr("class", "sliderAxis")
-        // .attr("transform", "translate(100," + 10 + ")")
         .call(d3.axisBottom(sliderAxis))
-        // .on("onchange", function(d) { console.log("etetste");})
 
-drop = d3.selectAll("#sliderdiv")
-        .append("div")
-        .attr("class", "dropdown")
+dropdown = d3.select("div") // TODO
 
-dropdown = d3.select("div")
 // Add dropdown menu
 dropdown.append("select")
         .selectAll("option")
-        .attr("class", "dropdown")
-        .attr("id", "dropdown")
         .data(foodnames) // TODO sort
         .enter()
           .append("option")
-          .attr("class", "dropdown-content")
           .attr("value", function(d){
               return d;
           })
@@ -259,7 +282,7 @@ dropdown.on('change', function(){
             .property("value")
         updateSunburst(foodname)
         updateUnderBarChart(foodname)
-        updateLineChart(foodname)})
+        updateLineChart(foodname, "False")})
 
 }).catch(err => {
   // TODO
@@ -296,13 +319,10 @@ function updateYear(bar) {
     // Fill in the barchart with rectangles
     function fillBars(food, year, color){
 
-      console.log("#bar" + i);
-      console.log(food, year);
-
       d3.selectAll("#bar" + i)
         .data(getDataArray(food, year))
         .transition()
-        .duration(600)
+        .duration(1000)
         .ease(d3.easeBounceOut)
         .attr("x", function(d) {
           return(xScale(d[1]) + xPadding)})
@@ -402,8 +422,6 @@ makeUnderBarchart("potato")
 function updateUnderBarChart(foodname) {
   var year = years[document.getElementById("year").value]; // TODO
 
-  console.log(year);
-
   bars = d3.selectAll("#sunburstsvg").selectAll("rect")
 
   bars.data(getDataArray2(foodname, year))
@@ -425,7 +443,7 @@ function updateUnderBarChart(foodname) {
 function makeSunburst(){
 
   test = getDataMeans("frozen-yogurt")
-  test2 = getDataMeans("carrot")
+  test2 = getDataArrayYears("carrot")
   test3 = getDataMeans("pear")
 
   var width = 380;
@@ -436,10 +454,10 @@ function makeSunburst(){
   var outerRadius2 = 190
   var radius3 = 190
   var outerRadius3 = 170
-  var radiusBig = 350
-  var outerRadiusBig = 420
-  var radiusBig2 = 300
-  var outerRadiusBig2 = 340
+  var radiusBig = 360
+  var outerRadiusBig = 430
+  var radiusBig2 = 290
+  var outerRadiusBig2 = 350
   var color = d3.scaleOrdinal(d3.schemeCategory20b);
 
   var sunburst = d3.select("#sunburstsvg")
@@ -449,10 +467,14 @@ function makeSunburst(){
     .attr('transform', 'translate(' + width + ',' + height + ')');
 
   var colors = d3.scaleOrdinal(d3.schemeBlues[5]) // TODO
+  var colors2 = d3.scaleSequential(d3.interpolatePiYG);
 
   arc = d3.arc()
               .innerRadius(radius)
               .outerRadius(outerRadius);
+  var labelArc = d3.arc()
+            .outerRadius(radius - 40)
+            .innerRadius(outerRadius - 40);
   arc2 = d3.arc()
               .innerRadius(radius2)
               .outerRadius(outerRadius2);
@@ -469,9 +491,13 @@ function makeSunburst(){
               .value(function(d, i) {return d[1]; })
               .sort(null);
 
-  var arr = [test, test2, test3]
-  var arrArc = [arc, arc2, arc3]
-  for (var i = 0; i < 3; i++) {
+  pie2 = d3.pie()
+              .value(function(d, i) {return d; })
+              .sort(null);
+
+  var arr = [test, test3]
+  var arrArc = [arc, arc3]
+  for (var i = 0; i < 2; i++) {
 
     sunburst.selectAll("#sunburstsvg")
           .data(pie(arr[i]))
@@ -494,8 +520,43 @@ function makeSunburst(){
                 .transition()
               .duration(250)
               .style('opacity', '1')
-            })
+            });
+
   }
+
+  sunburst.selectAll("#sunburstsvg")
+          .data(pie(test))
+          .attr("transform", function(d) {
+            return "translate(" + arc.centroid(d) + ")";
+        })
+         .attr("dy", ".35em")
+         .attr("text-anchor", "middle")
+         .text(function(d, i) {return years[i]; });
+
+
+
+  // sunburst.selectAll("#sunburstsvg")
+  //       .data(pie2(test2))
+  //       .enter()
+  //       .append('path')
+  //       .attr("id", "sunburstpath")
+  //       .attr('d', arrArc[1])
+  //       .attr("fill", function(d,i) {
+  //         return colors2(i);
+  //       })
+  //       .attr("stroke", "darkgray")
+  //       .attr("stroke-width", 6)
+  //       .each(function(d) { this._current = d; })
+  //       .on('mouseover', function(d) {
+  //             d3.select(this).style('opacity', '0.4')
+  //               .style("cursor", "pointer");
+  //         })
+  //       .on('mouseout', function(d) {
+  //             d3.select(this)
+  //             .transition()
+  //           .duration(250)
+  //           .style('opacity', '1')
+  //         })
 
   sunburst.selectAll("#sunburstsvg")
         .data(pie(test))
@@ -506,23 +567,23 @@ function makeSunburst(){
         .attr("fill", function(d,i) {
           return colors(i);
         })
-        .attr("opacity", 0.05)
+        .attr("opacity", 0.1)
         .attr("stroke", "darkgray")
         .attr("stroke-width", 6)
         .each(function(d) { this._current = d; })
 
   sunburst.selectAll("#sunburstsvg")
-        .data(pie(test))
+        .data(pie2(test2))
         .enter()
         .append('path')
         .attr("id", "sunburstpathOpacity2")
         .attr('d', arc5)
         .attr("fill", function(d,i) {
-          return colors(i);
+          return "black";
         })
-        .attr("opacity", 0.15)
+        .attr("opacity", 0.2)
         .attr("stroke", "darkgray")
-        .attr("stroke-width", 6)
+        .attr("stroke-width", 1)
         .each(function(d) { this._current = d; })
 
 }makeSunburst()
@@ -583,15 +644,15 @@ function makeLinechart(){
 
   var linechart = d3.selectAll("#linechart")
   var years = ["2004", "2005", "2006", "2007", "2008", "2009",
-              "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"]
+              "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
   var height = 200
   var width = 800
   var padding = 100
 
   // Define range and domain for xScale and yScale
   var xScale = d3.scaleLinear()
-      .domain([0,12]) // TODO
-      .range([padding, width + padding]);
+      .domain([0,11]) // TODO
+      .range([padding, width + 35]);
   var xAxis = d3.scalePoint()
       .domain(years)
       .range([0,width]);
@@ -644,17 +705,11 @@ function makeLinechart(){
       .attr("opacity", 0.8)
       .attr("d", function(d) { return lineScale(d); });
 
-  //Append legend to linechart
-  linechart.append("text")
-            .text("HIER KOMT EEN LEGENDA")
-            .attr("class", "linechartTitle")
-            .attr("x", 580)
-            .attr("y", 700)
-
   // Append text and title to the linechart
   linechart.append("text")
-          .text("Dit moet nog interactief worden met keuzes...")
+          .text("Mean searching rates of frozen-yogurt")
           .attr("class", "linechartTitle")
+          .attr("id", "linechartTitle")
           .attr("x", padding)
           .attr("y", 120)
 
@@ -680,18 +735,42 @@ function makeLinechart(){
 
 }makeLinechart()
 
-function updateLineChart(foodname) {
+function addComparison() {
+
+  var compareSelect = d3.selectAll("#comparediv")
+
+  compareSelect.append("select")
+          .selectAll("option")
+          .data(foodnames) // TODO sort
+          .enter()
+            .append("option")
+            .attr("value", function(d){
+                return d;
+            })
+            .text(function(d){
+                return d;
+            });
+
+  compareSelect.on('change', function(){
+              var foodname = d3.select(this)
+              .select("select")
+              .property("value")
+          updateLineChart(foodname, "True")})
+
+}addComparison()
+
+function updateLineChart(foodname, comparison) {
 
   var line = d3.selectAll("#linechart").selectAll("#line")
 
   var years = ["2004", "2005", "2006", "2007", "2008", "2009",
-              "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"]
+              "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
   var height = 200
   var width = 800
   var padding = 100
   var xScale = d3.scaleLinear()
-      .domain([0,12]) // TODO
-      .range([padding, width + padding]);
+      .domain([0,11]) // TODO
+      .range([padding, width + 35]);
   var yScale = d3.scaleLinear()
       .domain([0,200]) // TODO
       .range([400,0]);
@@ -700,21 +779,43 @@ function updateLineChart(foodname) {
       .x(function(d, i) { return xScale(i); })
       .y(function(d) { return yScale(d); });
 
-  d3.selectAll("#linechart").append("path")
-      .datum(getDataMeansLineChart(foodname))
+  var colors = ["red", "limegreen", "gold"]
+
+  d3.selectAll("#linechart").selectAll("#line").attr("opacity", 0.5)
+
+  if (comparison === "True") {
+    d3.selectAll("#linechart")
+        .append("path")
+        .datum(getDataMeansLineChart(foodname))
+        .attr("fill", "none")
+        .attr("id", "line2")
+        .attr("stroke", colors[2])
+        .attr("stroke-width", 6)
+        .attr("opacity", 0.8)
+        .attr("d", function(d) {return lineScale(d); });
+  }
+
+  if (comparison === "False") {
+  line.datum(getDataMeansLineChart(foodname))
       .transition()
+      .duration(700)
       .attr("fill", "none")
       .attr("id", "line")
-      .attr("stroke", colors[0])
+      .attr("stroke", colors[2])
       .attr("stroke-width", 6)
       .attr("opacity", 0.8)
       .attr("d", function(d) {return lineScale(d); });
 
+  }
+
+  // Update title with foodname
+  d3.selectAll("#linechartTitle")
+              .transition()
+              .text("Mean searching rates of " + foodname)
+
 }
 
-}).catch(err => {
-  // TODO
-});
+
 
 // TODO
 // $('#section07').click(function(){ MyFunction(); return false; });
@@ -723,9 +824,5 @@ function updateLineChart(foodname) {
 //   console.log("TESTTE");
 //   window.scrollBy(0, 600);
 // }
-
-
-
-
 
 }

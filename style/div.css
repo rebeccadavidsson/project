@@ -1,0 +1,52 @@
+.dropdowndiv {
+  width: 42%;
+  height: 60px;
+  float: right;
+  border: 0px;
+  display: inline-block;
+  background-color: silver;
+  position: relative;
+  padding-top: 10px;
+}
+
+.sliderdiv {
+  width: 62.4%;
+  height: 60px;
+  /* float: left; */
+  border: 0px;
+  z-index: 0;
+  display: inline-block;
+  background-color: darkgray;
+  /* position: relative; */
+  padding-top: 10px;
+  padding-bottom: 20px;
+  /* padding-left: 60px; */
+}
+
+.comparediv {
+  width: 600px;
+  height: 50px;
+  border: 0px;
+  display: flex;
+  /* display: inline-block; */
+  left: 100px;
+  top: 500px;
+  /* background-color: white; */
+  position: relative;
+  background-color: #000033;
+
+}
+
+.fillup {
+  width: 35%;
+  height: 60px;
+  float: left;
+  border: 0px;
+  z-index: 0;
+  display: inline-block;
+  background-color: silver;
+  position: absolute;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin-right: 30px;
+}
