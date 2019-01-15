@@ -33,10 +33,27 @@ header {
   background-color: #00003D;
 }
 
+.welcomesvg {
+  background: darkgray;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  /* position: absolute; */
+
+}
+
+.welcometext {
+  fill: white;
+  font-size: 30px;
+  /* text-shadow: 0px 0 black, 0 0px black, 0px 0 black, 0 -1px black; */
+  text-align: right;
+  font-weight: bold;
+}
+
+
 .sunburstsvg {
   background: darkgray;
   position: absolute;
-  /* float: left; */
   width: 58%;
   height: 740px;
   overflow: hidden;
@@ -71,7 +88,7 @@ header {
   fill: dimgray;
   position: absolute;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .axisBar {
@@ -88,7 +105,7 @@ header {
 
 .linechart {
   background: #000033;
-  width: 100%;
+  width: 93%;
   height: 810px;
   position: absolute;
 }
@@ -107,7 +124,7 @@ header {
   background-image: linear-gradient(to bottom, #000058 , grey);
   position: static;
   width: 100%;
-  height: 1600px;
+  height: 1800px;
 }
 
 .story {
@@ -118,4 +135,20 @@ header {
   font-size: 20px;
   color: white;
   /* box-shadow: 2px 20px grey; */
+}
+
+.legendtext {
+  fill: white;
+  font-family: Geneva;
+  font-size: 24px;
+}
+
+.d3-tip {
+  line-height: 1.5;
+  font-weight: 400;
+  font-family:"avenir next", Arial, sans-serif;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  /* color: #FFA500; */
+  border-radius: 1px;
 }

@@ -13,9 +13,11 @@
     <link rel="stylesheet" href="style/div.css"></link>
     <script rel="stylesheet" type="text/css" src="bootstrap/css/bootstrap.min.css"></script>
     <script src="d3/d3.min.js"></script>
+    <script src="scripts/d3-tip.js"></script>
+
+    <!-- <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?2.5.0"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script> -->
     <!-- <script src="scripts/script.js"></script> -->
     <script src="scripts/getarrays.js"></script>
     <script src="scripts/sunburst.js"></script>
@@ -31,33 +33,60 @@
   <p></p>
   <p style="font-size:40px">Food searching trends</p>
   <p style="font-size:20px">Data Processing 2019</p>
-  <p style="font-size:20px">Nog een ondertitel yess!!</p>
-  <p style="font-size:16px">Moet hier ook nog wat staan</p>
-  <p style="font-size:16px">Oh nee dit moet natuurlijk in het Engels!!! Sorry</p>
+  <br><br><br><br><br><br><br>
+  <p style="font-size:16px">Start by scrolling down!</p>
 <section id="section07" class="demo">
-  <a href="#sunburstsvg" onclick="MyFunction();"><span></span><span></span><span></span></a>
+  <a href="#welcomesvg" ><span></span><span></span><span></span></a>
 </section>
 </header>
-  <div class="dropdowndiv" id="dropdowndiv"></div>
+
 
 <!-- <section id="section07" class="demo2">
   <a href="#linechart"><span></span><span></span><span></span></a>
 </section> -->
 <!-- <svg class="col-sm-1" width=750px height=1000px id="sunburstsvg"></svg>
 <svg class="col-sm-2" width=580px height= 1000px id="datasvg"></svg> -->
+<svg class="welcomesvg"  id="welcomesvg" viewBox="0 0 1000 600">
+  <foreignObject id="one" x="1.9cm" y="1.6cm" width="30cm" height="10cm">
+      <p xmlns="http://www.w3.org/1999/xhtml"
+         style="font-size:38px;">Google searching trends</p>
+    </foreignObject>
+    <foreignObject id="two" x="2cm" y="4.6cm" width="8cm" height="10cm">
+        <p id="two" xmlns="http://www.w3.org/1999/xhtml"
+           style="font-size:17px;">BLbalabla in the years 2004 - 2016... Blablabal
+         Nog iets jajajja.... En hier moet ook even de data source enzo</p>
+         <a href="https://www.bakemag.com/ext/resources/images/r/h/y/t/h/d/o/o/o/f/2016/RhythmofFood.jpg">Data source</a>
+         <p></p>
+         <p>Tja moetlasblkjkd</p>
+    </foreignObject>
+     <!-- <use xlink:href="#two"/> -->
+</svg>
+<section id="section07" class="demo2">
+  <a href="#sunburstsvg" ><span></span><span></span><span></span></a>
+</section>
+<div class="dropdowndiv" id="dropdowndiv"></div>
 <svg class="sunburstsvg"  id="sunburstsvg" viewBox="0 0 800 1000"></svg>
 <svg class="datasvg" id="datasvg" viewBox="0 400 630 1"></svg>
+<section id="section07" class="demo3">
+  <a href="#linechart" ><span></span><span></span><span></span></a>
+</section>
 <div class="sliderdiv" id="sliderdiv"></div>
 <div class="fillup" id="fillup"></div>
 
 
 <!-- <svg class="betweenline" id="betweenline"></svg> -->
 <section id="section07" class="demo3">
-  <a href="#story"><span></span><span></span><span></span></a>
+  <a href="#linechart">
+    <!-- <span></span><span></span><span></span> -->
+  </a>
 </section>
 <svg class="linechart" id="linechart" viewBox="20 500 1680 100"></svg>
 <div class="comparediv" id="comparediv">Compare with: </div>
-<svg class="storysvg" id="storysvg"></svg>
-<!-- <p class="story" id="story"> Hier komt ook iets</p> -->
+<svg class="storysvg" id="storysvg" viewBox="-100 700 1680 100">
+  <foreignObject id="two" x="5cm" y="17.6cm" width="30cm" height="10cm">
+      <p xmlns="http://www.w3.org/1999/xhtml"
+         style="font-size:24px;">Explore the data with some more examples!</p>
+         <p style="font-size:17px">Bar charts are shown for different years between 2004 - 2016.</p>
+  </foreignObject></svg>
 </body>
 </html>

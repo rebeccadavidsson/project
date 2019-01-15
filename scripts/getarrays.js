@@ -26,20 +26,16 @@
 
     // TODO: Deze functies samenvoegen en input aanpassen
    // Make an array of of datapoints of one year for a chosen food
-   function getDataArray(data, food, year) {
-     // Process data
-     // console.log(data, food, year);
+   function getDataArrayMinMax(data, food, year) {
+
      // console.log(food, year);
      var keys = data[food][year];
      array = []
      for (var key in keys) {
-       array.push([keys[key]]);
+       array.push(parseInt(keys[key]));
      }
-     // Fill in the week-numbers
-     for (var i = 0; i < weeks; i++) {
-       array[i].push(weeksArray[i])
-     }
-     return array
+
+     return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
    }
 
    // Make an array of all data points of every year for a chosen food
@@ -68,9 +64,9 @@
        for (var i = 1; i < weeks + 1; i++) {
          value += parseInt(data[food][key][i])
        }
-       array.push([key, value]);
+       array.push(value);
     }
-    return array
+    return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
    }
 
    function getDataMeansLineChart(data, food) {
@@ -85,4 +81,21 @@
        array.push(value / weeks);
     }
     return array
+   }
+
+   function getDataMninBars(data,food) {
+
+     var keys = data[food];
+     array = []
+
+     // Loop through every year
+     for (var key in keys) {
+
+       // Loop through every value of that year
+       for (var i = 1; i < weeks + 1; i+= 4 ) {
+         array.push(parseInt(keys[key][i]))
+       }
+     }
+
+     return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
    }

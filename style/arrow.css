@@ -23,7 +23,7 @@ section h1 {
 
 .demo a {
   position: relative;
-  top: 200px;
+  top: 0px;
   left: 50%;
   z-index: 2;
   -webkit-transform: translate(0, -50%);
@@ -37,7 +37,7 @@ section h1 {
 
 .demo2 a {
   position: relative;
-  top: 710px;
+  top: -100px;
   left: 50%;
   z-index: 2;
   -webkit-transform: translate(0, -50%);

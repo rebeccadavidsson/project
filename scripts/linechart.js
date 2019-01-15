@@ -1,12 +1,17 @@
 
 function makeLinechart(data, foodname){
-
   var linechart = d3.selectAll("#linechart")
   var years = ["2004", "2005", "2006", "2007", "2008", "2009",
               "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
   var height = 200
   var width = 800
   var padding = 100
+
+  // Make an array that saves only 2 foodnames, used in compare function
+  arr = ["frozen-yogurt"]
+
+  // Update the legend
+  updateLegend(arr)
 
   // Define range and domain for xScale and yScale
   var xScale = d3.scaleLinear()
@@ -51,6 +56,7 @@ function makeLinechart(data, foodname){
 
   // Add lines to the graph
   var lineScale = d3.line()
+  // .interpolate("cardinal")
     .x(function(d, i) { return xScale(i); })
     .y(function(d) { return yScale(d); });
 
@@ -80,7 +86,7 @@ function makeLinechart(data, foodname){
             .attr("height", 650)
 
   linechart.append("text")
-            .text("Hier komt uitleg")
+            .text("Legend")
             .attr("class", "linechartTitle")
             .attr("x", 1100)
             .attr("y", 120)
@@ -90,7 +96,7 @@ function makeLinechart(data, foodname){
             .attr("font-size", "18px")
             .attr("fill", "white")
             .attr("x", 1100)
-            .attr("y", 200)
+            .attr("y", 450)
 }
 
 function updateLineChart(data, foodname, comparison) {
@@ -111,41 +117,99 @@ function updateLineChart(data, foodname, comparison) {
 
   var lineScale = d3.line()
       .x(function(d, i) { return xScale(i); })
-      .y(function(d) { return yScale(d); });
-
-  var colors = ["red", "limegreen", "gold"]
-
-  d3.selectAll("#linechart").selectAll("#line").attr("opacity", 0.5)
+      .y(function(d) { return yScale(d); })
 
   if (comparison === "True") {
+
     d3.selectAll("#linechart")
         .append("path")
+        .merge(line)
         .datum(getDataMeansLineChart(data, foodname))
         .attr("fill", "none")
         .attr("id", "line2")
-        .attr("stroke", colors[2])
+        .attr("stroke", "gold")
         .attr("stroke-width", 6)
-        .attr("opacity", 0.8)
-        .attr("d", function(d) {return lineScale(d); });
+        .attr("d", function(d) {return lineScale(d); })
+
+
+
+
+    // Make a dictionary to save 2 foodnames in an array
+    arr.push(foodname)
+
+    // Make sure array is nog longer than 2
+    if (Object.keys(arr).length > 2) {
+      arr.splice(0,1)
+    }
+
   }
 
   if (comparison === "False") {
   line.datum(getDataMeansLineChart(data, foodname))
       .transition()
-      .duration(700)
+      .duration(2000)
       .attr("fill", "none")
       .attr("id", "line")
-      .attr("stroke", colors[2])
+      .attr("stroke", "red")
       .attr("stroke-width", 6)
-      .attr("opacity", 0.8)
       .attr("d", function(d) {return lineScale(d); });
 
   }
-
   // Update title with foodname
   d3.selectAll("#linechartTitle")
               .transition()
               .text("Mean searching rates of " + foodname)
+}
+
+function addComparison(data, foodnames) {
+
+  var compareSelect = d3.selectAll("#comparediv")
+
+  compareSelect.append("select")
+          .selectAll("option")
+          .data(foodnames) // TODO sort
+          .enter()
+            .append("option")
+            .attr("value", function(d){
+                return d;
+            })
+            .text(function(d){
+                return d;
+            });
+
+  compareSelect.on('change', function(){
+              var foodname = d3.select(this)
+              .select("select")
+              .property("value")
+          updateLineChart(data, foodname, "True")
+          updateLegend(arr)})
+}
+
+function updateLegend(array) {
+
+  var legendHeight = 40
+  var colors = ["red", "gold"] // TODO
+
+  var legend = d3.selectAll("#linechart").selectAll(".legend")
+                  .data(array)
+                  .enter()
+                    .append("g")
+                    .attr("class", "legend")
+                    .attr("transform", function(d, i)
+                    { return "translate(0," + i * 100 + ")"; });
+
+  legend.append("rect")
+        .attr("x", 1100)
+        .attr("y", 200)
+        .attr("width", legendHeight)
+        .attr("height", legendHeight)
+        .attr("fill", function(d, i) {return colors[i]} )
+
+  legend.append("text")
+        .attr("x", 1190)
+        .attr("y", 225)
+        .attr("class", "legendtext")
+        .text(function(d, i) {return array[i]})
 
 
 }

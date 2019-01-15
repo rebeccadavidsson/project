@@ -34,8 +34,22 @@ TODO:
 Ik heb vandaag geprobeerd om me bootstrap columns te werken, maar het werd uiteindelijk toch minder mooi, dus heb ik toch alles in css gedaan.
 Ik heb in de linechart een knopje toegevoegd om linecharts met elkaar te vergelijken, maar deze is nog niet af. De lijnen worden wel toegevoegd, maar er moet natuurlijk ook een leganda bij wat welke lijn is.
 Ook heb ik alle css onderdelen verdeeld in 4 verschillende css bestanden om het overzicht te bewaren.
-Ook heb ik mijn code een beetje opgeschoond door alles in aparte files en folders te zetten en alles aan te roepen vanaf main.js. 
+Ook heb ik mijn code een beetje opgeschoond door alles in aparte files en folders te zetten en alles aan te roepen vanaf main.js.
 
 TODO:
 * Legenda maken bij de linechart.
 * Begin maken aan de data omzetten in bruikbare array dat gebruikt kan worden voor de sunburst.
+
+# Dag 7: Dinsdag
+* Functies uitgebreid om ook de min en max van de arrays te berekenen, zodat de kleurenschalen in de sunburst correct worden aangepast.
+* Begonnen aan de interactiviteit van de sunburst zelf. De bedoeling is dat er op de sunburst geklikt kan worden en er dan nog meer data weergegeven wordt.
+* Begonnen aan het maken van de legenda in de linechart. De linechart wordt nu wel aangemaakt als er een nieuwe variabele bij geklikt wordt, maar er worden nog geen dingen verwijderd in de linechart.
+* Ik heb een functie gemaakt die ervoor zorgt dat je smooth kan scrollen tussen de elementen. Als je op het knopje klikt, ga je met een overgang van 800 ms naar het volgende element.
+* Ik heb een soort mini pagina gemaakt waarin ik tekst ga stoppen over het project en waar er een voorbeeld van een sunburst wordt gegeven.
+* Aan het einde van de pagina heb ik een paar voorbeelden van barcharts neergezet :)
+
+TODO:
+* legenda afmaken in de linechart
+* Y-assen op de goede waardes zetten.
+* ervoor zorgen dat de sunburst goed geupdate wordt.
+* ervoor zorgen dat de lijst in de dropdown op alfabetische volgorde staat

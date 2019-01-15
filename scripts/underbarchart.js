@@ -3,7 +3,7 @@ function makeUnderBarchart(data, foodname) {
   var barPadding = 10
   var space = 600
   yPadding = 100
-  xPadding = yPadding - 5
+  xPadding = -5
 
   var bar = d3.selectAll("#sunburstsvg").selectAll(".bar")
 
@@ -22,13 +22,13 @@ function makeUnderBarchart(data, foodname) {
   // Add x- and y-axis
   underBarchart.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(100," + 870 + ")")
+        .attr("transform", "translate(0," + 870 + ")")
         .call(d3.axisBottom(xAxis2));
 
   underBarchart.append("g")
         .append("g")
         .attr("class", "y axis")
-        .attr("transform", "translate(100," + 770 + ")")
+        .attr("transform", "translate(0," + 770 + ")")
         .call(d3.axisLeft(yScale2).ticks(5));
 
   bar.data(getDataArray2(data, foodname, "2012"))
@@ -56,6 +56,24 @@ function makeUnderBarchart(data, foodname) {
               .style('opacity', '1')
             });
 
+    var circleX = 700
+    var circleY = 820
+
+    // Append circle with with year-text
+    var circle = underBarchart.append("circle")
+                .attr("cx", circleX)
+                .attr("cy", circleY)
+                .attr("r", 50)
+                .attr("fill", "silver");
+
+    underBarchart.append("text")
+            .text(years[document.getElementById("year").value])
+            .attr("x", circleX)
+            .attr("y", circleY + 5)
+            .attr("id", "yearcircle")
+            .attr("class", "foodname")
+            .attr("text-anchor", "middle")
+
 }
 
 // TODO
@@ -77,6 +95,22 @@ function updateUnderBarChart(data, foodname) {
         return(d[0])
       })
       .ease(d3.easeBounceOut)
+
+    var circleX = 700
+    var circleY = 820
+
+    // Update year text
+    d3.selectAll("#sunburstsvg").selectAll("#yearcircle").remove()
+
+    d3.selectAll("#sunburstsvg").append("text")
+            .text(years[document.getElementById("year").value])
+            .attr("x", circleX)
+            .attr("y", circleY + 5)
+            .attr("id", "yearcircle")
+            .attr("class", "foodname")
+            .attr("text-anchor", "middle")
+
+
 
 }
 
