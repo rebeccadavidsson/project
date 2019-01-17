@@ -57,10 +57,7 @@ header {
   width: 58%;
   height: 740px;
   overflow: hidden;
-  /* display: flex; */
   font-size: 0;
-
-
   }
 
 .datasvg {
@@ -91,10 +88,10 @@ header {
   font-size: 15px;
 }
 
-.axisBar {
+/* .x .y {
   stroke-width: 3;
   font: 16px sans-serif;
-}
+} */
 
 .betweenline {
   background: grey;

@@ -11,16 +11,12 @@
 
 .sliderdiv {
   width: 62.4%;
-  height: 60px;
-  /* float: left; */
+  height: 50px;
   border: 0px;
-  z-index: 0;
   display: inline-block;
   background-color: darkgray;
-  /* position: relative; */
   padding-top: 10px;
   padding-bottom: 20px;
-  /* padding-left: 60px; */
 }
 
 .comparediv {
@@ -28,18 +24,15 @@
   height: 50px;
   border: 0px;
   display: flex;
-  /* display: inline-block; */
-  left: 100px;
-  top: 500px;
-  /* background-color: white; */
+  left: 50px;
+  top: 630px;
   position: relative;
   background-color: #000033;
-
 }
 
 .fillup {
   width: 35%;
-  height: 60px;
+  height: 50px;
   float: left;
   border: 0px;
   z-index: 0;

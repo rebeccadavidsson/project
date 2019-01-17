@@ -44,6 +44,14 @@ var yearsSelected = ["2006", "2010", "2007", "2012"]
 var datasvg = d3.select("#datasvg")
 var bar = datasvg.selectAll(".bar")
 
+var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([-5, 0])
+            .html(function(d) {
+              return "<span class='details'>" + d + "<br></span>" ;
+            })
+datasvg.call(tip);
+
 // Load first bar charts when page is opened
 for (i = graphSpace, j = 0; i < 1000; i += graphSpace, j++) {
 datasvg.append("g")
@@ -68,13 +76,16 @@ datasvg.append("g")
       })
       .attr("fill", color)
       .on('mouseover', function(d) {
-            d3.select(this).style('opacity', '0.4')
+            d3.select(this)
+            .style('opacity', '0.4')
+            tip.show(d)
         })
       .on('mouseout', function(d) {
             d3.select(this)
             .transition()
           .duration(250)
           .style('opacity', '1')
+          tip.hide(d)
         })
 
       // Add circles for food name
@@ -82,7 +93,24 @@ datasvg.append("g")
                   .attr("cx", textLoc)
                   .attr("cy", i - weeks)
                   .attr("r", 55)
-                  .attr("fill", "lightgrey");
+                  .attr("fill", "lightgrey")
+                  .attr("id", j);
+      circle.on('mouseover', function(d) {
+            d3.select(this)
+            .style('opacity', 0.3)
+            .style("cursor", "pointer")
+        })
+          .on('mouseout', function(d) {
+                d3.select(this)
+                .transition()
+              .duration(250)
+              .style('opacity', 1)
+            })
+          .on("mousedown", function(d) {
+            var x = d3.select(this).attr('id')
+            updateSunburst(data, foods[x])
+            updateUnderBarChart(data, foods[x], yearsSelected[x])}
+          );
 
       datasvg.append("text")
             .text(foods[j])
@@ -103,13 +131,13 @@ datasvg.append("g")
   }
   function addButtons() {
 
-    for (i = 100, j = 0; i < graphSpace * 4; i += graphSpace, j++) {
-    d3.selectAll("#datasvg")
-      .append("g")
-      .attr("class", "y axis")
-      .attr("transform", "translate(100," + i + ")")
-      .call(d3.axisLeft(yScale).ticks(5));
-    }
+    // for (i = 100, j = 0; i < graphSpace * 4; i += graphSpace, j++) {
+    // d3.selectAll("#datasvg")
+    //   .append("g")
+    //   .attr("class", "y axis")
+    //   .attr("transform", "translate(100," + i + ")")
+    //   .call(d3.axisLeft(yScale).ticks(5));
+    // }
 
     dropdown = d3.select("#dropdowndiv")
             .attr("id", "dropdown") // TODO
@@ -133,45 +161,56 @@ datasvg.append("g")
                 var foodname = d3.select(this)
                 .select("select")
                 .property("value")
+                var year = d3.selectAll("#yearcircle").text()
             updateSunburst(data, foodname)
-            updateUnderBarChart(data, foodname)
+            updateUnderBarChart(data, foodname, year)
             updateLineChart(data, foodname, "False")})
 
-
-    var sliderAxis = d3.scalePoint()
-        .range([barPadding ,graphWidth + barPadding]);
-
-    // Add slide bar
-    slider = d3.selectAll('#sliderdiv')
-            .append("div")
-            .attr("class", "slidecontainer")
-
-    var x = document.getElementById("select");
-
-    slider.append("input")
-              .attr("type", "range")
-              .attr("min", 1)
-              .attr("max", 12)
-              .attr("value", 1)
-              .attr("class", "slider")
-              .attr("id", "year")
-              .on("input", function input() {
-    					updateYear(data, bar);
-              updateUnderBarChart(data, x.options[x.selectedIndex].text) // TODO
-    				});
-
-    slider.append("g")
-          .attr("class", "sliderAxis")
-            .call(d3.axisBottom(sliderAxis))
-
   }addButtons()
+  addSlider(data)
+}
+
+// TODO
+function addSlider(data) {
+
+
+    // Add a slider
+    var dataTime = d3.range(0, 13).map(function(d) { // TODO
+      return new Date(2005 + d, 0, 0);
+    });
+
+    var x = document.getElementById("select")
+
+    // When dragging the slider, update displayed year and underBarchart
+    var sliderTime = d3
+      .sliderBottom()
+      .min(d3.min(dataTime))
+      .max(d3.max(dataTime))
+      .step(1000 * 60 * 60 * 24 * 365)
+      .width(550)
+      .tickFormat(d3.timeFormat('%Y'))
+      .tickValues(dataTime)
+      .default(new Date(2004, 0, 0))
+      .on('onchange', val => {
+        d3.select('p#value-time')
+        var year = d3.timeFormat('%Y')(val)
+        var foodname = d3.selectAll("#sunburstTitle").text()
+        updateYear(data, year)
+        updateUnderBarChart(data, foodname, year)
+      });
+
+    var gTime = d3.select('#sunburstsvg')
+                .append('g')
+                .attr("id", "slider")
+                .attr('transform', 'translate(20,940)');
+
+    gTime.call(sliderTime);
+
+
 }
 
 // Update bars with a transition when moving the slide bar
-function updateYear(data, bar) {
-
-  // Get year that is currently selected at the slide bar
-  var year = years[document.getElementById("year").value];
+function updateYear(data, year) {
 
   var graphWidth = 280
   var yPadding = 100
@@ -200,7 +239,7 @@ function updateYear(data, bar) {
     function fillBars(food, year, color){
 
       d3.selectAll("#bar" + i)
-        .data(getDataArray2(data, food, year))
+        .data(getDataArray2(data, food, year)[0])
         .transition()
         .duration(1000)
         .ease(d3.easeBounceOut)

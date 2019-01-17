@@ -53,3 +53,22 @@ TODO:
 * Y-assen op de goede waardes zetten.
 * ervoor zorgen dat de sunburst goed geupdate wordt.
 * ervoor zorgen dat de lijst in de dropdown op alfabetische volgorde staat
+
+# Dag 8: woensdag
+* Lijst is in alfebetische volgorde
+* Ik heb ervoor gekozen om de bij de linechart niet meer de keuze te geven om data met elkaar te vergelijken. Dit omdat het niet heel veel extra info biedt en het soms een beetje onoverzichtelijk wordt.
+* Ik heb extra knopjes toegevoegd om de sunburst te kunnen updaten.
+
+TODO:
+* Y-assen moeten ook nog goed update in de linechart.
+* Ik snap nog steeds niet hoe ik de sunburst goed kan updaten, maar heb nog geen kans gehad om dit te vragen aan een assistent door lange wachtrijen.
+* Voedingen uit dataset halen waar missende datapunten van zijn.
+
+# Dag 9: Donderdag
+* y-assen updaten nu goed in de linechart, maar nog niet in de bar chart
+* begin gemaakt aan bugs eruit halen door missende data eruit te halen, maar ik weet niet zo goed of ik dat beter in javascript kan doen of in python.
+* ik weet nu hoe ik de sunburst goed kan laten updaten, maar daarvoor moet ik mijn data omzetten in een ander json formaat of moet ik d3.nest() gebruiken. Ik ga denk ik ervoor kiezen om d3.nest() te gebruiken omdat ik dat beter begrijp.
+
+TODO:
+* y-as goed laten updaten in de barchart
+* Data omzetten in ander formaat om te gebruiken in de sunburst.

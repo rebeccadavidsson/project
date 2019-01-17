@@ -24,6 +24,7 @@
     //   }
     // }
 
+
     // TODO: Deze functies samenvoegen en input aanpassen
    // Make an array of of datapoints of one year for a chosen food
    function getDataArrayMinMax(data, food, year) {
@@ -80,7 +81,7 @@
        }
        array.push(value / weeks);
     }
-    return array
+    return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
    }
 
    function getDataMninBars(data,food) {

@@ -14,9 +14,10 @@
     <script rel="stylesheet" type="text/css" src="bootstrap/css/bootstrap.min.css"></script>
     <script src="d3/d3.min.js"></script>
     <script src="scripts/d3-tip.js"></script>
-
+      <script src="scripts/d3-simple-slider.js"></script>
     <!-- <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?2.5.0"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script> -->
     <!-- <script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script> -->
     <!-- <script src="scripts/script.js"></script> -->
     <script src="scripts/getarrays.js"></script>
@@ -55,7 +56,7 @@
         <p id="two" xmlns="http://www.w3.org/1999/xhtml"
            style="font-size:17px;">BLbalabla in the years 2004 - 2016... Blablabal
          Nog iets jajajja.... En hier moet ook even de data source enzo</p>
-         <a href="https://www.bakemag.com/ext/resources/images/r/h/y/t/h/d/o/o/o/f/2016/RhythmofFood.jpg">Data source</a>
+         <a href="https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004">Data source</a>
          <p></p>
          <p>Tja moetlasblkjkd</p>
     </foreignObject>
@@ -64,9 +65,12 @@
 <section id="section07" class="demo2">
   <a href="#sunburstsvg" ><span></span><span></span><span></span></a>
 </section>
-<div class="dropdowndiv" id="dropdowndiv"></div>
+<div class="dropdowndiv" id="dropdowndiv">
+
+</div>
+<!-- <input type="text" placeholder="Search.." class="topnav"> -->
 <svg class="sunburstsvg"  id="sunburstsvg" viewBox="0 0 800 1000"></svg>
-<svg class="datasvg" id="datasvg" viewBox="0 400 630 1"></svg>
+<svg class="datasvg" id="datasvg" viewBox="0 470 640 1"></svg>
 <section id="section07" class="demo3">
   <a href="#linechart" ><span></span><span></span><span></span></a>
 </section>
@@ -81,9 +85,12 @@
   </a>
 </section>
 <svg class="linechart" id="linechart" viewBox="20 500 1680 100"></svg>
-<div class="comparediv" id="comparediv">Compare with: </div>
+<section id="section07" class="demo3">
+  <a href="#three" ><span></span><span></span><span></span></a>
+</section>
+<div class="comparediv" id="comparediv">Choose category: </div>
 <svg class="storysvg" id="storysvg" viewBox="-100 700 1680 100">
-  <foreignObject id="two" x="5cm" y="17.6cm" width="30cm" height="10cm">
+  <foreignObject id="three" x="5cm" y="17.6cm" width="30cm" height="10cm">
       <p xmlns="http://www.w3.org/1999/xhtml"
          style="font-size:24px;">Explore the data with some more examples!</p>
          <p style="font-size:17px">Bar charts are shown for different years between 2004 - 2016.</p>

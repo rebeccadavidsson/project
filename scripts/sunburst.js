@@ -1,8 +1,8 @@
 
 function makeSunburst(data){
 
-  var set1 = getDataMeans(data, "frozen-yogurt")[0]
-  var set2 = getDataMninBars(data, "carrot")[0]
+  var set1 = getDataMeans(data, "anise")[0]
+  var set2 = getDataMninBars(data, "anise")[0]
   var width = 380;
   var height = 400;
   var radius = 160;
@@ -20,7 +20,7 @@ function makeSunburst(data){
 
 
   var colors = d3.scaleSequential(d3.interpolateBlues)
-                  .domain([0,3000])
+                  .domain([650,1200])
   var colorsBlue = d3.scaleSequential(d3.interpolateBlues)
                   .domain([0,30])
 
@@ -49,8 +49,6 @@ function makeSunburst(data){
               })
 
   sunburst.call(tip);
-  // console.log("jjjjj");
-
 
   sunburst.selectAll("#sunburstsvg")
         .data(pie(set1))
@@ -76,8 +74,10 @@ function makeSunburst(data){
             .duration(250)
             .style('opacity', '1')
           })
-        .on("mousedown", function() {
-              var year = d3.select(this);
+        .on("mousedown", function(d) {
+              var year = years[d.index]
+              var foodname = d3.selectAll("#sunburstTitle").text()
+              updateUnderBarChart(data, foodname, year)
               clickedSunburst(data, year)
             });
 
@@ -134,17 +134,18 @@ function makeSunburst(data){
   d3.select("#sunburstsvg")
     .append("text")
     .attr("id", "sunburstTitle")
-    .text("frozen-yogurt")
+    .text("anise")
       .attr("class", "datatext")
       .attr("text-anchor", "middle")
       .attr('y', 400)
       .attr('x', 390)
 
+
 }
 
 function makeSunburstWelcome(data, foodnames){
 
-// set a variable to automatically update the sunburst
+// // set a variable to automatically update the sunburst
 // var inter = setInterval(function() {
 //               updateWelcome(data, "lasagna");
 //               setInterval(function() {
@@ -221,6 +222,11 @@ function makeSunburstWelcome(data, foodnames){
           })
         .on("mousedown", function() {
               var year = d3.select(this);
+              console.log(year);
+              console.log(foodname);
+              var foodname = d3.selectAll("#sunburstTitle").text()
+
+              updateUnderBarChart(data, foodname, year)
               clickedSunburst(data, year)
             });
 
@@ -288,7 +294,7 @@ function updateWelcome(data, food) {
   sunburst.selectAll("#sunburstpath")
           .data(pie(getDataMeans(data, food)[0]))
           .transition()
-          .duration(3000)
+          .duration(6000)
           .attr("d", arc)
           .attr("fill", function(d,i) {
             return colors(d.data);
@@ -298,7 +304,7 @@ function updateWelcome(data, food) {
     sunburst.selectAll("#sunburstpathOpacity1")
             .data(pie(getDataMeans(data, food)[0]))
             .transition()
-            .duration(3000)
+            .duration(6000)
             .attr("d", arc4)
             .attr("fill", function(d,i) {
               return colors(d.data);
@@ -309,7 +315,7 @@ function updateWelcome(data, food) {
     sunburst.selectAll("#sunburstpathOpacity2")
           .data(pie(getDataMninBars(data, food)[0]))
           .transition()
-          .duration(3000)
+          .duration(6000)
           .attr("id", "sunburstpathOpacity2")
           .attr('d', arc5)
           .attr("fill", function(d,i) {
@@ -327,9 +333,9 @@ function updateSunburst(data, food) {
   var sunburst = d3.selectAll("#sunburstsvg")
 
   var colors = d3.scaleSequential(d3.interpolateBlues)
-                  .domain([getDataMeans(data, food)[1],getDataMeans(data, food)[2]])
+                  .domain([getDataMeans(data, food)[1] - 300,getDataMeans(data, food)[2]]) // TODO
   var colorsBlue= d3.scaleSequential(d3.interpolateBlues)
-                  .domain([getDataMninBars(data, food)[1],getDataMninBars(data, food)[2]])
+                  .domain([getDataMninBars(data, food)[1],getDataMninBars(data, food)[2] - 20])
 
   // Add new title
   sunburst.selectAll("#sunburstTitle")
@@ -380,9 +386,16 @@ function updateSunburst(data, food) {
 
 function clickedSunburst(data, year) {
 
-  // TODO:
-  var year = "2015"
-  var food = "carrot"
+  var foodname = d3.selectAll("#sunburstTitle").text()
+  console.log(data[foodname]);
+  dataset = data[foodname]
+
+
+
+
+
+  var food = d3.selectAll("#sunburstTitle").text()
+
 
   var colors = d3.scaleSequential(d3.interpolateBlues)
                   .domain([getDataArrayMinMax(data, food, year)[1],
@@ -392,14 +405,23 @@ function clickedSunburst(data, year) {
               .value(function(d, i) { return d; })
               .sort(null);
 
-  d3.select("#sunburstsvg").selectAll("#sunburstpath")
+  d3.select("#sunburstsvg")
+          .selectAll("#sunburstpath")
           .data(pie(getDataArrayMinMax(data, food, year)[0]))
           .transition()
-          .duration(400)
+          .duration(500)
           .attr("d", arc)
           .attr("fill", function(d,i) {
             return colors(d.data);
           })
           .each(function(d) {this._current = d; })
+
+    d3.select("#sunburstsvg")
+                .append("text")
+                .text(year)
+                .attr("class", "datatext")
+                .style("font-size", "15px")
+                .attr("x", 390)
+                .attr("y", 430)
 
 }

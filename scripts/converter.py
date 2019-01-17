@@ -21,5 +21,10 @@ with open("../data/foodvalues.csv") as csvfile:
 
         nd[row[0]][year][week] = row[3]
 
+    # print(len(nd[row[0]][year].values()))
+
+
+
+
     with open("../data/result.json", "w") as fp:
         json.dump(nd, fp)
