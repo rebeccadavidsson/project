@@ -1,6 +1,6 @@
 function makeUnderBarchart(data, foodname) {
 
-  var barPadding = 10
+  var barPadding = 9
   var space = 600
   yPadding = 100
   xPadding = -5
@@ -16,38 +16,45 @@ function makeUnderBarchart(data, foodname) {
 
   var tempYear = "2004"
 
-  var yScale2 = d3.scaleLinear()
+  yScale2 = d3.scaleLinear()
         .domain([getDataArray2(data, foodname, tempYear)[1],
                  getDataArray2(data, foodname, tempYear)[2]])
-        .range([getDataArray2(data, foodname, tempYear)[2],0])
+        .range([100,5])
 
   underBarchart = d3.selectAll("#sunburstsvg")
 
   // Add x- and y-axis
   underBarchart.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + 870 + ")")
+        .attr("transform", "translate(30," + 870 + ")")
         .call(d3.axisBottom(xAxis2));
 
   underBarchart.append("g")
         .append("g")
         .attr("class", "y axis")
-        .attr("transform", "translate(0," + 780 + ")")
+        .attr("transform", "translate(30," + 770 + ")")
         .call(d3.axisLeft(yScale2).ticks(5));
+
+  // Make y-axis title
+  underBarchart.append("text")
+            .text("Total search count")
+            .attr("transform", "translate(5,860) rotate(270)")
+            .attr("fill", "white")
+            .style("font-size", "10px")
 
   bar.data(getDataArray2(data, foodname, tempYear)[0])
           .attr("id", "underBarchartbars")
           .enter()
           .append("rect")
           .attr("class", "bar")
-          .attr("transform", "translate(0," + 1165 + ")")
+          .attr("transform", "translate(30," + 1165 + ")")
           .attr("x", function(d) {
             return(xScale2(d[1]) + xPadding)})
           .attr("y", function(d) {
             return(yScale2(d[0]) + yPadding + 100 - space)})
           .attr("width", 6)
           .attr("height", function(d) {
-            return(d[0])
+            return d[0]
           })
           .attr("fill", "white")
           .on('mouseover', function(d) {
@@ -78,17 +85,20 @@ function makeUnderBarchart(data, foodname) {
             .attr("class", "foodname")
             .attr("text-anchor", "middle")
 
+
+
 }
 
 // TODO
 function updateUnderBarChart(data, foodname, year) {
-  // var year = years[document.getElementById("year").value]; // TODO
+
   var space = 600
-  //
-  // var yScale2 = d3.scaleLinear()
-  //       .domain([getDataArray2(data, foodname, year)[1],
-  //                getDataArray2(data, foodname, year)[2]])
-  //       .range([getDataArray2(data, foodname, year)[2],0])
+
+  // Update new yScale
+  var yScale = d3.scaleLinear()
+        .domain([getDataArray2(data, foodname, year)[1],
+                 getDataArray2(data, foodname, year)[2]])
+        .range([100,5])
 
   bars = d3.selectAll("#sunburstsvg").selectAll("rect")
 
@@ -108,7 +118,7 @@ function updateUnderBarChart(data, foodname, year) {
     d3.selectAll("#sunburstsvg").selectAll(".y")
       .transition()
       .duration(400)
-      .call(d3.axisLeft(yScale2).ticks(5));
+      .call(d3.axisLeft(yScale).ticks(5));
 
     var circleX = 700
     var circleY = 820
@@ -124,17 +134,23 @@ function updateUnderBarChart(data, foodname, year) {
             .attr("class", "foodname")
             .attr("text-anchor", "middle")
 
+    d3.selectAll(".barchartcircleyear").remove()
+
 }
 
 // TODO
 function getDataArray2(data, food, year) {
 
   var keys = data[food][year];
+  console.log("tttt");
   array = []
   arr2 = []
   for (var key in keys) {
     array.push([keys[key]]);
     arr2.push(keys[key])
+    if (keys[key] == "undefined") {
+      console.log("ERROOOOR");
+    }
   }
 
   // Fill in the week-numbers

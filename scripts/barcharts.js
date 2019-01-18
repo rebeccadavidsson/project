@@ -121,7 +121,7 @@ datasvg.append("g")
 
       datasvg.append("text")
             .text(yearsSelected[j])
-            .attr("class", "foodname")
+            .attr("class", "barchartcircleyear")
             .style("font-size", "10px")
             .attr("text-anchor", "middle")
             .attr("x", textLoc)
@@ -341,7 +341,7 @@ function exploreBarCharts(data) {
 
           datasvg.append("text")
                 .text(yearsSelected[j])
-                .attr("class", "foodname")
+                .attr("class", "barchartcircleyear")
                 .style("font-size", "10px")
                 .attr("text-anchor", "middle")
                 .attr("x", textLoc + h)

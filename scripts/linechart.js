@@ -81,6 +81,14 @@ function makeLinechart(data, foodname){
     .x(function(d, i) { return xScale(i); })
     .y(function(d) { return yScale(d); });
 
+  var tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([-5, 0])
+              .html(function(d) {
+                return "<span class='details'>" + d + "<br></span>" ;
+              })
+  linechart.call(tip)
+
   // Append a path for each line
   linechart.append("path")
       .datum(getDataMeansLineChart(data, foodname)[0])
@@ -89,7 +97,8 @@ function makeLinechart(data, foodname){
       .attr("stroke", colors[0])
       .attr("stroke-width", 6)
       .attr("opacity", 0.8)
-      .attr("d", function(d) { return lineScale(d); });
+      .attr("d", function(d) { return lineScale(d); })
+      // .on("mouseover", function(d) {tip.show(d)});
 
   // Append text and title to the linechart
   linechart.append("text")
@@ -230,6 +239,6 @@ function updateLegend(array) {
 
 function makeMiniLinecharts(data) {
 
-  
+
 
 }

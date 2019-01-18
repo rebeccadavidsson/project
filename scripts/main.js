@@ -39,9 +39,11 @@ fetch('data/result.json').then(response => {
   var years = ["2004", "2005", "2006", "2007", "2008", "2009",
              "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
 
+
   // Make an array of foodnames
   var foodnames = []
   for (var key in data) {
+
 
     // Skip header
     if (key != "id") {
@@ -49,44 +51,31 @@ fetch('data/result.json').then(response => {
     }
   }
 
-  for (var i = 0; i < 10; i++) {
-    var d = data[foodnames[i]]
 
-    for (var j = 0; j < 13; j++) {
-
-      // console.log(d[years[j]]);
-    }
-
-    // for (var value in d) {
-    //   console.log(value["2004"]);
-    // }
-  }
+  // for (var i = 0; i < Object.keys(foodnames).length; i++) {
+  //   var d = data[foodnames[i]]
+  //   // console.log(Object.keys(d).length)
+  //   // console.log(foodnames[i], d, d["2004"]);
+  //   for (var j = 0; j < 13; j++) {
+  //     console.log(Object.keys(d[years[j]]).length)
+  //     // console.log(d[years[j]]);
+  //   }
+  //
+  //   // for (var value in d) {
+  //   //   console.log(value["2004"]);
+  //   // }
+  // }
 
   // Sort in alphabetical order
   foodnames.sort();
-
-  function convertNested(data) {
-
-    var hierarchy = {
-        key: "names",
-        values: d3.nest()
-            .key(function(d) { return d; })
-            // .value(function(d) { return d; })
-            .rollup(function(leaves) {
-                return leaves.length;
-            })
-            .entries(foodnames)
-    };
-
-
-  }convertNested(data)
-
-
 
 
 
   // Make a sunburst when page is opened
   makeSunburstWelcome(data, foodnames) // TODO
+
+  // TODO:
+  zoomSunburst()
 
   // Make a few bar charts
   makeBarcharts(data, foodnames)

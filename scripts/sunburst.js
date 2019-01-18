@@ -13,8 +13,10 @@ function makeSunburst(data){
   var outerRadiusBig2 = 350
   var yearsArray = ["2004", "2005", "2006", "2007", "2008", "2009",
                     "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
+  var monthsArray = ["January", "February", "March", "April", "May", "June",
+                      "July", "August", "September", "October", "November", "December"]
 
-  var sunburst = d3.select("#sunburstsvg")
+  sunburst = d3.select("#sunburstsvg")
     .append('g')
     .attr('transform', 'translate(' + width + ',' + height + ')');
 
@@ -41,20 +43,28 @@ function makeSunburst(data){
               .sort(null);
 
   // Add variable to show tooltip when user hovers over sunburst's arc
-  var tip = d3.tip()
+  tip = d3.tip()
               .attr('class', 'd3-tip')
               .offset([-5, 0])
               .html(function(d) {
                 return "<strong> Year: </strong><span class='details'>" + yearsArray[d.index] + "<br></span>" + "<strong>Total search count: </strong><span class='details'>" + d.data  +"</span>";
               })
 
+  tipMonth = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([-5, 0])
+              .html(function(d) {
+                return "<strong> Month: </strong><span class='details'>" + monthsArray[(d.index % 12)] + "<br></span>" + "<strong>Total search count: </strong><span class='details'>" + d.data  +"</span>";
+              })
+
   sunburst.call(tip);
+  sunburst.call(tipMonth)
 
   sunburst.selectAll("#sunburstsvg")
         .data(pie(set1))
         .enter()
         .append('path')
-        .attr("id", "sunburstpath")
+        .attr("class", "sunburstpath")
         .attr('d', arc)
         .attr("fill", function(d,i) {
           return colors(d.data);
@@ -111,7 +121,7 @@ function makeSunburst(data){
         .data(pie(set2))
         .enter()
         .append('path')
-        .attr("id", "sunburstpathOpacity2")
+        .attr("class", "sunburstpathOpacity2")
         .attr('d', arc5)
         .attr("fill", function(d,i) {
           return colorsBlue(d.data); // TODO
@@ -122,13 +132,15 @@ function makeSunburst(data){
         .each(function(d) { this._current = d; })
         .on('mouseover', function(d) {
               d3.select(this).style('opacity', 0.5)
+              tipMonth.show(d)
           })
         .on('mouseout', function(d) {
               d3.select(this)
               .transition()
             .duration(250)
             .style('opacity', 0.7)
-          })
+            tipMonth.hide(d)
+          });
 
   // Append sunburst title
   d3.select("#sunburstsvg")
@@ -138,7 +150,7 @@ function makeSunburst(data){
       .attr("class", "datatext")
       .attr("text-anchor", "middle")
       .attr('y', 400)
-      .attr('x', 390)
+      .attr('x', 385)
 
 
 }
@@ -162,7 +174,7 @@ function makeSunburstWelcome(data, foodnames){
   var set1 = getDataMeans(data, "frozen-yogurt")[0]
   var set2 = getDataMninBars(data, "pie")[0]
 
-  var width = 700;
+  var width = 800;
   var height = 470;
   var radius = 160;
   var outerRadius = 260;
@@ -340,7 +352,7 @@ function updateSunburst(data, food) {
   // Add new title
   sunburst.selectAll("#sunburstTitle")
           .remove()
-  sunburst.selectAll("#sunburstpath")
+  sunburst.selectAll(".sunburstpath")
           .data(pie(getDataMeans(data, food)[0]))
           .transition()
           .duration(400)
@@ -350,7 +362,7 @@ function updateSunburst(data, food) {
           })
           .each(function(d) { this._current = d; })
 
-    sunburst.selectAll("#sunburstpathOpacity1")
+    sunburst.selectAll(".sunburstpathOpacity1")
             .data(pie(getDataMeans(data, food)[0]))
             .transition()
             .duration(400)
@@ -361,7 +373,7 @@ function updateSunburst(data, food) {
             .each(function(d) { this._current = d; })
 
     // Make middle ring with mini data
-    sunburst.selectAll("#sunburstpathOpacity2")
+    sunburst.selectAll(".sunburstpathOpacity2")
           .data(pie(getDataMninBars(data, food)[0]))
           .transition()
           .duration(600)
@@ -386,42 +398,108 @@ function updateSunburst(data, food) {
 
 function clickedSunburst(data, year) {
 
-  var foodname = d3.selectAll("#sunburstTitle").text()
-  console.log(data[foodname]);
-  dataset = data[foodname]
-
-
-
-
 
   var food = d3.selectAll("#sunburstTitle").text()
-
-
-  var colors = d3.scaleSequential(d3.interpolateBlues)
-                  .domain([getDataArrayMinMax(data, food, year)[1],
-                           getDataArrayMinMax(data, food, year)[2]])
+  console.log(getDataArrayMinMax(data, food, year)[0]);
 
   var pie = d3.pie()
               .value(function(d, i) { return d; })
               .sort(null);
 
-  d3.select("#sunburstsvg")
-          .selectAll("#sunburstpath")
+
+  var arc = d3.arc()
+              .innerRadius(160)
+              .outerRadius(350);
+
+
+  var food = d3.selectAll("#sunburstTitle").text() //TODO
+
+  var colors = d3.scaleSequential(d3.interpolateBlues)
+                  .domain([getDataArrayMinMax(data, food, year)[1],
+                           getDataArrayMinMax(data, food, year)[2]])
+
+  paths = d3.select("#sunburstsvg")
+          .selectAll(".sunburstpathOpacity2, .sunburstpath")
           .data(pie(getDataArrayMinMax(data, food, year)[0]))
-          .transition()
-          .duration(500)
-          .attr("d", arc)
+  // Exit
+  paths.exit().remove()
+
+  // Add new data
+  // paths.data(pie(getDataArrayMinMax(data, food, year)[0]))
+
+  paths.enter()
+          .append('path')
+          .attr("class", "sunburstpath")
+          .attr('d', arc)
           .attr("fill", function(d,i) {
             return colors(d.data);
           })
-          .each(function(d) {this._current = d; })
+          .attr("stroke", "darkgray")
+          .attr("stroke-width", 6)
+          .each(function(d) { this._current = d; })
 
-    d3.select("#sunburstsvg")
-                .append("text")
-                .text(year)
-                .attr("class", "datatext")
-                .style("font-size", "15px")
-                .attr("x", 390)
-                .attr("y", 430)
+  paths.transition()
+          .duration(500)
+          .attr("d", arc)
+          .style("opacity", 0.8)
+          // .attr("fill", function(d,i) {
+          //   return colors(d.data);
+          // })
+          // .each(function(d) {this._current = d; })
+
+
+  // Append circle to click on to go back to original sunburst
+  var goBack = sunburst.append("circle")
+          .attr("cx", 0)
+          .attr("cy", 0)
+          .attr("r", 120)
+          .attr("fill", "lightgrey")
+          .style("opacity", 0.3)
+
+  goBack.on('mouseover', function(d) {
+        d3.select(this)
+        .style("cursor", "pointer")
+        })
+        .on("mousedown", function() {
+          makeSunburst(data)
+          console.log("TODO", foodname);})
+
+
+}
+
+// Convert data using d3.nest()
+function getDataSunburst() {
+
+
+  fetch('data/result_nested.json').then(response => {
+    return response.json();
+  }).then(data => {
+
+
+    var databyName = d3.nest()
+         .key(function(d) { return d.name; })
+         .key(function(d) { return d.year; })
+         .key(function(d) { return d.week_id; })
+         .key(function(d) { return d.week_value; })
+         .entries(data);
+
+      var data = databyName
+
+      console.log("EINDE");
+    // return databyName
+  }).catch(err => {
+    // TODO
+  });
+
+}
+
+
+function zoomSunburst() {
+
+  data = getDataSunburst()
+  // console.log(data);
+
+
+
 
 }

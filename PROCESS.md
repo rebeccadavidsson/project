@@ -72,3 +72,15 @@ TODO:
 TODO:
 * y-as goed laten updaten in de barchart
 * Data omzetten in ander formaat om te gebruiken in de sunburst.
+
+# Dag 10: Vrijdag
+* Ik heb de data omgezet aan de hand van d3.nest() en dat ging veel makkelijker dan ik had verwacht! :-). Ik weet alleen nog niet zeker of ik dit ook daadwerkelijk ga gebruiken, omdat ik niet heel veel data heb om te nesten; ik heb alleen 1 week > 52 weken > 12 jaren, dus maar 3 loops. Ik ga eerst proberen om het te laten werken zonder de nested data.
+* Ik heb een tooltip gemaakt die ook de maand aangeeft, maar deze geeft soms de verkeerde maand aan doordat ik nog niet goed weet hoe ik het moet berekenen als er 52 weken zijn per jaar en 52 / 4 = 13 maanden ipv 12 maanden.
+* De sunburst wordt nu soort van geupdate maar nog heel erg lelijk en zonder transition
+
+TODO:
+* Updaten van jaartallen helemaal rechts van de mini barcharts als de slider wordt bewogen.
+* Missende data er uit halen.
+* sunburst updaten met transition
+* Tooltip functie maken die ook de GOEDE maand aangeeft.
+* Ticks weghalen bij maanden omdat de maanden soms niet helemaal kloppen

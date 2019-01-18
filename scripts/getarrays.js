@@ -93,8 +93,11 @@
      for (var key in keys) {
 
        // Loop through every value of that year
-       for (var i = 1; i < weeks + 1; i+= 4 ) {
+       for (var i = 1; i < weeks + 1 ; i+= (  4 + (1/3)) ) {
+         i = Math.floor(i)
          array.push(parseInt(keys[key][i]))
+
+
        }
      }
 

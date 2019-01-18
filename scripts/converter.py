@@ -7,6 +7,8 @@ import json
 import csv
 from nested_dict import nested_dict
 
+all = []
+
 with open("../data/foodvalues.csv") as csvfile:
     foodvalues = csv.reader(csvfile, delimiter=',')
 
@@ -21,10 +23,11 @@ with open("../data/foodvalues.csv") as csvfile:
 
         nd[row[0]][year][week] = row[3]
 
-    # print(len(nd[row[0]][year].values()))
-
-
+        all.append({"name": row[0], "year": year, "week_id": week, "week_value": row[3] })
 
 
     with open("../data/result.json", "w") as fp:
         json.dump(nd, fp)
+
+    with open("../data/result_nested.json", "w") as fp:
+        json.dump(all, fp)
