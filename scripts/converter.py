@@ -4,30 +4,94 @@ Name: Rebecca Davidsson, student number: 11252138.
 """
 
 import json
-import csv
-from nested_dict import nested_dict
+import pandas as pd
 
 all = []
 
-with open("../data/foodvalues.csv") as csvfile:
-    foodvalues = csv.reader(csvfile, delimiter=',')
+def to_flare_json(df, filename):
 
-    nd = nested_dict()
-    for row in foodvalues:
-        year = row[2].split("-")[0]
-        week = row[2].split("-")[-1]
-
-        # Filter out all '01', '02' etc.
-        if week[0] == "0":
-            week = week[1]
-
-        nd[row[0]][year][week] = row[3]
-
-        all.append({"name": row[0], "year": year, "week_id": week, "week_value": row[3] })
+    flare = dict()
+    d = {"name":"flare", "children": []}
 
 
-    with open("../data/result.json", "w") as fp:
-        json.dump(nd, fp)
+    for index, row in df.iterrows():
+        parent = row[0]
+        child = row[2].split("-")[0] # string
+        child2 = row[2].split("-")[-1] # string
+        child_size = row[3] # int
 
-    with open("../data/result_nested.json", "w") as fp:
-        json.dump(all, fp)
+        # Make a list of keys
+        key_list = []
+        for item in d['children']:
+            key_list.append(item['name'])
+
+        # CHECK IF CHILD 2 IN CHILD...
+            # if not: append to child
+            # else: append new child to parent?
+
+        #if 'parent' is NOT a key in flare.JSON, append it
+        if not parent in key_list:
+            d['children'].append({"name": parent, "children":[{"name": child, "children": [{"name": child2, "size": child_size}]}]})
+
+        # if parent IS a key in flare.json, add a new child to it
+        else:
+            d['children'][key_list.index(parent)]['children'].append({"name": child, "children": child_size})
+
+        child_list = []
+
+
+    flare = d
+
+    # export the final result to a json file
+    with open(filename +'.json', 'w') as outfile:
+        json.dump(flare, outfile, indent=4)
+    return ("Done")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+#
+# with open("../data/foodvalues.csv") as csvfile:
+#     foodvalues = csv.reader(csvfile, delimiter=',')
+#     next(foodvalues)
+#     nd = nested_dict()
+#     Dict = {}
+#     Dict["name"] = {}
+#     for row in foodvalues:
+#         year = row[2].split("-")[0]
+#         week = row[2].split("-")[-1]
+#
+#         Dict["name"][row[0]] = [{"children" : [{}]}]
+#         Dict["name"][row[0]][0]["children"] = [{"name" : year}]
+#
+#         # Dict["name"]["children"] = [{row[0]}]
+#
+#         # Filter out all '01', '02' etc.
+#         if week[0] == "0":
+#             week = week[1]
+#
+#         nd[row[0]][year][week] = row[3]
+    # print(Dict)
+        # all.append({"name": row[0], "year": year, "week_id": week, "week_value": row[3] })
+
+to_flare_json(pd.read_csv("../data/foodvalues.csv"), "foodvalues")
+    # with open("../data/result.json", "w") as fp:
+    #     json.dump(nd, fp)
+    #
+    # with open("../data/result_nested.json", "w") as fp:
+    #     json.dump(all, fp)

@@ -51,6 +51,51 @@ fetch('data/result.json').then(response => {
     }
   }
 
+  // Take a 2-column CSV and transform it into a hierarchical structure suitable
+// for a partition layout. The first column is a sequence of step names, from
+// root to leaf, separated by hyphens. The second column is a count of how
+// often that sequence occurred.
+function buildHierarchy(csv) {
+  var root = {"name": "root", "children": []};
+  for (var i = 0; i < csv.length; i++) {
+    var sequence = csv[i][0];
+    var size = +csv[i][1];
+    if (isNaN(size)) { // e.g. if this is a header row
+      continue;
+    }
+    var parts = sequence.split("-");
+    var currentNode = root;
+    for (var j = 0; j < parts.length; j++) {
+      var children = currentNode["children"];
+      var nodeName = parts[j];
+      var childNode;
+      if (j + 1 < parts.length) {
+   // Not yet at the end of the sequence; move down the tree.
+ 	var foundChild = false;
+ 	for (var k = 0; k < children.length; k++) {
+ 	  if (children[k]["name"] == nodeName) {
+ 	    childNode = children[k];
+ 	    foundChild = true;
+ 	    break;
+ 	  }
+ 	}
+  // If we don't already have a child node for this branch, create it.
+ 	if (!foundChild) {
+ 	  childNode = {"name": nodeName, "children": []};
+ 	  children.push(childNode);
+ 	}
+ 	currentNode = childNode;
+      } else {
+ 	// Reached the end of the sequence; create a leaf node.
+ 	childNode = {"name": nodeName, "size": size};
+ 	children.push(childNode);
+      }
+    }
+  }
+  return root;
+};
+
+
 
   // for (var i = 0; i < Object.keys(foodnames).length; i++) {
   //   var d = data[foodnames[i]]
@@ -68,6 +113,55 @@ fetch('data/result.json').then(response => {
 
   // Sort in alphabetical order
   foodnames.sort();
+
+  d3.csv("data/foodvalues.csv", function(error, data) {
+
+
+    console.log(buildHierarchy(data));
+
+  //*************************************************
+  // FUNCTION
+  //*************************************************
+  function genJSON(csvData, groups) {
+
+    var genGroups = function(data) {
+      return _.map(data, function(element, index) {
+        return { name : index, children : element };
+      });
+    };
+
+    var nest = function(node, curIndex) {
+      if (curIndex === 0) {
+        node.children = genGroups(_.groupBy(csvData, groups[0]));
+        _.each(node.children, function (child) {
+          nest(child, curIndex + 1);
+        });
+      }
+      else {
+        if (curIndex < groups.length) {
+          node.children = genGroups(
+            _.groupBy(node.children, groups[curIndex])
+          );
+          _.each(node.children, function (child) {
+            nest(child, curIndex + 1);
+          });
+        }
+      }
+      return node;
+    };
+    return nest({}, 0);
+  }
+
+  //*************************************************
+  // CALL FUNCTION WITH ARRAY OF GROUPS
+  //*************************************************
+  // var preppedData = genJSON(data, ['id', 'week_id'])
+
+  //*************************************************
+  // YOUR DATA VISUALIZATION CODE HERE
+  //*************************************************
+
+});
 
 
 
