@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="style/arrow.css"></link>
     <link rel="stylesheet" href="style/slider.css"></link>
     <link rel="stylesheet" href="style/div.css"></link>
+    <link rel="stylesheet" href="style/questionmark.css"></link>
     <script rel="stylesheet" type="text/css" src="bootstrap/css/bootstrap.min.css"></script>
     <script src="d3/d3.min.js"></script>
     <script src="scripts/d3-tip.js"></script>
@@ -73,13 +74,28 @@
          </p>
     </foreignObject>
 </svg>
+<div class="between">
+</div>
+<div class="between2">
+</div>
 <section id="section07" class="demo2">
   <a href="#sunburstsvg" ><span></span><span></span><span></span></a>
 </section>
 <div class="dropdowndiv" id="dropdowndiv">
-
 </div>
-<svg class="sunburstsvg"  id="sunburstsvg" viewBox="0 0 800 1000"></svg>
+<svg class="sunburstsvg"  id="sunburstsvg" viewBox="0 0 800 1000">
+  <foreignObject id="one" x="17.9cm" y="1.6cm" width="30cm" height="10cm">
+      <div class="help-tip">
+        <p>This is a sunburst made from data of one food category.
+          Every piece in the circle represents either a year, month or week of data.
+          The bigger a piece, the higher the search count for this food category.
+          <br>
+          Zoom in on a year by clicking on one of the sunburst pieces.
+          <br>
+        </p>
+      </div>
+    </foreignObject>
+</svg>
 <svg class="datasvg" id="datasvg" viewBox="0 470 640 1">
 </svg>
 <section id="section07" class="demo3">

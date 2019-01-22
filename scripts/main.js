@@ -77,14 +77,11 @@ fetch('data/result.json').then(response => {
   // Make a sunburst when page is opened
   makeSunburstWelcome(data, foodnames) // TODO
 
-  // TODO:
-  // zoomSunburst()
+  // Make the first sunburst
+  makeSunburst(data)
 
   // Make a few bar charts
   makeBarcharts(data, foodnames)
-
-  // Make the first sunburst
-  makeSunburst(data)
 
   // Make the bar chart that goes under the sunburst
   makeUnderBarchart(data, foodname)

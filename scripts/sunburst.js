@@ -13,7 +13,7 @@ function makeSunburst(dataX){
     partition = data => {
         const root = d3.hierarchy(data)
             .sum(function(d) {return d.size})
-            .sort(null)
+            // .sort(null)
             // .sort((a, b) => b.value - a.value);
         return d3.partition()
             .size([2 * Math.PI, root.height + 1])
@@ -22,7 +22,7 @@ function makeSunburst(dataX){
 
 
 
-    color = d3.scaleOrdinal().range(d3.quantize(d3.interpolateReds, data.children.length + 1))
+    color = d3.scaleOrdinal(d3.interpolateReds).range(d3.quantize(d3.interpolatePlasma, data.children.length + 1))
 
     // color_palettes = [['#4abdac', '#fc4a1a', '#f7b733'], ['#f03b20', '#feb24c', '#ffeda0'], ['#007849', '#0375b4', '#ffce00'], ['#373737', '#dcd0c0', '#c0b283'], ['#e37222', '#07889b', '#eeaa7b'], ['#062f4f', '#813772', '#b82601'], ['#565656', '#76323f', '#c09f80']];
     // color = d3.scaleOrdinal().range(color_palettes[~~(Math.random() * 1)]),
@@ -62,21 +62,9 @@ function makeSunburst(dataX){
       .selectAll("path")
       .data(root.descendants().slice(1))
       .enter().append("path")
-        // .attr("fill", d => { while (d.depth > 1) d = d.parent;
-        //   console.log(d.data);
-        //   return color(d.data.name); })
-
         .attr("fill", function(d) {
-          // if (d.depth > 1) {
+          // while (d.depth > 1) {
           //   d = d.parent
-          //   console.log(d.value);
-          // }
-          // else {
-          //   console.log(d);
-          //
-          // }
-          // while (d.depth > 2) {
-          //   console.log(d);
           // }
           return color(d.value)
         })
@@ -91,7 +79,7 @@ function makeSunburst(dataX){
             // tip.show(tipArr[partition(d).height])
           })
           .on("mouseout", function(d) {
-            // tip.hide(d)
+            // tip.hide(d
           })
           .on("click", clicked);
 
@@ -141,16 +129,12 @@ function makeSunburst(dataX){
         .attr("transform", `translate(${width / 1.2},${width / 1.1})`);
 
     function clicked(p) {
-      console.log(p.data.name[0]);
-
       // Update barchart when clicked on a year
       if (p.data.name[0] == 2) {
         var foodname = d3.selectAll("#sunburstTitle").text()
         updateUnderBarChart(dataX, foodname, p.data.name)
         updateYear(dataX, p.data.name)
       }
-
-
       parent.datum(p.parent || root);
       root.each(d => d.target = {
         x0: Math.max(0, Math.min(1, (d.x0 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
@@ -322,66 +306,11 @@ function makeSunburstWelcome(data, foodnames){
 
 
 }
-//
-// function updateWelcome(data, food) {
-//
-//   var sunburst = d3.selectAll("#welcomesvg")
-//
-//   var colors = d3.scaleSequential(d3.interpolateReds)
-//                   .domain([getDataMeans(data, food)[1],getDataMeans(data, food)[2]])
-//   var colorsBlue = d3.scaleSequential(d3.interpolateReds)
-//                   .domain([getDataMninBars(data, food)[1],getDataMninBars(data, food)[2]])
-//
-//
-//   sunburst.selectAll("#sunburstpath")
-//           .data(pie(getDataMeans(data, food)[0]))
-//           .transition()
-//           .duration(6000)
-//           .attr("d", arc)
-//           .attr("fill", function(d,i) {
-//             return colors(d.data);
-//           })
-//           .each(function(d) { this._current = d; })
-//
-//     sunburst.selectAll("#sunburstpathOpacity1")
-//             .data(pie(getDataMeans(data, food)[0]))
-//             .transition()
-//             .duration(6000)
-//             .attr("d", arc4)
-//             .attr("fill", function(d,i) {
-//               return colors(d.data);
-//             })
-//             .each(function(d) { this._current = d; })
-//
-//     // Make middle ring with mini data
-//     sunburst.selectAll("#sunburstpathOpacity2")
-//           .data(pie(getDataMninBars(data, food)[0]))
-//           .transition()
-//           .duration(6000)
-//           .attr("id", "sunburstpathOpacity2")
-//           .attr('d', arc5)
-//           .attr("fill", function(d,i) {
-//             return colorsBlue(d.data);
-//           })
-//           .attr("opacity", 0.3)
-//           .attr("stroke", "darkgray")
-//           .attr("stroke-width", 1)
-//           .each(function(d) { this._current = d; })
-//
-// }
 
-function updateSunburst(data, food) {
+function updateSunburst(dataX, food) {
 
-  var dataset = sunburstData(data, food)
+  var dataset = sunburstData(dataX, food)
   var data = dataset[0]
-  console.log(data);
-  arc = d3.arc()
-      .startAngle(d => d.x0)
-      .endAngle(d => d.x1)
-      .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
-      .padRadius(radius * 1.2)
-      .innerRadius(d => d.y0 * radius - 20)
-      .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1))
 
   root = partition(data)
   root.each(d => d.current = d);
@@ -399,14 +328,16 @@ function updateSunburst(data, food) {
       .attr("class", "sunburstCorrect")
       .attr("transform", `translate(${width / 1.2},${width / 1.1})`);
 
-  var path = g.append("g")
-    .attr("class", "path")
-    .selectAll("path")
-    .data(root.descendants().slice(1))
-    .enter().append("path")
-      .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
-      .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.9: 0.7) : 0)
-      .attr("d", d => arc(d.current));
+    var path = g.append("g")
+      .attr("class", "path")
+      .selectAll("path")
+      .data(root.descendants().slice(1))
+      .enter().append("path")
+        .attr("fill", function(d) {
+          return color(d.value)
+        })
+        .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.9: 0.7) : 0)
+        .attr("d", d => arc(d.current));
 
   path.filter(d => d.children)
         .style("cursor", "pointer")
@@ -450,12 +381,12 @@ function updateSunburst(data, food) {
 
 
 
-
-
-
-
-
     function clicked(p) {
+      if (p.data.name[0] == 2) {
+        var foodname = d3.selectAll("#sunburstTitle").text()
+        updateUnderBarChart(dataX, foodname, p.data.name)
+        updateYear(dataX, p.data.name)
+      }
       parent.datum(p.parent || root);
       root.each(d => d.target = {
         x0: Math.max(0, Math.min(1, (d.x0 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,

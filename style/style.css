@@ -5,7 +5,6 @@
 
 html {
   scroll-behavior: smooth;
-  /* height: 100% */
 }
 
 body {
@@ -169,11 +168,6 @@ header {
 .axis {
 	font: 10px sans-serif;
 
-}
-
-.axis-slider {
-  /* stroke: #D4D8DA; */
-  stroke-width: 0.0001px;
 }
 
 .axis path,

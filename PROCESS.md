@@ -92,6 +92,8 @@ TODO:
 * Als ik tijd over heb wil ik ook nog een ring aan de sunburst toevoegen die de maanden weergeeft.
 
 # Dag 12: Dinsdag
-*
+* Vandaag heb ik data toegevoegd aan de sunburst. Je kan nu ook de maanden bekijken.
+* Ik heb ervoor gekozen om de sunburst te verwijderen en een nieuwe te maken tussen het switchen van voeding, omdat het te langzaam wordt om de hele sunburst te updaten en ook omdat het te lastig is.
+* Ik heb help-tips toegevoegd aan de pagina voor als de gebruiker het niet snapt.
 
-TODO: x-as op bar charts veranderen dat december niet op het einde zit. 
+* TODO: Checken of alle update functies goed met elkaar werken.
