@@ -5,7 +5,7 @@ function makeUnderBarchart(data, foodname) {
   yPadding = 100
   xPadding = -5
 
-  var bar = d3.selectAll("#sunburstsvg").selectAll(".bar")
+  var bar = d3.select("#sunburstsvg").selectAll(".bar") // TODO
 
   xScale2 = d3.scaleLinear()
         .domain([0,weeks])
@@ -21,26 +21,35 @@ function makeUnderBarchart(data, foodname) {
                  getDataArray2(data, foodname, tempYear)[2]])
         .range([100,5])
 
-  underBarchart = d3.selectAll("#sunburstsvg")
+  underBarchart = d3.select("#sunburstsvg")
+
+  // Add a tooltip
+  var tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([-5, 0])
+              .html(function(d) {
+                return "<span class='details'>" + d + "<br></span>" ;
+              })
+  underBarchart.call(tip);
 
   // Add x- and y-axis
   underBarchart.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(30," + 870 + ")")
-        .call(d3.axisBottom(xAxis2));
+        .call(d3.axisBottom(xAxis2).tickSize(2));
 
   underBarchart.append("g")
         .append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(30," + 770 + ")")
-        .call(d3.axisLeft(yScale2).ticks(5));
+        .call(d3.axisLeft(yScale2).ticks(2));
 
   // Make y-axis title
   underBarchart.append("text")
             .text("Total search count")
-            .attr("transform", "translate(5,860) rotate(270)")
+            .attr("transform", "translate(0,880) rotate(270)")
             .attr("fill", "white")
-            .style("font-size", "10px")
+            .style("font-size", "13px")
 
   bar.data(getDataArray2(data, foodname, tempYear)[0])
           .attr("id", "underBarchartbars")
@@ -58,13 +67,15 @@ function makeUnderBarchart(data, foodname) {
           })
           .attr("fill", "white")
           .on('mouseover', function(d) {
-                d3.select(this).style('opacity', '0.4');
+                d3.select(this).style('opacity', '0.4')
+                tip.show(d);
             })
           .on('mouseout', function(d) {
                 d3.select(this)
                 .transition()
               .duration(250)
               .style('opacity', '1')
+              tip.hide(d);
             });
 
     var circleX = 700
@@ -98,7 +109,7 @@ function updateUnderBarChart(data, foodname, year) {
   var yScale = d3.scaleLinear()
         .domain([getDataArray2(data, foodname, year)[1],
                  getDataArray2(data, foodname, year)[2]])
-        .range([100,5])
+        .range([100,0])
 
   bars = d3.selectAll("#sunburstsvg").selectAll("rect")
 
@@ -142,7 +153,6 @@ function updateUnderBarChart(data, foodname, year) {
 function getDataArray2(data, food, year) {
 
   var keys = data[food][year];
-  console.log("tttt");
   array = []
   arr2 = []
   for (var key in keys) {

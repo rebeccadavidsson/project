@@ -84,3 +84,14 @@ TODO:
 * sunburst updaten met transition
 * Tooltip functie maken die ook de GOEDE maand aangeeft.
 * Ticks weghalen bij maanden omdat de maanden soms niet helemaal kloppen
+* Bij onderste dropdown ook bovenste gedeelte laten updaten
+
+# Dag 11: Maandag
+* Missende data eruit gehaald, ticks weggehaald
+* Ik ben heel blij, want het is gelukt om de data om te zetten in een bruikbaar format voor de sunburst. Ik heb hieruit ook een mooie sunburst kunnen maken die goed update!
+* Als ik tijd over heb wil ik ook nog een ring aan de sunburst toevoegen die de maanden weergeeft.
+
+# Dag 12: Dinsdag
+*
+
+TODO: x-as op bar charts veranderen dat december niet op het einde zit. 

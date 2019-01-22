@@ -11,82 +11,83 @@ function getDataArray(data, food, year) {
   for (var i = 0; i < weeks; i++) {
     array[i].push(weeksArray[i])
   }
+
   return array
 }
 
 function makeBarcharts(data, foodnames) {
 
-var graphWidth = 280
-var yPadding = 100
-var xPadding = yPadding - 5
-var barPadding = 8
-var graphSpace = 200
-var textLoc = 480
-var weeks = 52 // TODO
-var monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-              "Aug", "Sep", "Okt", "Nov", "Dec"]
+  var graphWidth = 280
+  var yPadding = 100
+  var xPadding = yPadding - 5
+  var barPadding = 8
+  var graphSpace = 200
+  var textLoc = 480
+  var weeks = 52 // TODO
+  var monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+                "Aug", "Sep", "Okt", "Nov", "Dec", ""]
 
-// Define range and domain for xScale and yScale
-var xScale = d3.scaleLinear()
-    .domain([0,weeks])
-    .range([barPadding ,graphWidth + barPadding]);
-var xAxis = d3.scalePoint()
-    .domain(monthsArray)
-    .range([0,graphWidth]);
-var yScale = d3.scaleLinear()
-    .domain([0,yPadding])
-    .range([yPadding,0]);
+  // Define range and domain for xScale and yScale
+  var xScale = d3.scaleLinear()
+      .domain([0,weeks])
+      .range([barPadding ,graphWidth + barPadding]);
+  var xAxis = d3.scalePoint()
+      .domain(monthsArray)
+      .range([0,graphWidth]);
+  var yScale = d3.scaleLinear()
+      .domain([0,yPadding])
+      .range([yPadding,0]);
 
-var colors = ["#660066", "#990099", "#ff00ff", "#ff99ff"]
-var foods = ["pear", "asparagus", "mojito", "pasta-salad"]
-var yearsSelected = ["2006", "2010", "2007", "2012"]
+  var colors = ["#660066", "#990099", "#ff00ff", "#ff99ff"]
+  var foods = ["pear", "asparagus", "mojito", "pasta-salad"]
+  var yearsSelected = ["2006", "2010", "2007", "2012"]
 
-var datasvg = d3.select("#datasvg")
-var bar = datasvg.selectAll(".bar")
+  var datasvg = d3.select("#datasvg")
+  var bar = datasvg.selectAll(".bar")
 
-var tip = d3.tip()
-            .attr('class', 'd3-tip')
-            .offset([-5, 0])
-            .html(function(d) {
-              return "<span class='details'>" + d + "<br></span>" ;
-            })
-datasvg.call(tip);
+  var tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([-5, 0])
+              .html(function(d) {
+                return "<span class='details'>" + d + "<br></span>" ;
+              })
+  datasvg.call(tip);
 
-// Load first bar charts when page is opened
-for (i = graphSpace, j = 0; i < 1000; i += graphSpace, j++) {
-datasvg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(100," + i + ")")
-      .call(d3.axisBottom(xAxis));
+  // Load first bar charts when page is opened
+  for (i = graphSpace, j = 0; i < 1000; i += graphSpace, j++) {
+  datasvg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(100," + i + ")")
+        .call(d3.axisBottom(xAxis));
 
-  // Fill in the barchart with rectangles
-  function fillBars(food, year, color){
-    bar.data(getDataArray(data, food, year))
-      .enter()
-      .append("rect")
-      .attr("class", "bar")
-      .attr("id", "bar" + i)
-      .attr("x", function(d) {
-        return(xScale(d[1]) + xPadding)})
-      .attr("y", function(d) {
-        return(yScale(d[0]) + yPadding + i - graphSpace)})
-      .attr("width", 3.5)
-      .attr("height", function(d) {
-        return(d[0])
-      })
-      .attr("fill", color)
-      .on('mouseover', function(d) {
-            d3.select(this)
-            .style('opacity', '0.4')
-            tip.show(d)
+    // Fill in the barchart with rectangles
+    function fillBars(food, year, color){
+      bar.data(getDataArray(data, food, year))
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("id", "bar" + i)
+        .attr("x", function(d) {
+          return(xScale(d[1]) + xPadding)})
+        .attr("y", function(d) {
+          return(yScale(d[0]) + yPadding + i - graphSpace)})
+        .attr("width", 3.5)
+        .attr("height", function(d) {
+          return(d[0])
         })
-      .on('mouseout', function(d) {
-            d3.select(this)
-            .transition()
-          .duration(250)
-          .style('opacity', '1')
-          tip.hide(d)
-        })
+        .attr("fill", color)
+        .on('mouseover', function(d) {
+              d3.select(this)
+              .style('opacity', '0.4')
+              tip.show(d)
+          })
+        .on('mouseout', function(d) {
+              d3.select(this)
+              .transition()
+            .duration(250)
+            .style('opacity', '1')
+            tip.hide(d)
+          })
 
       // Add circles for food name
       var circle = datasvg.append("circle")
@@ -109,11 +110,13 @@ datasvg.append("g")
           .on("mousedown", function(d) {
             var x = d3.select(this).attr('id')
             updateSunburst(data, foods[x])
-            updateUnderBarChart(data, foods[x], yearsSelected[x])}
+            updateUnderBarChart(data, foods[x], yearsSelected[x])
+            updateLineChart(data, foods[x], "False")}
           );
 
       datasvg.append("text")
             .text(foods[j])
+            .attr("pointer-events", "none")
             .attr("class", "foodname")
             .attr("text-anchor", "middle")
             .attr("x", textLoc)
@@ -121,6 +124,7 @@ datasvg.append("g")
 
       datasvg.append("text")
             .text(yearsSelected[j])
+            .attr("pointer-events", "none")
             .attr("class", "barchartcircleyear")
             .style("font-size", "10px")
             .attr("text-anchor", "middle")
@@ -202,6 +206,8 @@ function addSlider(data) {
     var gTime = d3.select('#sunburstsvg')
                 .append('g')
                 .attr("id", "slider")
+                .style("stroke-width", "2px")
+                .attr("class", "axis-slider")
                 .attr('transform', 'translate(20,940)');
 
     gTime.call(sliderTime);
@@ -269,7 +275,7 @@ function exploreBarCharts(data) {
   var textLoc = 400
   var weeks = 52 // TODO
   var monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-                "Aug", "Sep", "Okt", "Nov", "Dec"]
+                "Aug", "Sep", "Okt", "Nov", "Dec", ""]
 
   // Define range and domain for xScale and yScale
   var xScale = d3.scaleLinear()
@@ -349,5 +355,6 @@ function exploreBarCharts(data) {
 
         }fillBars(foods[j], yearsSelected[j], colors[j])
       }
+
     }
 }

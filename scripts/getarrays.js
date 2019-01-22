@@ -11,7 +11,7 @@
     var years = ["2004", "2005", "2006", "2007", "2008", "2009",
                "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"] // TODO
     var monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-                  "Aug", "Sep", "Okt", "Nov", "Dec"]
+                  "Aug", "Sep", "Okt", "Nov", "Dec", ""]
     var weeksArray = fillArrayWithNumbers(weeks)
 
 
@@ -19,7 +19,7 @@
    // Make an array of of datapoints of one year for a chosen food
    function getDataArrayMinMax(data, food, year) {
 
-     // console.log(food, year);
+
      var keys = data[food][year];
      array = []
      for (var key in keys) {
@@ -53,6 +53,7 @@
        value = 0
        // Calculate total value per year
        for (var i = 1; i < weeks + 1; i++) {
+
          value += parseInt(data[food][key][i])
        }
        array.push(value);
@@ -83,8 +84,8 @@
      for (var key in keys) {
 
        // Loop through every value of that year
-       for (var i = 1; i < weeks + 1 ; i+= (  4 + (1/3)) ) {
-         i = Math.floor(i)
+       for (var i = 1; i < weeks + 1 ; i += 4) {
+
          array.push(parseInt(keys[key][i]))
        }
      }
@@ -128,4 +129,165 @@ function genJSON(csvData, groups) {
     return node;
   };
   return nest({}, 0);
+}
+
+
+function sunburstData(data, foodname) {
+  var years = ["2004", "2005", "2006", "2007", "2008", "2009",
+              "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
+  var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+                "Aug", "Sep", "Okt", "Nov", "Dec"]
+  indexs = [0, 5, 9, 13, 17, 22, 26, 31, 35, 39, 44, 48]
+
+  var flare = []
+  testJson = []
+
+  // 13 years
+  for (var j = 0, i = 0; j < 13; j++, i++) {
+    testJson.push({"name" : years[i], "children" : getMonths(years[i])})
+  }
+
+
+  function getArray(year) {
+    var tempArr = []
+    for (var j = 0; j < 52; j++) {
+      dataArray = getDataArray3(data, foodname, year)
+      tempArr.push({"name" : dataArray[j][1].toString(), "size" :  parseInt(dataArray[j][0])})
+    }
+    return tempArr
+  }
+
+  function getMonths(year) {
+    var temp = []
+    var tempArray = getArray(year)
+
+    for (var k = 0; k < 12; k++) {
+      temp.push({"name" : "month", "children" : getMonth(indexs[k], tempArray)})
+    }
+    return temp;
+  }
+
+  flare.push({"name": "flare", "children" : testJson})
+  console.log(flare);
+  return flare;
+}
+
+
+function getDataArray3(data, food, year) {
+
+  var keys = data[food][year];
+  array = []
+  for (var key in keys) {
+    array.push([keys[key]]);
+  }
+  // Fill in the week-numbers
+  for (var i = 0; i < weeks; i++) {
+    array[i].push(weeksArray[i])
+  }
+
+  return array
+}
+
+function getMonth(index, dataArray) {
+
+  var monthsArray = []
+
+  if (index >= 0 && index < 5) {
+    dataArrayTotal = []
+    for (var i = 0; i < 5; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "January", "children" : dataArrayTotal})
+    return monthsArray
+  }
+
+  else if (index >= 5 && index < 9) {
+    dataArrayTotal = []
+    for (var i = 5; i < 9; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "February", "children" : dataArrayTotal})
+    return monthsArray
+  }
+  else if (index >= 9 && index < 13) {
+    dataArrayTotal = []
+    for (var i = 9; i < 13; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "March", "children" : dataArrayTotal})
+    return monthsArray
+  }
+  else if (index >= 13 && index < 17) {
+    dataArrayTotal = []
+    for (var i = 13; i < 17; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "April", "children" : dataArrayTotal})
+    return monthsArray
+  }
+  else if (index >= 17 && index < 22) {
+    dataArrayTotal = []
+    for (var i = 17; i < 22; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "May", "children" : dataArrayTotal})
+    return monthsArray
+  }
+  else if (index >= 22 && index < 26) {
+    dataArrayTotal = []
+    for (var i = 22; i < 26; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "June", "children" : dataArrayTotal})
+    return monthsArray
+  }
+  else if (index >= 26 && index < 31) {
+    dataArrayTotal = []
+    for (var i = 26; i < 31; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "July", "children" : dataArrayTotal})
+    return monthsArray
+  }
+  else if (index >= 31 && index < 35) {
+    dataArrayTotal = []
+    for (var i = 31; i < 35; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "August", "children" : dataArrayTotal})
+    return monthsArray
+  }
+  else if (index >= 35 && index < 39) {
+    dataArrayTotal = []
+    for (var i = 35; i < 39; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "September", "children" : dataArrayTotal})
+    return monthsArray
+  }
+  else if (index >= 39 && index < 44) {
+    dataArrayTotal = []
+    for (var i = 39; i < 44; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "October", "children" : dataArrayTotal})
+    return monthsArray
+  }
+  else if (index >= 44 && index < 48) {
+    dataArrayTotal = []
+    for (var i = 44; i < 48; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "November", "children" : dataArrayTotal})
+    return monthsArray
+  }
+  else if (index >= 48 && index < 52) {
+    dataArrayTotal = []
+    for (var i = 48; i < 52; i++) {
+      dataArrayTotal.push(dataArray[i])
+    }
+    monthsArray.push({"name" : "December", "children" : dataArrayTotal})
+    return monthsArray
+  }
+
 }

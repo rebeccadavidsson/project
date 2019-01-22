@@ -154,7 +154,7 @@
         .attr('class', 'track')
         .attr(x + '1', scale.range()[0] - SLIDER_END_PADDING)
         .attr('stroke', '#bbb')
-        .attr('stroke-width', 6)
+        .attr('stroke-width', 12)
         .attr('stroke-linecap', 'round');
 
       sliderEnter
@@ -162,7 +162,7 @@
         .attr('class', 'track-inset')
         .attr(x + '1', scale.range()[0] - SLIDER_END_PADDING)
         .attr('stroke', '#eee')
-        .attr('stroke-width', 4)
+        .attr('stroke-width', 6)
         .attr('stroke-linecap', 'round');
 
       if (fill) {
@@ -199,6 +199,7 @@
           return transformAlong(scale(d));
         })
         .attr('font-family', 'sans-serif')
+        .attr("stroke", "white")
         .attr("fill", "white")
         .attr(
           'text-anchor',
@@ -214,12 +215,12 @@
         .attr('transform', 'rotate(' + (orientation + 1) * 90 + ')')
         .attr('d', handle)
         .attr('fill', 'white')
-        .attr('stroke', '#777');
+        // .attr('stroke', '#777');
 
       if (displayValue && value.length === 1) {
         handleEnter
           .append('text')
-          .attr('font-size', 20) // TODO: Remove coupling to font-size in d3-axis
+          .attr('font-size', 24) // TODO: Remove coupling to font-size in d3-axis
           .attr(y, k * 27)
           .attr(
             'dy',

@@ -5,6 +5,7 @@ Name: Rebecca Davidsson, student number: 11252138.
 
 import json
 import pandas as pd
+from collections import defaultdict
 
 all = []
 
@@ -16,28 +17,28 @@ def to_flare_json(df, filename):
 
     for index, row in df.iterrows():
         parent = row[0]
-        child = row[2].split("-")[0] # string
-        child2 = row[2].split("-")[-1] # string
-        child_size = row[3] # int
+        child = row[2].split("-")[0] # string, year
+        child2 = row[2].split("-")[-1] # string, week
+        child_size = row[3] # int, value
 
         # Make a list of keys
         key_list = []
+        child_list = []
         for item in d['children']:
             key_list.append(item['name'])
+            child_list.append(item['children'])
 
-        # CHECK IF CHILD 2 IN CHILD...
-            # if not: append to child
-            # else: append new child to parent?
 
         #if 'parent' is NOT a key in flare.JSON, append it
         if not parent in key_list:
-            d['children'].append({"name": parent, "children":[{"name": child, "children": [{"name": child2, "size": child_size}]}]})
+            # d['children'].append({"name": parent, "children":[{"name": child, "children": child_size}]})
+            d['children'].append({"name": parent, "children":[{"name": child, "children": child2 }]})
+
 
         # if parent IS a key in flare.json, add a new child to it
         else:
-            d['children'][key_list.index(parent)]['children'].append({"name": child, "children": child_size})
+            d['children'][key_list.index(parent)]['children'].append({"name": child, "children": child2})
 
-        child_list = []
 
 
     flare = d
@@ -45,20 +46,7 @@ def to_flare_json(df, filename):
     # export the final result to a json file
     with open(filename +'.json', 'w') as outfile:
         json.dump(flare, outfile, indent=4)
-    return ("Done")
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print ("Done")
 
 
 
