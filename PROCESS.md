@@ -96,4 +96,11 @@ TODO:
 * Ik heb ervoor gekozen om de sunburst te verwijderen en een nieuwe te maken tussen het switchen van voeding, omdat het te langzaam wordt om de hele sunburst te updaten en ook omdat het te lastig is.
 * Ik heb help-tips toegevoegd aan de pagina voor als de gebruiker het niet snapt.
 
-* TODO: Checken of alle update functies goed met elkaar werken.
+TODO:
+* Checken of alle update functies goed met elkaar werken.
+* Naam van voeding ook bij de barchart toevoegen.
+
+# Dag 13: Woensdag
+* Update functies gecheckt en verbeterd.
+* Slider-bug er uit gehaald.
+* Extra svg toegevoegd met 'behind the scenes van de sunburst' waar een volledige sunburst instaat.

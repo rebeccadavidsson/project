@@ -37,7 +37,7 @@ section h1 {
 
 .demo2 a {
   position: relative;
-  top: -120px;
+  top: -150px;
   left: 50%;
   z-index: 2;
   -webkit-transform: translate(0, -50%);
@@ -52,6 +52,20 @@ section h1 {
 .demo3 a {
   position: relative;
   top: 700px;
+  left: 50%;
+  z-index: 2;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  color: #fff;
+  font : normal 400 20px/1 'Josefin Sans', sans-serif;
+  letter-spacing: .1em;
+  text-decoration: none;
+  transition: opacity .3s;
+}
+
+.demo4 a {
+  position: relative;
+  top: 0px;
   left: 50%;
   z-index: 2;
   -webkit-transform: translate(0, -50%);

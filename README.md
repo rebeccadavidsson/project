@@ -1,5 +1,7 @@
 # Project voorstel
 
+https://rebeccadavidsson.github.io/project/index.html#three
+
 ## Google zoekopdrachten naar voeding vanaf 2014
 
 Welke soorten voeding worden het meest opgezocht in welke jaarperiode?
@@ -18,7 +20,7 @@ D3
 ### Data
 Alle data staat in 1 bestand en kan gevonden worden op:
 https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004
-Uit deze dataset moeten de jaartallen en data nog omgezet worden in bruikbare getallen. 
+Uit deze dataset moeten de jaartallen en data nog omgezet worden in bruikbare getallen.
 
 ### Vergelijkbare data visualisaties
 ![Alt text](https://www.bakemag.com/ext/resources/images/r/h/y/t/h/d/o/o/o/f/2016/RhythmofFood.jpg)

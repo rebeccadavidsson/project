@@ -78,7 +78,7 @@ fetch('data/result.json').then(response => {
   makeSunburstWelcome(data, foodnames) // TODO
 
   // Make the first sunburst
-  makeSunburst(data)
+  makeSunburst(data, "#sunburstsvg")
 
   // Make a few bar charts
   makeBarcharts(data, foodnames)
@@ -97,6 +97,11 @@ fetch('data/result.json').then(response => {
 
   // Add a few barchart examples to explore data
   exploreBarCharts(data)
+
+  // Make the second sunburst
+  // makeSunburst(data, "#sunburstOutro")
+
+  makeUnderSunburst(data, "#sunburstOutro")
 
 }).catch(err => {
   // TODO

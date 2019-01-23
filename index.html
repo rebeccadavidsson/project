@@ -16,16 +16,8 @@
     <script src="d3/d3.min.js"></script>
     <script src="scripts/d3-tip.js"></script>
       <script src="scripts/d3-simple-slider.js"></script>
-    <!-- <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?2.5.0"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script async="" src="https://www.google-analytics.com/analytics.js"></script>
-    <!-- <script src="https://static.observablehq.com/bundle.9627e0ec077bcbb1f8971ac34273c5619b667d3a69f469a49bdfc6964359724f.js" crossorigin></script> -->
-
-
-    <!-- <script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script> -->
-    <!-- <script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script> -->
-    <!-- <script src="scripts/script.js"></script> -->
-    <!-- <script src="scripts/underscore.js"></script> -->
     <script src="scripts/getarrays.js"></script>
     <script src="scripts/sunburst.js"></script>
     <script src="scripts/barcharts.js"></script>
@@ -48,11 +40,11 @@
 <svg class="welcomesvg"  id="welcomesvg" viewBox="0 0 1000 600">
   <foreignObject id="one" x="1.9cm" y="1.6cm" width="30cm" height="10cm">
       <p xmlns="http://www.w3.org/1999/xhtml"
-         style="font-size:38px;">Sunburst diagram</p>
+         style="font-size:34px;">Sunburst diagram</p>
     </foreignObject>
     <foreignObject id="two" x="2cm" y="3.6cm" width="8.5cm" height="10cm">
         <p id="two" xmlns="http://www.w3.org/1999/xhtml"
-           style="font-size:13px;">The sunburst diagram represents data from a
+           style="font-size:10px;">The sunburst diagram represents data from a
               specific food category over the years 2004 up until 2016.
               <br><br>
               The outer circle represents every weekly data point. For instance,
@@ -74,16 +66,14 @@
          </p>
     </foreignObject>
 </svg>
-<div class="between">
-</div>
-<div class="between2">
-</div>
+<div class="between"></div>
+<div class="between2"></div>
 <section id="section07" class="demo2">
   <a href="#sunburstsvg" ><span></span><span></span><span></span></a>
 </section>
 <div class="dropdowndiv" id="dropdowndiv">
 </div>
-<svg class="sunburstsvg"  id="sunburstsvg" viewBox="0 0 800 1000">
+<svg class="sunburstsvg"  id="sunburstsvg" viewBox="0 60 800 1000">
   <foreignObject id="one" x="17.9cm" y="1.6cm" width="30cm" height="10cm">
       <div class="help-tip">
         <p>This is a sunburst made from data of one food category.
@@ -92,6 +82,8 @@
           <br>
           Zoom in on a year by clicking on one of the sunburst pieces.
           <br>
+          <br>
+          Colors don't represent element values.
         </p>
       </div>
     </foreignObject>
@@ -107,24 +99,37 @@
   <p class="barchartstext"><strong>Move the slider</strong> to view a bar chart of a specific year.</p>
   <p class="barchartstext"><strong>Scroll down</strong> to view the line graph of your chosen food category.</p>
 </div>
-
-
-<!-- <svg class="betweenline" id="betweenline"></svg> -->
 <section id="section07" class="demo3">
-  <a href="#linechart">
-    <!-- <span></span><span></span><span></span> -->
-  </a>
+  <a href="#linechart"></a>
 </section>
 <svg class="linechart" id="linechart" viewBox="20 500 1680 100"></svg>
 <section id="section07" class="demo3">
   <a href="#three" ><span></span><span></span><span></span></a>
 </section>
 <div class="comparediv" id="comparediv">Choose category: </div>
-<svg class="storysvg" id="storysvg" viewBox="-100 700 1680 100">
+<svg class="storysvg" id="storysvg" viewBox="-100 600 1680 100">
   <foreignObject id="three" x="5cm" y="17.6cm" width="30cm" height="10cm">
       <p xmlns="http://www.w3.org/1999/xhtml"
          style="font-size:24px;">Explore the data with some more examples!</p>
          <p style="font-size:17px">Bar charts are shown for different years between 2004 - 2016.</p>
-  </foreignObject></svg>
+  </foreignObject>
+</svg>
+<section id="section07" class="demo4">
+  <a href="#sunburstOutro"></a>
+</section>
+<div class="between"></div>
+<div class="between2"></div>
+<section id="section07" class="demo4">
+  <a href="#sunburstOutro"></a>
+</section>
+<svg class="sunburstOutro" id="sunburstOutro" viewBox="-360 300 1500 100">
+  <foreignObject x="-2.7cm" y="-10.3cm" width="30cm" height="10cm">
+      <p xmlns="http://www.w3.org/1999/xhtml"
+         style="font-size:24px;">Behind the scenes of the sunburst.</p>
+         <br>
+         <p style="font-size:17px">The inner circle represents years, the second circle the months and the outer circle all the weeks.</p>
+
+  </foreignObject>
+</svg>
 </body>
 </html>

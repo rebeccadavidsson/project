@@ -45,13 +45,14 @@ function makeBarcharts(data, foodnames) {
   var datasvg = d3.select("#datasvg")
   var bar = datasvg.selectAll(".bar")
 
-  var tip = d3.tip()
+  tip = d3.tip()
               .attr('class', 'd3-tip')
               .offset([-5, 0])
               .html(function(d) {
                 return "<span class='details'>" + d + "<br></span>" ;
               })
   datasvg.call(tip);
+  d3.selectAll("#storysvg").call(tip)
 
   // Load first bar charts when page is opened
   for (i = graphSpace, j = 0; i < 1000; i += graphSpace, j++) {
@@ -135,14 +136,6 @@ function makeBarcharts(data, foodnames) {
   }
   function addButtons() {
 
-    // for (i = 100, j = 0; i < graphSpace * 4; i += graphSpace, j++) {
-    // d3.selectAll("#datasvg")
-    //   .append("g")
-    //   .attr("class", "y axis")
-    //   .attr("transform", "translate(100," + i + ")")
-    //   .call(d3.axisLeft(yScale).ticks(5));
-    // }
-
     dropdown = d3.select("#dropdowndiv")
             .attr("id", "dropdown") // TODO
 
@@ -162,10 +155,9 @@ function makeBarcharts(data, foodnames) {
 
     // Update function on dropdown selection
     dropdown.on('change', function(){
-                var foodname = d3.select(this)
-                .select("select")
-                .property("value")
-                var year = d3.selectAll("#yearcircle").text()
+                var temp = document.getElementById('select');
+                var foodname = temp.options[temp.selectedIndex].value
+                var year = d3.selectAll(".yearcircle").text()
             updateSunburst(data, foodname)
             updateUnderBarChart(data, foodname, year)
             updateLineChart(data, foodname, "False")})
@@ -208,7 +200,7 @@ function addSlider(data) {
                 .attr("id", "slider")
                 .style("stroke-width", "2px")
                 .attr("class", "axis-slider")
-                .attr('transform', 'translate(20,940)');
+                .attr('transform', 'translate(20,1010)');
 
     gTime.call(sliderTime);
 
@@ -323,12 +315,14 @@ function exploreBarCharts(data) {
           .attr("fill", color)
           .on('mouseover', function(d) {
                 d3.select(this).style('opacity', '0.4')
+                tip.show(d)
             })
           .on('mouseout', function(d) {
                 d3.select(this)
                 .transition()
               .duration(250)
               .style('opacity', '1')
+              tip.hide(d)
             })
 
           // Add circles for food name
@@ -347,7 +341,6 @@ function exploreBarCharts(data) {
 
           datasvg.append("text")
                 .text(yearsSelected[j])
-                .attr("class", "barchartcircleyear")
                 .style("font-size", "10px")
                 .attr("text-anchor", "middle")
                 .attr("x", textLoc + h)

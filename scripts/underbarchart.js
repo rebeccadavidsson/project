@@ -2,7 +2,7 @@ function makeUnderBarchart(data, foodname) {
 
   var barPadding = 9
   var space = 600
-  yPadding = 100
+  yPadding = 150
   xPadding = -5
 
   var bar = d3.select("#sunburstsvg").selectAll(".bar") // TODO
@@ -35,19 +35,19 @@ function makeUnderBarchart(data, foodname) {
   // Add x- and y-axis
   underBarchart.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(30," + 870 + ")")
+        .attr("transform", "translate(30," + 920 + ")")
         .call(d3.axisBottom(xAxis2).tickSize(2));
 
   underBarchart.append("g")
         .append("g")
         .attr("class", "y axis")
-        .attr("transform", "translate(30," + 770 + ")")
+        .attr("transform", "translate(30," + 820 + ")")
         .call(d3.axisLeft(yScale2).ticks(2));
 
   // Make y-axis title
   underBarchart.append("text")
             .text("Total search count")
-            .attr("transform", "translate(0,880) rotate(270)")
+            .attr("transform", "translate(0,920) rotate(270)")
             .attr("fill", "white")
             .style("font-size", "13px")
 
@@ -78,25 +78,31 @@ function makeUnderBarchart(data, foodname) {
               tip.hide(d);
             });
 
-    var circleX = 700
-    var circleY = 820
+    var circleX = 740
+    var circleY = 870
 
     // Append circle with with year-text
-    var circle = underBarchart.append("circle")
+    underBarchart.append("circle")
                 .attr("cx", circleX)
                 .attr("cy", circleY)
-                .attr("r", 50)
+                .attr("r", 70)
                 .attr("fill", "silver");
 
     underBarchart.append("text")
             .text("2004")
             .attr("x", circleX)
-            .attr("y", circleY + 5)
-            .attr("id", "yearcircle")
-            .attr("class", "foodname")
+            .attr("y", circleY + 20)
+            .attr("class", "yearcircle")
             .attr("text-anchor", "middle")
 
-
+    // Append foodname-text
+    underBarchart.append("text")
+            .text(foodname)
+            .attr("x", circleX)
+            .attr("y", circleY - 5)
+            .attr("class", "foodnameBig")
+            .attr("text-anchor", "middle")
+            .style("font-size", "15px")
 
 }
 
@@ -131,23 +137,43 @@ function updateUnderBarChart(data, foodname, year) {
       .duration(400)
       .call(d3.axisLeft(yScale).ticks(5));
 
-    var circleX = 700
-    var circleY = 820
+    var circleX = 740
+    var circleY = 870
 
     // Update year text
-    d3.selectAll("#sunburstsvg").selectAll("#yearcircle").remove()
+    d3.selectAll("#sunburstsvg").selectAll(".yearcircle, .foodnameBig").remove()
 
-    d3.selectAll("#sunburstsvg").append("text")
+    // Append year
+    d3.select("#sunburstsvg").append("text")
             .text(year)
             .attr("x", circleX)
-            .attr("y", circleY + 5)
-            .attr("id", "yearcircle")
-            .attr("class", "foodname")
+            .attr("y", circleY + 20)
+            .attr("class", "yearcircle")
             .attr("text-anchor", "middle")
 
-    d3.selectAll(".barchartcircleyear").remove()
+    // Append foodname
+    d3.select("#sunburstsvg").append("text")
+            .text(foodname)
+            .attr("x", circleX)
+            .attr("y", circleY - 5)
+            .attr("class", "foodnameBig")
+            .attr("text-anchor", "middle")
+            .style("font-size", "15px")
+
+
+
+
+    // Remove years in mini barchart-circles
+    var barchartcircleyear = d3.selectAll(".barchartcircleyear").remove()
 
 }
+
+function updateUnderBarChartName(foodname) {
+  d3.selectAll(".foodnameBig").remove()
+}
+
+
+
 
 // TODO
 function getDataArray2(data, food, year) {
