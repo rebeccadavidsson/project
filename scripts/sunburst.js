@@ -369,7 +369,7 @@ function updateSunburst(dataX, food) {
             return getMonthSunburst(parseInt(d.data.name))
           }
           else if (d.depth == 4) {
-            return "week " + d.data.name + ", rate: " + d.data.size
+            return "week " + d.data.name
           }
           else {
             return d.data.name
