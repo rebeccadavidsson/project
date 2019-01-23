@@ -9,6 +9,19 @@
   padding-top: 10px;
 }
 
+.button {
+  background-color: gainsboro;
+  border: none;
+  color: black;
+  padding: 1.0em;
+  margin-left: 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
 .sliderdiv {
   width: 62.4%;
   height: 50px;

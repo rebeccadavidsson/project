@@ -39,7 +39,7 @@ function makeBarcharts(data, foodnames) {
       .range([yPadding,0]);
 
   var colors = ["#660066", "#990099", "#ff00ff", "#ff99ff"]
-  var foods = ["pear", "asparagus", "mojito", "pasta-salad"]
+  var foods = ["easter-egg", "asparagus", "mojito", "pasta-salad"]
   var yearsSelected = ["2006", "2010", "2007", "2012"]
 
   var datasvg = d3.select("#datasvg")
@@ -134,6 +134,7 @@ function makeBarcharts(data, foodnames) {
 
     }fillBars(foods[j], yearsSelected[j], colors[j])
   }
+
   function addButtons() {
 
     dropdown = d3.select("#dropdowndiv")
@@ -161,6 +162,7 @@ function makeBarcharts(data, foodnames) {
             updateSunburst(data, foodname)
             updateUnderBarChart(data, foodname, year)
             updateLineChart(data, foodname, "False")})
+
 
   }addButtons()
   addSlider(data)
@@ -200,7 +202,7 @@ function addSlider(data) {
                 .attr("id", "slider")
                 .style("stroke-width", "2px")
                 .attr("class", "axis-slider")
-                .attr('transform', 'translate(20,1010)');
+                .attr('transform', 'translate(20,1080)');
 
     gTime.call(sliderTime);
 
@@ -217,7 +219,7 @@ function updateYear(data, year) {
   var graphSpace = 200
   var textLoc = 480
   var colors = ["#660066", "#990099", "#ff00ff", "#ff99ff"]
-  var foods = ["pear", "asparagus", "mojito", "pasta-salad"]
+  var foods = ["easter-egg", "asparagus", "mojito", "pasta-salad"]
   var yearsSelected = ["2006", "2010", "2007", "2012"]
 
   // Define range and domain for xScale and yScale

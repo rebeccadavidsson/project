@@ -101,6 +101,7 @@ TODO:
 * Naam van voeding ook bij de barchart toevoegen.
 
 # Dag 13: Woensdag
+* Ik heb ervoor gekozen om de labels van de grootste maanden weer te geven naast de sunburst
 * Update functies gecheckt en verbeterd.
 * Slider-bug er uit gehaald.
 * Extra svg toegevoegd met 'behind the scenes van de sunburst' waar een volledige sunburst instaat.

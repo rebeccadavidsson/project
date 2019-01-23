@@ -162,13 +162,13 @@ function sunburstData(data, foodname) {
     var tempArray = getArray(year)
 
     for (var k = 0; k < 12; k++) {
-      temp.push({"name" : "month", "children" : getMonth(indexs[k], tempArray)})
+      temp.push({ "name" : "month", "children" : getMonth(indexs[k], tempArray) })
     }
     return temp;
   }
 
   flare.push({"name": "flare", "children" : testJson})
-  console.log(flare);
+  console.log(testJson);
   return flare;
 }
 

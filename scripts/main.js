@@ -27,11 +27,10 @@ $(document).ready(function(){
 
 function onload() {
 
-// Open file
-fetch('data/result.json').then(response => {
-  return response.json();
-}).then(data => {
-
+  // Open file
+  fetch('data/result.json').then(response => {
+    return response.json();
+  }).then(data => {
 
   // Set foodname to load data when page is opened
   var foodname = "anise"
@@ -41,7 +40,7 @@ fetch('data/result.json').then(response => {
 
 
   // Make an array of foodnames
-  var foodnames = []
+  foodnames = []
 
   for (var key in data) {
 
@@ -102,6 +101,7 @@ fetch('data/result.json').then(response => {
   // makeSunburst(data, "#sunburstOutro")
 
   makeUnderSunburst(data, "#sunburstOutro")
+
 
 }).catch(err => {
   // TODO

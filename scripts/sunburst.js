@@ -9,6 +9,8 @@ function makeSunburst(dataX, svgX){
     // get data
     var data = sunburstData(dataX, tempFoodname)[0]
 
+    console.log(data);
+
     // Partition data with d3.hierarchy
     partition = data => {
         const root = d3.hierarchy(data)
@@ -88,7 +90,7 @@ function makeSunburst(dataX, svgX){
               return getMonthSunburst(parseInt(d.data.name))
             }
             else if (d.depth == 4) {
-              return "week " + d.data.name + ", rate: " + d.data.size
+              return "week " + d.data.name
             }
             else {
               return d.data.name
@@ -169,7 +171,12 @@ function makeSunburst(dataX, svgX){
     }
 
     function labelVisible(d) {
-      return d.y1 <= 3 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.04;
+      if (d.y1 >= 4 && d.y0 <= 1) {
+         return d.y1 <= 4 && d.y0 >= 2 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.18;
+       }
+       else {
+         return d.y1 <= 4 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.08;
+       }
     }
 
     function labelTransform(d) {
@@ -304,7 +311,6 @@ function makeSunburstWelcome(data, foodnames){
             .style('opacity', 0.3)
           })
 
-
 }
 
 function updateSunburst(dataX, food) {
@@ -426,7 +432,12 @@ function updateSunburst(dataX, food) {
     }
 
     function labelVisible(d) {
-      return d.y1 <= 3 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.04;
+      if (d.y1 >= 4 && d.y0 <= 1) {
+         return d.y1 <= 4 && d.y0 >= 2 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.18;
+       }
+       else {
+         return d.y1 <= 4 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.08;
+       }
     }
 
     function labelTransform(d) {
@@ -491,8 +502,6 @@ function getMonthSunburst(index) {
 }
 
 
-
-
 function makeUnderSunburst(dataX, svgX) {
 
   var tempFoodname = "asparagus-de"
@@ -517,9 +526,9 @@ function makeUnderSunburst(dataX, svgX) {
     .data(root.descendants().slice(1))
     .enter().append("path")
     .attr("fill", function(d) {
-      // while (d.depth > 1) {
-      //   d = d.parent
-      // }
+      while (d.depth > 1) {
+        d = d.parent
+      }
       return color(d.value)
     })
       .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.9: 0.7) : visible)
