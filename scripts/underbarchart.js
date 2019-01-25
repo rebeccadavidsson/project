@@ -172,9 +172,6 @@ function updateUnderBarChart(data, foodname, year) {
       .duration(400)
       .call(d3.axisLeft(yScale).ticks(5));
 
-    // var circleX = 740
-    // var circleY = 870
-
     // Update year text
     d3.selectAll("#sunburstsvg").selectAll(".yearcircle, .foodnameBig").remove()
 
@@ -194,9 +191,6 @@ function updateUnderBarChart(data, foodname, year) {
             .attr("class", "foodnameBig")
             .attr("text-anchor", "middle")
             .style("font-size", "15px")
-
-
-
 
     // Remove years in mini barchart-circles
     var barchartcircleyear = d3.selectAll(".barchartcircleyear").remove()
