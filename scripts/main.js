@@ -74,7 +74,7 @@ function onload() {
   makeSunburstWelcome(data, foodnames) // TODO
 
   // Make the first sunburst
-  makeSunburst(data, "#sunburstsvg")
+  makeSunburst(data, foodname)
 
   // Make a few bar charts
   makeBarcharts(data, foodnames)
