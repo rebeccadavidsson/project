@@ -189,12 +189,15 @@ function makeSunburst(dataX, svgX){
 
 }
 
+/*
+ * Make a sunburst on the background with low opacity.
+ */
 function makeSunburstWelcome(data, foodnames){
 
   var set1 = getDataMeans(data, "frozen-yogurt")[0]
   var set2 = getDataMninBars(data, "pie")[0]
 
-  var width = 800;
+  var width = 820;
   var height = 470;
   var radius = 160;
   var outerRadius = 260;
@@ -207,7 +210,6 @@ function makeSunburstWelcome(data, foodnames){
     .append('g')
     .attr('transform', 'translate(' + width + ',' + height + ')');
 
-
   var colors = d3.scaleSequential(d3.interpolateReds)
                   .domain([0,3000])
   var colorsBlue = d3.scaleSequential(d3.interpolateReds)
@@ -219,100 +221,57 @@ function makeSunburstWelcome(data, foodnames){
   var labelArc = d3.arc()
             .outerRadius(radius - 40)
             .innerRadius(outerRadius - 40);
-  arc4 = d3.arc()
+  var arc2 = d3.arc()
               .innerRadius(radiusBig)
               .outerRadius(outerRadiusBig);
-  arc5 = d3.arc()
+  var arc3 = d3.arc()
               .innerRadius(radiusBig2)
               .outerRadius(outerRadiusBig2);
-  pie = d3.pie()
+  var pie = d3.pie()
               .value(function(d, i) {return d; })
               .sort(null);
 
+  var dataList = [set1, set1, set2]
+  var arcList = [arc, arc2, arc3]
+  var opacityList = [0.7, 0.1, 0.3]
 
-  sunburst.selectAll("#sunburstsvg")
-        .data(pie(set1))
-        .enter()
-        .append('path')
-        .attr("id", "sunburstpath")
-        .attr('d', arc)
-        .attr("fill", function(d,i) {
-          return colors(d.data);
-        })
-        .attr("stroke", "darkgray")
-        .attr("stroke-width", 6)
-        .attr("opacity", 0.7)
-        .each(function(d) { this._current = d; })
-        .on('mouseover', function(d) {
-              d3.select(this).style('opacity', 0.2)
-          })
-        .on('mouseout', function(d) {
-              d3.select(this)
-              .transition()
-            .duration(250)
-            .style('opacity', 0.4)
-          })
-        .on("mousedown", function() {
-              var year = d3.select(this);
-              console.log(year);
-              console.log(foodname);
-              var foodname = d3.selectAll("#sunburstTitle").text()
+  // Loop over the three arcs
+  for (var j = 0; j < 3; j++) {
 
-              updateUnderBarChart(data, foodname, year)
-              clickedSunburst(data, year)
-            });
-
-
-  // Make outer ring
-  sunburst.selectAll("#sunburstsvg")
-        .data(pie(set1))
-        .enter()
-        .append('path')
-        .attr("id", "sunburstpathOpacity1")
-        .attr('d', arc4)
-        .attr("fill", function(d,i) {
-          return colors(d.data);
-        })
-        .attr("opacity", 0.1)
-        .attr("stroke", "darkgray")
-        .attr("stroke-width", 6)
-        .each(function(d) { this._current = d; })
-        .on('mouseover', function(d) {
-              d3.select(this).style('opacity', 0.05)
+    // Append paths for the sunburst
+    sunburst.selectAll("#sunburstsvg")
+          .data(pie(dataList[j]))
+          .enter()
+          .append("path")
+          .attr('d', arcList[j])
+          .attr("fill", function(d) {
+            if (j == 2) {
+                return colorsBlue(d.data);
+            }
+            else {
+                return colors(d.data);
+            }
           })
-        .on('mouseout', function(d) {
-              d3.select(this)
-              .transition()
-            .duration(250)
-            .style('opacity', 0.1)
-          })
-
-  // Make middle ring with mini data
-  sunburst.selectAll("#sunburstsvg")
-        .data(pie(set2))
-        .enter()
-        .append('path')
-        .attr("id", "sunburstpathOpacity2")
-        .attr('d', arc5)
-        .attr("fill", function(d,i) {
-          return colorsBlue(d.data); // TODO
-        })
-        .attr("opacity", 0.3)
-        .attr("stroke", "darkgray")
-        .attr("stroke-width", 1)
-        .each(function(d) { this._current = d; })
-        .on('mouseover', function(d) {
-              d3.select(this).style('opacity', 0.2)
-          })
-        .on('mouseout', function(d) {
-              d3.select(this)
-              .transition()
-            .duration(250)
-            .style('opacity', 0.3)
-          })
-
+          .attr("stroke", "darkgray")
+          .attr("stroke-width", 6)
+          .attr("opacity", opacityList[j])
+          .each(function(d) { this._current = d; })
+          .on('mouseover', function(d) {
+              console.log(opacityList[j]);
+                d3.select(this).style('opacity', 0.3)
+            })
+          .on('mouseout', function(d) {
+                d3.select(this)
+                .transition()
+              .duration(250)
+              .style('opacity', 0.2)
+            })
+  }
 }
 
+/*
+ * Update 
+ */
 function updateSunburst(dataX, food) {
 
   var dataset = sunburstData(dataX, food)
@@ -504,7 +463,7 @@ function getMonthSunburst(index) {
 
 function makeUnderSunburst(dataX, svgX) {
 
-  var tempFoodname = "asparagus-de"
+  var tempFoodname = "cauliflower"
 
   // get data
   var data = sunburstData(dataX, tempFoodname)[0]
@@ -526,13 +485,20 @@ function makeUnderSunburst(dataX, svgX) {
     .data(root.descendants().slice(1))
     .enter().append("path")
     .attr("fill", function(d) {
-      while (d.depth > 1) {
-        d = d.parent
-      }
       return color(d.value)
     })
       .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.9: 0.7) : visible)
-      .attr("d", d => arc(d.current));
+      .attr("d", d => arc(d.current))
+      .on("mouseover", function(d) {
+        d3.select(this)
+        .style("opacity", 0.4)
+      })
+      .on("mouseout", function(d) {
+        d3.select(this)
+        .transition()
+        .duration(400)
+        .style("opacity", 1)
+      })
 
   // Add title
   svg.append("text")

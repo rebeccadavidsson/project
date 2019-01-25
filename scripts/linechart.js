@@ -401,11 +401,17 @@ function addComparison(data, foodnames) {
                 return d;
             });
 
-  compareSelect.on('change', function(){
+  compareSelect.on('change', function(d){
               var foodname = d3.select(this)
               .select("select")
               .property("value")
-          updateLineChart(data, foodname, "True")})
+
+              var year = d3.select(".yearcircle").text()
+
+              updateLineChart(data, foodname, "True")
+              updateSunburst(data, foodname)
+              updateUnderBarChart(data, foodname, year)
+          })
 }
 
 function updateLegend(array) {

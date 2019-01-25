@@ -108,7 +108,7 @@ function makeUnderBarchart(data, foodname) {
 
 // TODO
 function updateUnderBarChart(data, foodname, year) {
-
+  console.log(data, foodname, year);
   var space = 600
 
   // Update new yScale

@@ -38,12 +38,10 @@ function onload() {
   var years = ["2004", "2005", "2006", "2007", "2008", "2009",
              "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
 
-
   // Make an array of foodnames
   foodnames = []
 
   for (var key in data) {
-
 
     // Skip header
     if (key != "id") {
@@ -69,9 +67,8 @@ function onload() {
     }
   }
 
-  // Sort in alphabetical order
+  // Sort in alphabetical order, used in the dropdown
   foodnames.sort();
-
 
   // Make a sunburst when page is opened
   makeSunburstWelcome(data, foodnames) // TODO

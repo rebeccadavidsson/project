@@ -105,3 +105,12 @@ TODO:
 * Update functies gecheckt en verbeterd.
 * Slider-bug er uit gehaald.
 * Extra svg toegevoegd met 'behind the scenes van de sunburst' waar een volledige sunburst instaat.
+
+TODO:
+* Update sunburst bij update dropdown linechart
+
+# Dag 14: Donderdag, hackaton
+
+#Dag 15: Vrijdag
+* Alle update functies werkend, ook die van de linechart op de andere grafieken.
+* Code meer gecomment en opgeschoond. 
