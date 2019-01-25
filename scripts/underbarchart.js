@@ -1,3 +1,6 @@
+/*
+ * Make an interactive barchart of a specific food category.
+ */
 function makeUnderBarchart(data, foodname) {
 
   var barPadding = 9
@@ -22,15 +25,6 @@ function makeUnderBarchart(data, foodname) {
         .range([100,5])
 
   underBarchart = d3.select("#sunburstsvg")
-
-  // Add a tooltip
-  var tip = d3.tip()
-              .attr('class', 'd3-tip')
-              .offset([-5, 0])
-              .html(function(d) {
-                return "<span class='details'>" + d + "<br></span>" ;
-              })
-  underBarchart.call(tip);
 
   // Add x- and y-axis
   underBarchart.append("g")
@@ -61,21 +55,63 @@ function makeUnderBarchart(data, foodname) {
             return(xScale2(d[1]) + xPadding)})
           .attr("y", function(d) {
             return(yScale2(d[0]) + yPadding + 100 - space)})
-          .attr("width", 6)
+          .attr("width", 8)
           .attr("height", function(d) {
             return d[0]
           })
           .attr("fill", "white")
           .on('mouseover', function(d) {
-                d3.select(this).style('opacity', '0.4')
+                d3.select(this)
+                    .style('opacity', 0.3)
+                    .attr("cursor", "pointer")
                 tip.show(d);
+
+                // Calculate corresponding month
+                if (d[1] == 0) {
+                  var month = 1
+                }
+                else {
+                  var month = Math.floor(d[1] / (4 + (1/3))) + 1
+                }
+
+                // Get classname from child and change opacity
+                var y =  d3.select(".yearcircle").text() + "month"
+                document.getElementsByClassName(y)[month - 1].style.opacity = 0.1
+                document.getElementsByClassName(y)[month - 1].style.transition = "0s";
+
+                // Get classname from parent and change opacity
+                var x =  "flare" + d3.select(".yearcircle").text()
+                var xTarget  = document.getElementsByClassName(x)
+                xTarget.item(0).style.opacity = 0.1
+                xTarget.item(0).style.transition = "0s";
             })
           .on('mouseout', function(d) {
                 d3.select(this)
                 .transition()
               .duration(250)
               .style('opacity', '1')
+              .attr("cursor", "default")
               tip.hide(d);
+
+              // Calculate corresponding month
+              if (d[1] == 0) {
+                var month = 1
+              }
+              else {
+                var month = Math.floor(d[1] / (4 + (1/3))) + 1
+              }
+
+              // Get classname from child and change opacity
+              var y =  d3.select(".yearcircle").text() + "month"
+              document.getElementsByClassName(y)[month - 1].style.opacity = 1
+              document.getElementsByClassName(y)[month - 1].style.transition = "2s"
+
+              // Get classname from parent and change opacity
+              var x =  "flare" + d3.select(".yearcircle").text()
+              var xTarget  = document.getElementsByClassName(x)
+              xTarget.item(0).style.transition = "2s";
+              xTarget.item(0).style.opacity = 1
+
             });
 
     circleX = 740
@@ -108,7 +144,6 @@ function makeUnderBarchart(data, foodname) {
 
 // TODO
 function updateUnderBarChart(data, foodname, year) {
-  console.log(data, foodname, year);
   var space = 600
 
   // Update new yScale
@@ -171,7 +206,6 @@ function updateUnderBarChart(data, foodname, year) {
 function updateUnderBarChartName(foodname) {
   d3.selectAll(".foodnameBig").remove()
 }
-
 
 
 

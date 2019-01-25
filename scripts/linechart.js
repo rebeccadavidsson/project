@@ -277,8 +277,6 @@ function makeLinechart(data, foodname){
 
 function updateLineChart(data, foodname, comparison) {
 
-  console.log("skljdfhlksdjfhlkjs");
-
   svg = d3.select("#linechart"),
       margin = {top: 200, right: 0, bottom: 0, left: 100},
       width = 900 - margin.left - margin.right,
@@ -394,10 +392,16 @@ function addComparison(data, foodnames) {
           .data(foodnames) // TODO sort
           .enter()
             .append("option")
+            .property("selected", function(d){ return d === "-"; })
             .attr("value", function(d){
                 return d;
             })
             .text(function(d){
+
+              // Disable first option
+              if (d === "-") {
+                d3.select(this).property("disabled", true)
+              }
                 return d;
             });
 

@@ -168,7 +168,7 @@ function sunburstData(data, foodname) {
   }
 
   flare.push({"name": "flare", "children" : testJson})
-  console.log(testJson);
+  
   return flare;
 }
 

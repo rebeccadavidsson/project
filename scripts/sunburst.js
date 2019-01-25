@@ -1,6 +1,5 @@
-
 /*
- * Make the interactive sunburst.
+ * Make the interactive sunburst. Input is all data and chosen foodname.
  * Source: https://beta.observablehq.com/@mbostock/d3-zoomable-sunburst
  */
 function makeSunburst(dataX, tempFoodname){
@@ -9,7 +8,7 @@ function makeSunburst(dataX, tempFoodname){
     var data = sunburstData(dataX, tempFoodname)[0]
 
     color = d3.scaleOrdinal(d3.interpolateReds).range(d3.quantize(d3.interpolatePlasma, data.children.length + 1))
-    width = 430
+    width = 410
     radius = width / 4
     arc = d3.arc()
         .startAngle(d => d.x0)
@@ -24,7 +23,7 @@ function makeSunburst(dataX, tempFoodname){
 
     var g = svg.append("g")
         .attr("class", "sunburstCorrect")
-        .attr("transform", `translate(${width / 1.2},${width / 0.95})`);
+        .attr("transform", `translate(${width / 1.2},${width / 0.97})`);
 
     // Partition data with d3.hierarchy
     partition = data => {
@@ -46,49 +45,12 @@ function makeSunburst(dataX, tempFoodname){
 
     path.filter(d => d.children)
           .style("cursor", "pointer")
-          .on("click", clicked);
+          .on("click", function(d) {clicked(d, dataX, root, path, label)})
 
     // Append circle in the middle to go back a level in the sunburst
-    parent = makeParent(g, root, radius, clicked)
+    parent = makeParent(g, root, radius, function(d) {clicked(d, dataX, root, path, label)})
 
-    addTitle(tempFoodname, width, svg, 0.95)
-
-    function clicked(p) {
-
-      // Update barchart when clicked on a year
-      if (p.data.name[0] == 2) {
-        var foodname = d3.selectAll("#sunburstTitle").text()
-        updateUnderBarChart(dataX, foodname, p.data.name)
-        updateYear(dataX, p.data.name)
-      }
-      parent.datum(p.parent || root);
-      root.each(d => d.target = {
-        x0: Math.max(0, Math.min(1, (d.x0 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
-        x1: Math.max(0, Math.min(1, (d.x1 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
-        y0: Math.max(0, d.y0 - p.depth),
-        y1: Math.max(0, d.y1 - p.depth)
-      });
-
-      const t = g.transition().duration(450);
-
-      // Transition the data on all arcs
-      path.transition(t)
-          .tween("data", d => {
-            const i = d3.interpolate(d.current, d.target);
-            return t => d.current = i(t);
-          })
-        .filter(function(d) {
-          return +this.getAttribute("fill-opacity") || arcVisible(d.target);
-        })
-          .attr("fill-opacity", d => arcVisible(d.target) ? (d.children ? 0.9 : 0.7) : 0)
-          .attrTween("d", d => () => arc(d.current));
-
-      label.filter(function(d) {
-          return +this.getAttribute("fill-opacity") || labelVisible(d.target);
-        }).transition(t)
-          .attr("fill-opacity", d => +labelVisible(d.target))
-          .attrTween("transform", d => () => labelTransform(d.current));
-    }
+    addTitle(tempFoodname, width, svg, 0.97)
 
 }
 
@@ -160,7 +122,6 @@ function makeSunburstWelcome(data, foodnames){
           .attr("opacity", opacityList[j])
           .each(function(d) { this._current = d; })
           .on('mouseover', function(d) {
-              console.log(opacityList[j]);
                 d3.select(this).style('opacity', 0.3)
             })
           .on('mouseout', function(d) {
@@ -195,60 +156,23 @@ function updateSunburst(dataX, food) {
 
   var g = svg.append("g")
       .attr("class", "sunburstCorrect")
-      .attr("transform", `translate(${width / 1.2},${width / 0.95})`);
+      .attr("transform", `translate(${width / 1.2},${width / 0.97})`);
 
   // Append paths for all depths of the sunburst
   var path = makePaths(g, root)
 
   path.filter(d => d.children)
         .style("cursor", "pointer")
-        .on("click", clicked);
+        .on("click", function(d) {clicked(d, dataX, root, path, label)})
 
   label = makeLabel(g, root)
 
-  parent = makeParent(g, root, radius, clicked)
-
-  function clicked(p) {
-    if (p.data.name[0] == 2) {
-      var foodname = d3.selectAll("#sunburstTitle").text()
-      updateUnderBarChart(dataX, foodname, p.data.name)
-      updateYear(dataX, p.data.name)
-    }
-    parent.datum(p.parent || root);
-    root.each(d => d.target = {
-      x0: Math.max(0, Math.min(1, (d.x0 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
-      x1: Math.max(0, Math.min(1, (d.x1 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
-      y0: Math.max(0, d.y0 - p.depth),
-      y1: Math.max(0, d.y1 - p.depth)
-    });
-
-    const t = g.transition().duration(400);
-
-    // Transition the data on all arcs, even the ones that aren’t visible,
-    // so that if this transition is interrupted, entering arcs will start
-    // the next transition from the desired position.
-    path.transition(t)
-        .tween("data", d => {
-          const i = d3.interpolate(d.current, d.target);
-          return t => d.current = i(t);
-        })
-      .filter(function(d) {
-        return +this.getAttribute("fill-opacity") || arcVisible(d.target);
-      })
-        .attr("fill-opacity", d => arcVisible(d.target) ? (d.children ? 0.9 : 0.7) : 0)
-        .attrTween("d", d => () => arc(d.current));
-
-    label.filter(function(d) {
-        return +this.getAttribute("fill-opacity") || labelVisible(d.target);
-      }).transition(t)
-        .attr("fill-opacity", d => +labelVisible(d.target))
-        .attrTween("transform", d => () => labelTransform(d.current));
-    }
+  parent = makeParent(g, root, radius, function(d) {clicked(d, dataX, root, path, label)})
 
   // Remove old sunburst title and add a new one.
   d3.selectAll("#sunburstsvg").selectAll("#sunburstTitle").remove()
 
-  addTitle(food, width, svg, 0.95)
+  addTitle(food, width, svg, 0.97)
 }
 
 /*
@@ -336,7 +260,19 @@ function makePaths(g, root) {
     })
     .attr("fill-opacity", d => arcVisible(d.current)
           ? (d.children ? 0.9: 0.7) : 0)
-    .attr("d", d => arc(d.current));
+    .attr("d", d => arc(d.current))
+    .attr("class", function(d) {
+      if (d.parent.data.name) {
+        return (d.parent.data.name + d.data.name);
+
+      }
+      else {
+        return d.data.name
+      }
+
+      // return d.data.name
+
+    })
 
     return path
 }
@@ -347,6 +283,7 @@ function makePaths(g, root) {
 function makeLabel(g, root) {
 
     label = g.append("g")
+          .attr("class", "labels")
           .attr("pointer-events", "none")
           .attr("text-anchor", "middle")
           .style("font-size", "14px")
@@ -365,7 +302,7 @@ function makeLabel(g, root) {
               return getMonthSunburst(parseInt(d.data.name))
             }
             else if (d.depth == 4) {
-              return "week " + d.data.name
+              return "week " + parseInt(d.data.name)
             }
             else {
               return d.data.name
@@ -401,6 +338,47 @@ function addTitle(tempFoodname, width, svg, factor) {
       .attr("text-anchor", "middle")
       .attr("pointer-events", "none")
       .attr("transform", `translate(${width / 1.2},${width / factor})`);
+}
+
+/*
+ * Make a transition between old and new data when an arc is clicked on.
+ * Result is a transitioned, zoomed in sunburst.
+ */
+function clicked(p, dataX, root, path, label) {
+
+  // Update barchart when clicked on a year
+  if (p.data.name[0] == 2) {
+    var foodname = d3.selectAll("#sunburstTitle").text()
+    updateUnderBarChart(dataX, foodname, p.data.name)
+    updateYear(dataX, p.data.name)
+  }
+  parent.datum(p.parent || root);
+  root.each(d => d.target = {
+    x0: Math.max(0, Math.min(1, (d.x0 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
+    x1: Math.max(0, Math.min(1, (d.x1 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
+    y0: Math.max(0, d.y0 - p.depth),
+    y1: Math.max(0, d.y1 - p.depth)
+  });
+
+  const t = g.transition().duration(450);
+
+  // Transition the data on all arcs
+  path.transition(t)
+      .tween("data", d => {
+        const i = d3.interpolate(d.current, d.target);
+        return t => d.current = i(t);
+      })
+    .filter(function(d) {
+      return +this.getAttribute("fill-opacity") || arcVisible(d.target);
+    })
+      .attr("fill-opacity", d => arcVisible(d.target) ? (d.children ? 0.9 : 0.7) : 0)
+      .attrTween("d", d => () => arc(d.current));
+
+  label.filter(function(d) {
+      return +this.getAttribute("fill-opacity") || labelVisible(d.target);
+    }).transition(t)
+      .attr("fill-opacity", d => +labelVisible(d.target))
+      .attrTween("transform", d => () => labelTransform(d.current));
 }
 
 /*

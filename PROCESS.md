@@ -113,4 +113,11 @@ TODO:
 
 #Dag 15: Vrijdag
 * Alle update functies werkend, ook die van de linechart op de andere grafieken.
-* Code meer gecomment en opgeschoond. 
+* Code meer gecomment en opgeschoond.
+* Ik heb ervoor gekozen om een aantal variabelen als globale variabele te maken, omdat anders de input van een functie enorm lang wordt en de input in andere functies soms anders niet beschikbaar is.
+
+TODO:
+* variabele monthsarray maar 1 keer aanmaken
+* Week 0 naar week 1 omzetten in de sunburst
+* Globale variabele maken  van data
+* Nog een interactief element toevoegen aan de barchart

@@ -32,6 +32,7 @@ function onload() {
     return response.json();
   }).then(data => {
 
+
   // Set foodname to load data when page is opened
   var foodname = "anise"
 
@@ -70,6 +71,8 @@ function onload() {
   // Sort in alphabetical order, used in the dropdown
   foodnames.sort();
 
+  foodnames.splice(0,0,"-")
+
   // Make a sunburst when page is opened
   makeSunburstWelcome(data, foodnames) // TODO
 
@@ -98,7 +101,6 @@ function onload() {
   // makeSunburst(data, "#sunburstOutro")
 
   makeUnderSunburst(data, "#sunburstOutro")
-
 
 }).catch(err => {
   // TODO
