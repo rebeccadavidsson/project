@@ -7,83 +7,82 @@
 <head>
   <meta charset="utf-8">
   <title>Final Project</title>
-    <link rel="stylesheet" href="style/style.css"></link>
-    <link rel="stylesheet" href="style/arrow.css"></link>
-    <link rel="stylesheet" href="style/slider.css"></link>
-    <link rel="stylesheet" href="style/div.css"></link>
-    <link rel="stylesheet" href="style/questionmark.css"></link>
-    <script rel="stylesheet" type="text/css" src="bootstrap/css/bootstrap.min.css"></script>
-    <script src="d3/d3.min.js"></script>
-    <script src="scripts/d3-tip.js"></script>
-      <script src="scripts/d3-simple-slider.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
-    <script src="scripts/getarrays.js"></script>
-    <script src="scripts/sunburst.js"></script>
-    <script src="scripts/barcharts.js"></script>
-    <script src="scripts/underbarchart.js"></script>
-    <script src="scripts/linechart.js"></script>
-    <script src="scripts/main.js"></script>
+  <link rel="stylesheet" href="style/style.css"></link>
+  <link rel="stylesheet" href="style/arrow.css"></link>
+  <link rel="stylesheet" href="style/slider.css"></link>
+  <link rel="stylesheet" href="style/div.css"></link>
+  <link rel="stylesheet" href="style/questionmark.css"></link>
+  <script src="d3/d3.min.js"></script>
+  <script src="scripts/d3-tip.js"></script>
+  <script src="scripts/d3-simple-slider.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="scripts/getarrays.js"></script>
+  <script src="scripts/sunburst.js"></script>
+  <script src="scripts/barcharts.js"></script>
+  <script src="scripts/underbarchart.js"></script>
+  <script src="scripts/linechart.js"></script>
+  <script src="scripts/main.js"></script>
 </head>
 <body onload="onload()">
   <p style="font-size:10px" class="name">Rebecca Davidsson || Programming project 2019 || Food searching trends</p>
-<header>
-  <p></p>
-  <p style="font-size:40px">Food searching trends</p>
-  <p style="font-size:20px">Programming project 2019</p>
-  <br><br><br><br><br><br><br>
-  <p style="font-size:16px">Start by scrolling down!</p>
-<section id="section07" class="demo">
-  <a href="#welcomesvg" ><span></span><span></span><span></span></a>
-</section>
-</header>
-<svg class="welcomesvg"  id="welcomesvg" viewBox="0 0 1000 600">
-  <foreignObject id="one" x="1.9cm" y="1.4cm" width="30cm" height="10cm">
+  <header>
+    <div class="box box--one" id="box-one">
+    <p></p>
+    <p style="font-size:40px">Food trends based on Google searches</p>
+    <p style="font-size:20px">Programming project 2019</p>
+    <br><br><br><br><br><br><br>
+    <p style="font-size:16px">Start by scrolling down!</p>
+    <section id="section07" class="demo">
+      <a href="#welcomesvg" ><span></span><span></span><span></span></a>
+    </section>
+  </header>
+  <svg class="welcomesvg"  id="welcomesvg" viewBox="0 0 1000 600">
+    <foreignObject id="one" x="1.9cm" y="1.4cm" width="30cm" height="10cm">
       <p xmlns="http://www.w3.org/1999/xhtml"
-         style="font-size:32px;">Sunburst, bargraph and linegraph</p>
+      style="font-size:32px;">Sunburst, bargraph and linegraph</p>
     </foreignObject>
     <foreignObject id="two" x="2cm" y="3.0cm" width="8.5cm" height="13cm">
-        <p id="two" xmlns="http://www.w3.org/1999/xhtml"
-           style="font-size:10px;">
-              <strong>Sunburst</strong>
-              <br>
-              The sunburst diagram represents data from a
-              specific food category over the years 2004 up until 2016.
-              The first thing you get to see when you scroll down is an interactive
-              sunburst diagram. A preview is represented on the right.
-              <br><br>
-              The outer circle represents every weekly data point. For instance,
-              the total search count for 'anise' in January 2004 was 26.
-              The outer circle tells us which month was the most popular month
-              for this food category.
-              <br><br>
-              The inner circle represents the sum of all data points for every
-              year.
-              As you can see, the number of inner circles is 13, each
-              representing one year between 2004 and 2016.
-              Zoom in to a more detailed sunburst by clicking on an element.
-              Go back by clicking in the middle.
-              <br><br>
-              <strong>Bargraph</strong>
-              <br>
-              The bargraph automatically changes by choosing a food category.
-              The graph represents a yearly overview of search rates for a specific
-              food category. Change the year by moving the slider.
-              <br><br>
-              <strong>Linegraph</strong>
-              <br>
-              The linegraph represents mean searching rates for a chosen food category.
-              The graph can be used to find a year in which a topic was trending.
-              For instance, 'coffee' was trending in the year 2012. Choose the food category
-              with any dropdown bar.
-              <br><br><br>
-              Data is proveded by:
-                <a href="https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004">www.kaggle.com</a><br>
-                <br>
-              Sunburst is inspired by:
-                <a href="https://beta.observablehq.com/@mbostock/d3-zoomable-sunburst">beta.observablehq.com</a>
-         </p>
-    </foreignObject>
+      <p id="two" xmlns="http://www.w3.org/1999/xhtml"
+      style="font-size:10px;">
+      <strong>Sunburst</strong>
+      <br>
+      The sunburst diagram represents data from a
+      specific food category over the years 2004 up until 2016.
+      The first thing you get to see when you scroll down is an interactive
+      sunburst diagram. A preview is represented on the right.
+      <br><br>
+      The outer circle represents every weekly data point. For instance,
+      the total search count for 'anise' in January 2004 was 26.
+      The outer circle tells us which month was the most popular month
+      for this food category.
+      <br><br>
+      The inner circle represents the sum of all data points for every
+      year.
+      As you can see, the number of inner circles is 13, each
+      representing one year between 2004 and 2016.
+      Zoom in to a more detailed sunburst by clicking on an element.
+      Go back by clicking in the middle.
+      <br><br>
+      <strong>Bargraph</strong>
+      <br>
+      The bargraph automatically changes by choosing a food category.
+      The graph represents a yearly overview of search rates for a specific
+      food category. Change the year by moving the slider.
+      <br><br>
+      <strong>Linegraph</strong>
+      <br>
+      The linegraph represents mean searching rates for a chosen food category.
+      The graph can be used to find a year in which a topic was trending.
+      For instance, 'coffee' was trending in the year 2012. Choose the food category
+      with any dropdown bar.
+      <br><br><br>
+      Data is proveded by:
+      <a href="https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004">www.kaggle.com</a><br>
+      <br>
+      Sunburst is inspired by:
+      <a href="https://beta.observablehq.com/@mbostock/d3-zoomable-sunburst">beta.observablehq.com</a>
+    </p>
+  </foreignObject>
 </svg>
 <div class="between"></div>
 <div class="between2"></div>
@@ -95,21 +94,21 @@
 </div>
 <svg class="sunburstsvg"  id="sunburstsvg" viewBox="0 30 800 1100">
   <foreignObject id="one" x="17.9cm" y="1.6cm" width="30cm" height="10cm">
-      <div class="help-tip">
-        <p>This is a sunburst made from data of one food category.
-          Every piece in the circle represents either a year, month or week of data.
-          The bigger a piece, the higher the search count for this food category.
-          <br>
-          Zoom in on a year by clicking on one of the sunburst pieces. Zoom out
-          by clicking in the middle.
-          <br>
-          <br>
-          * Colors don't represent element values. <br><br>
-          * Labels of weeks and months are only shown for highest search rates.
-          <br>
-        </p>
-      </div>
-    </foreignObject>
+    <div class="help-tip">
+      <p>This is a sunburst made from data of one food category.
+        Every piece in the circle represents either a year, month or week of data.
+        The bigger a piece, the higher the search count for this food category.
+        <br>
+        Zoom in on a year by clicking on one of the sunburst pieces. Zoom out
+        by clicking in the middle.
+        <br>
+        <br>
+        * Colors don't represent element values. <br><br>
+        * Labels of weeks and months are only shown for highest search rates.
+        <br>
+      </p>
+    </div>
+  </foreignObject>
 </svg>
 <svg class="datasvg" id="datasvg" viewBox="0 470 640 1">
 </svg>
@@ -134,22 +133,21 @@
 </div>
 <svg class="storysvg" id="storysvg" viewBox="-100 600 1680 100">
   <foreignObject id="three" x="5cm" y="17.6cm" width="30cm" height="10cm">
-      <p xmlns="http://www.w3.org/1999/xhtml"
-         style="font-size:24px;">Explore the data with some more examples!</p>
-         <p style="font-size:17px">Bar charts are shown for different years between 2004 - 2016.</p>
+    <p xmlns="http://www.w3.org/1999/xhtml"
+    style="font-size:24px;">Explore the data with some more examples!</p>
+    <p style="font-size:17px">Bar charts are shown for different years between 2004 - 2016.</p>
   </foreignObject>
-  <foreignObject x="17.9cm" y="-1cm" width="30cm" height="10cm">
-      <div class="help-tip">
-        <p>This is a linechart .... TODO
-        </p>
-      </div>
-    </foreignObject>
-    <foreignObject x="18.9cm" y="21cm" width="30cm" height="10cm">
-        <div class="help-tip">
-          <p> Examples .... TODO
-          </p>
-        </div>
-      </foreignObject>
+  <foreignObject x="17.9cm" y="-1cm" width="10cm" height="10cm">
+    <div class="help-tip">
+      <p>This is a linechart of mean searching rates for a chosen food category
+        over the years 2004 - 2016.
+        Mean searching rates are calculated by adding all weekly values together
+        over a whole year and deviding by 52.
+        <br>
+        Move your mouse over the line to get more details.
+      </p>
+    </div>
+  </foreignObject>
 </svg>
 <section id="section07" class="demo4">
   <a href="#sunburstOutro"></a>
@@ -160,15 +158,18 @@
   <a href="#sunburstOutro"></a>
 </section>
 <svg class="sunburstOutro" id="sunburstOutro" viewBox="-360 300 1500 100">
-  <foreignObject x="-2.7cm" y="-10.3cm" width="30cm" height="10cm">
-      <p xmlns="http://www.w3.org/1999/xhtml"
-         style="font-size:24px;">Behind the scenes of the sunburst.</p>
-         <br>
-         <p style="font-size:17px">The inner circle represents years, the second
-            circle the months and the outer circle all the weeks.
-            This sunburst shows all the data of a sunburst from one food category,
-            which gives an impression of how all the yearly data is calculated.
-          </p>
+  <foreignObject x="-2.7cm" y="-9.3cm" width="26cm" height="10cm">
+    <p xmlns="http://www.w3.org/1999/xhtml"
+    style="font-size:24px;">Behind the scenes of the sunburst.</p>
+    <br>
+    <p style="font-size:17px">The inner circle represents years, the second
+      circle the months and the outer circle all the weeks.
+      This sunburst shows all the data of a sunburst from one food category,
+      which gives an impression of how all the yearly data is calculated.
+    </p>
+    <section id="section07" class="demo4">
+      <a href="#sunburstOutro" ><span></span><span></span><span></span></a>
+    </section>
   </foreignObject>
 </svg>
 </body>

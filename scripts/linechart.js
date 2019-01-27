@@ -263,6 +263,10 @@ function makeLinechart(data, foodname){
         focus.append("circle")
             .attr("r", 3.5);
 
+        focus.append("text")
+           .attr("x", -15)
+         	.attr("dy", "-1.31em")
+          .style("fill", "white");
 
         svg.append("rect")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -521,7 +525,7 @@ function mousemove() {
       d1 = dataset[i],
       d = x0 - d0.year > d1.year - x0 ? d1 : d0;
   focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
-  // focus.select("text").text(function() { return d.value; });
+  focus.select("text").text(function() { return Math.round(d.value * 100) / 100; });
   focus.select(".x-hover-line").attr("y2", 500 - y(d.value));
   focus.select(".y-hover-line").attr("x2", 800 + 800);
 }

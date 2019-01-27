@@ -1,5 +1,6 @@
 // Source: https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll
 $(document).ready(function(){
+
   // Add smooth scrolling to all links
   $("a").on('click', function(event) {
 
@@ -22,6 +23,17 @@ $(document).ready(function(){
       });
     } // End if
   });
+});
+
+// Source: https://codepen.io/martinwolf/pen/ZGXKEX/
+$(document).ready(function() {
+    $(window).on('scroll', function() {
+        var st = $(this).scrollTop();
+
+        $('#box-one').css({
+            'transform': 'translateY('+ ((st)/1.3) +'px)'
+        });
+    });
 });
 
 
