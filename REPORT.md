@@ -1,7 +1,7 @@
 # Programming project 2019 - Food trends based on Google searches
-Minor programmeren UvA
-Naam: Rebecca Davidsson
-Student nummer: 11252138
+Minor programming UvA
+Name: Rebecca Davidsson
+Student number: 11252138
 
 ![Alt text](doc/page1.png)
 ![Alt text](doc/page2.png)
@@ -54,16 +54,22 @@ Functions:
   * makeMiniLinecharts
   * mousemove, [source: ](https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3)  
 6. **getarrays.js:** converts data into useable arrays.
-Functions:
-  *
 
-
+7. **d3-simple-slider.js:** script to make a slider, [source: ](https://github.com/johnwalley/d3-simple-slider   ).
+8. **d3-tip.js:** tooltip script, [source: ](https://github.com/jprichardson/d3-tooltip).
 
 ### HTML
+The only HTML-file in this repository is 'index.html' and includes all visualisations.
 
 ### CSS
+* style.css: this is the main css file and includes all styles of svg, text, paragraphs etc.
+* div.css: a file aspecially for all the div-elements.
+* questionmark.css
+* slider.css: besides the slider, this file also contains the styling of the dropdown menu's.
+* arrow.css: styling for the arrow that lets the user scroll down.
 
 ### Python
+The only python file in this repository is converter.py. This file converts the downloaded data into a format that can be used in Javascript. 
 
 ### Data
 
