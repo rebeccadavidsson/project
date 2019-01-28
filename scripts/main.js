@@ -16,7 +16,7 @@ $(document).ready(function(){
       // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
       $('html, body').animate({
         scrollTop: $(hash).offset().top
-      }, 400, function(){
+      }, 600, function(){
 
         // Add hash (#) to URL when done scrolling (default click behavior)
         window.location.hash = hash;
@@ -104,7 +104,7 @@ function onload() {
   makeMiniLinecharts(data)
 
   // Call function that adds a compare button
-  addComparison(data, foodnames)
+  linechartDropdown(data, foodnames)
 
   // Add a few barchart examples to explore data
   exploreBarCharts(data)

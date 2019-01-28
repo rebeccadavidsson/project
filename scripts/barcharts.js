@@ -33,7 +33,9 @@ function makeBarcharts(data, foodnames) {
               .attr('class', 'd3-tip')
               .offset([-5, 0])
               .html(function(d) {
-                return "<span class='details'>" + d[0] + "<br></span>" ;
+                return "<span>" + "Week " + d[1] + "<br></span>"  +
+                        "<span class='details'>" + "<strong> "+ "Rate: "
+                        + d[0] + "</strong>" + "<br></span>" ;
               })
   datasvg.call(tip);
   d3.selectAll("#storysvg").call(tip)
@@ -97,7 +99,7 @@ function makeBarcharts(data, foodnames) {
             var x = d3.select(this).attr('id')
             updateSunburst(data, foods[x])
             updateUnderBarChart(data, foods[x], yearsSelected[x])
-            updateLineChart(data, foods[x], "False")}
+            updateLineChart(data, foods[x])}
           );
 
       datasvg.append("text")
@@ -147,7 +149,6 @@ function makeBarcharts(data, foodnames) {
                 }
                   return d;
               });
-    // document.getElementById("dropdown").options[0].disabled = true;
 
     // Update function on dropdown selection
     dropdown.on('change', function(){
@@ -156,7 +157,7 @@ function makeBarcharts(data, foodnames) {
                 var year = d3.selectAll(".yearcircle").text()
                 updateSunburst(data, foodname)
                 updateUnderBarChart(data, foodname, year)
-                updateLineChart(data, foodname, "False")})
+                updateLineChart(data, foodname)})
   }addDropdown()
   addSlider(data)
 }
@@ -346,3 +347,4 @@ function getDataArray(data, food, year) {
 
   return array
 }
+// TODO

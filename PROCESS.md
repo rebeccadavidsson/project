@@ -51,8 +51,9 @@ TODO:
 TODO:
 * legenda afmaken in de linechart
 * Y-assen op de goede waardes zetten.
-* ervoor zorgen dat de sunburst goed geupdate wordt.
 * ervoor zorgen dat de lijst in de dropdown op alfabetische volgorde staat
+* ervoor zorgen dat de sunburst goed geupdate wordt, nu gebeurren er nog hele verkeerde dingen, zie plaatje:
+![Alt text](doc/sunbursterror.png)
 
 # Dag 8: woensdag
 * Lijst is in alfebetische volgorde
@@ -111,7 +112,7 @@ TODO:
 
 # Dag 14: Donderdag, hackaton
 
-#Dag 15: Vrijdag
+# Dag 15: Vrijdag
 * Alle update functies werkend, ook die van de linechart op de andere grafieken.
 * Code meer gecomment en opgeschoond.
 * Ik heb ervoor gekozen om een aantal variabelen als globale variabele te maken, omdat anders de input van een functie enorm lang wordt en de input in andere functies soms anders niet beschikbaar is.
@@ -119,5 +120,13 @@ TODO:
 TODO:
 * variabele monthsarray maar 1 keer aanmaken
 * Week 0 naar week 1 omzetten in de sunburst
-* Globale variabele maken  van data
+* Globale variabele maken van data
 * Nog een interactief element toevoegen aan de barchart
+
+# Dag 16: Maandag
+Ik heb een interactief element toegevoegd aan de barchart, namelijk dat je kan zien welk element in de sunburst wordt aangegeven in de barchart.
+
+TODO:
+* Alle functies om data te verkrijgen in 1 bestand zetten
+* Jaartallen van voorbeeld barcharts op 2004 zetten.
+* Dropdown functies bij elkaar voegen

@@ -6,6 +6,7 @@ function makeSunburst(dataX, tempFoodname){
 
     // Get data
     var data = sunburstData(dataX, tempFoodname)[0]
+    console.log(data);
 
     color = d3.scaleOrdinal(d3.interpolateReds).range(d3.quantize(d3.interpolatePlasma, data.children.length + 1))
     width = 410
@@ -55,7 +56,7 @@ function makeSunburst(dataX, tempFoodname){
 }
 
 /*
- * Make a sunburst on the background with low opacity.
+ * Make a sunburst with low opacity on the background.
  */
 function makeSunburstWelcome(data, foodnames){
 
@@ -177,6 +178,7 @@ function updateSunburst(dataX, food) {
 
 /*
  * Makes the sunburst on a specific svg with plasma colors and high opacity.
+ * This sunburst has no hidden layers.
  */
 function makeUnderSunburst(dataX, svgX) {
 
@@ -269,8 +271,6 @@ function makePaths(g, root) {
       else {
         return d.data.name
       }
-
-      // return d.data.name
 
     })
 

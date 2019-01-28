@@ -17,7 +17,7 @@ De sunburst zal bestaan uit alle jaren van de dataset van de gekozen voeding. Al
 Het doel hiervan is de gebruiker overzichtelijke informatie geven over de opzoekwaardes van een voedingscategorie.
 
 ### Externe componenten
-D3
+D3 (D3 tip + D3 simple slider)
 jQuery
 
 ### Data

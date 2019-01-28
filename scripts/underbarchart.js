@@ -1,14 +1,18 @@
 /*
  * Make an interactive barchart of a specific food category.
+ * Interactivity includes a tooltip that's linked to the sunburst.
  */
 function makeUnderBarchart(data, foodname) {
 
-  var barPadding = 9
-  var space = 600
+  space = 600
   yPadding = 230
   xPadding = -5
+  circleX = 740
+  circleY = 960
+  var tempYear = "2004"
+  var barPadding = 9
 
-  var bar = d3.select("#sunburstsvg").selectAll(".bar") // TODO
+  var bar = d3.select("#sunburstsvg").selectAll(".bar")
 
   xScale2 = d3.scaleLinear()
         .domain([0,weeks])
@@ -16,9 +20,6 @@ function makeUnderBarchart(data, foodname) {
   xAxis2 = d3.scalePoint()
         .domain(monthsArray)
         .range([0,space]);
-
-  var tempYear = "2004"
-
   yScale2 = d3.scaleLinear()
         .domain([getDataArray2(data, foodname, tempYear)[1],
                  getDataArray2(data, foodname, tempYear)[2]])
@@ -45,6 +46,7 @@ function makeUnderBarchart(data, foodname) {
             .attr("fill", "white")
             .style("font-size", "13px")
 
+  // Append bars with tooltip
   bar.data(getDataArray2(data, foodname, tempYear)[0])
           .attr("id", "underBarchartbars")
           .enter()
@@ -114,9 +116,6 @@ function makeUnderBarchart(data, foodname) {
 
             });
 
-    circleX = 740
-    circleY = 960
-
     // Append circle with with year-text
     underBarchart.append("circle")
                 .attr("cx", circleX)
@@ -142,9 +141,13 @@ function makeUnderBarchart(data, foodname) {
 
 }
 
-// TODO
+/*
+ * Update the under-barchart with new data. Under-barchart gets
+ * updated by the dropdown menu's or by clicking on food-names.
+ * The update works with a transition.
+ * Data will always be the same lenght, so no need to use exit().remove()
+ */
 function updateUnderBarChart(data, foodname, year) {
-  var space = 600
 
   // Update new yScale
   var yScale = d3.scaleLinear()
@@ -152,8 +155,9 @@ function updateUnderBarChart(data, foodname, year) {
                  getDataArray2(data, foodname, year)[2]])
         .range([100,0])
 
-  bars = d3.selectAll("#sunburstsvg").selectAll("rect")
+  var bars = d3.selectAll("#sunburstsvg").selectAll("rect")
 
+  // Update bars
   bars.data(getDataArray2(data, foodname, year)[0])
       .transition()
       .duration(400)
@@ -197,12 +201,6 @@ function updateUnderBarChart(data, foodname, year) {
 
 }
 
-function updateUnderBarChartName(foodname) {
-  d3.selectAll(".foodnameBig").remove()
-}
-
-
-
 // TODO
 function getDataArray2(data, food, year) {
 
@@ -212,9 +210,6 @@ function getDataArray2(data, food, year) {
   for (var key in keys) {
     array.push([keys[key]]);
     arr2.push(keys[key])
-    if (keys[key] == "undefined") {
-      console.log("ERROOOOR");
-    }
   }
 
   // Fill in the week-numbers
