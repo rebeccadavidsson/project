@@ -13,11 +13,12 @@ Student nummer: 11252138
 
 ### Javascript
 This repository consists of 9 Javascript files and are all placed in the 'scripts'-folder.
-1. ** main.js: ** main script to load data and call other functions.
+1. **main.js:** main script to load data and call other functions.
 Functions:
   * onload;
-  * functions to control scrolling events.
-2. ** barcharts.js: ** makes a few interactive barcharts (see number 1 in the figure above). Features of this script are the tooltip and some onclick-events.
+  * function to control scrolling events, [source: ](https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll)
+  * function to control parallax effect, [source: ](https://codepen.io/martinwolf/pen/ZGXKEX/)
+2. **barcharts.js:** makes a few interactive barcharts (see number 1 in the figure above). Features of this script are the tooltip and some onclick-events.
 Also, this script consists of a function to make a dropdown and a slider.
 Functions:
   * makeBarcharts;
@@ -25,7 +26,7 @@ Functions:
   * addSlider (see number 4 in the figure above);
   * updateYear: This is an update function that updates the barcharts when the slider is moved or when the selected year gets changed.
   * exploreBarCharts: This is a function to make mini barcharts at the end of the page. Only interactivity is a toolip.
-3. ** sunburst.js: ** includes functions to make and update the sunburst(s) (see number 2 in the figure above).
+3. **sunburst.js:** includes functions to make and update the sunburst(s) (see number 2 in the figure above).
 Functions:
   * makeSunburst (main sunburst);
   * makeSunburstWelcome: a function to make the non-interactive sunburst at the top of the page to welcome the user with a sunburst preview.
@@ -40,13 +41,22 @@ Functions:
   * addTitle
   * clicked: zooms in or out of the sunburst when user clicks on one of the elements.
   * getMonthSunburst
-4. ** underBarchart.js: ** makes the main interactive barchart (see number 3 in the figure above).
+4. **underBarchart.js:** makes the main interactive barchart (see number 3 in the figure above).
 Functions:
     * makeUnderBarchart: function to make the initial barchart when the page is opened. Adds axes, title and position. Also includes the tooltip that works together with the sunburst; hovering over one of the bars in the barchart cuases that corresponding element to get highlighted in the sunburst.
     * updateUnderBarChart: updates the bar chart with a y-axis transition.
-5. ** linechart.js: **
+5. **linechart.js:** makes all linecharts (interactive and non-interactive).
+Functions:
+  * makeLinechart;
+  * updateLineChart
+  * linechartDropdown
+  * updateLegend
+  * makeMiniLinecharts
+  * mousemove, [source: ](https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3)  
+6. **getarrays.js:** converts data into useable arrays.
+Functions:
+  *
 
-https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3
 
 
 ### HTML

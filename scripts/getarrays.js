@@ -1,148 +1,124 @@
+var years = ["2004", "2005", "2006", "2007", "2008", "2009",
+           "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"]
+var monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+             "Aug", "Sep", "Okt", "Nov", "Dec", ""]
+var weeks = 52
+var yearsCount = 12
 
-  // Source: http://2ality.com/2013/11/initializing-arrays.html
-  function fillArrayWithNumbers(n) {
-       var arr = Array.apply(null, Array(n));
-       return arr.map(function (x, i) { return i }); // TODO
-   }
+// Source: http://2ality.com/2013/11/initializing-arrays.html
+// Fill empty array with numbers
+function fillArrayWithNumbers(n) {
+     var arr = Array.apply(null, Array(n));
+     return arr.map(function (x, i) { return i + 1 });
+ }
 
-   // TODO
-    var weeks = 52
-    var yearsCount = 12
-    var years = ["2004", "2005", "2006", "2007", "2008", "2009",
-               "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"] // TODO
-    var monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-                  "Aug", "Sep", "Okt", "Nov", "Dec", ""]
-    var weeksArray = fillArrayWithNumbers(weeks)
+// Get array from 1:52
+var weeksArray = fillArrayWithNumbers(weeks)
 
+/*
+ * Make an array of of datapoints of one year for a chosen food
+ * Return array and min and max value of array.
+ */
+function getDataArrayMinMax(data, food, year) {
 
-    // TODO: Deze functies samenvoegen en input aanpassen
-   // Make an array of of datapoints of one year for a chosen food
-   function getDataArrayMinMax(data, food, year) {
+ var keys = data[food][year];
+ array = []
+ for (var key in keys) {
+   array.push(parseInt(keys[key]));
+ }
 
-
-     var keys = data[food][year];
-     array = []
-     for (var key in keys) {
-       array.push(parseInt(keys[key]));
-     }
-
-     return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
-   }
-
-   // Make an array of all data points of every year for a chosen food
-   function getDataArrayYears(data, food) {
-     // Process data
-     var keys = data[food];
-     array = []
-
-     // Loop through every year
-     for (var key in keys) {
-
-       // Loop through every value of that year
-       for (var i = 1; i < weeks + 1; i++) {
-         array.push(parseInt(keys[key][i]))
-       }
-     }
-     return array
-   }
-
-   function getDataMeans(data, food) {
-     array = []
-     for (var key in data[food]) {
-
-       value = 0
-       // Calculate total value per year
-       for (var i = 1; i < weeks + 1; i++) {
-
-         value += parseInt(data[food][key][i])
-       }
-       array.push(value);
-    }
-    return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
-   }
-
-   function getDataMeansLineChart(data, food) {
-     array = []
-
-     for (var key in data[food]) {
-       value = 0
-       // Calculate total value per year
-       for (var i = 1; i < weeks + 1; i++) {
-         value += parseInt(data[food][key][i])
-       }
-       array.push(value / weeks);
-    }
-    return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
-   }
-
-   function getDataMninBars(data,food) {
-
-     var keys = data[food];
-     array = []
-
-     // Loop through every year
-     for (var key in keys) {
-
-       // Loop through every value of that year
-       for (var i = 1; i < weeks + 1 ; i += 4) {
-
-         array.push(parseInt(keys[key][i]))
-       }
-     }
-
-     return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
-   }
-
-
-
-
-   // The function takes two arguments:
-// csvData - array of data rows
-// groups - array of strings i.e. ['g1', 'g2'] or ['g1']
-
-function genJSON(csvData, groups) {
-
-
-  var genGroups = function (data) {
-    return _.map(data, function(element, index) {
-      return { name : index, children : element };
-    });
-  };
-
-  var nest = function (node, curIndex) {
-    if (curIndex === 0) {
-      node.children = genGroups(_.groupBy(csvData, groups[0]));
-      _.each(node.children, function (child) {
-        nest(child, curIndex + 1);
-      });
-    }
-    else {
-      if (curIndex < groups.length) {
-        node.children = genGroups(
-          _.groupBy(node.children, groups[curIndex])
-        );
-        _.each(node.children, function (child) {
-          nest(child, curIndex + 1);
-        });
-      }
-    }
-    return node;
-  };
-  return nest({}, 0);
+ return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
 }
 
+/*
+ * Make an array of all data points of every year for a chosen food
+ */
+function getDataArrayYears(data, food) {
 
+   // Process data
+   var keys = data[food];
+   array = []
+
+   // Loop through every year
+   for (var key in keys) {
+
+     // Loop through every value of that year
+     for (var i = 1; i < weeks + 1; i++) {
+       array.push(parseInt(keys[key][i]))
+     }
+   }
+   return array
+ }
+
+/*
+* Make an array of ALL searching rates per year.
+* Return array and min and max value of array.
+*/
+function getDataMeans(data, food) {
+ array = []
+ for (var key in data[food]) {
+   value = 0
+   // Calculate total value per year
+   for (var i = 1; i < weeks + 1; i++) {
+     value += parseInt(data[food][key][i])
+   }
+   array.push(value);
+  }
+  return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
+}
+
+/*
+* Make an array of MEAN searching rates per year.
+* Return array and min and max value of array.
+*/
+function getDataMeansLineChart(data, food) {
+ array = []
+
+   for (var key in data[food]) {
+     value = 0
+     // Calculate total value per year
+     for (var i = 1; i < weeks + 1; i++) {
+       value += parseInt(data[food][key][i])
+     }
+     array.push(value / weeks);
+  }
+  return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
+}
+
+/*
+ * Make an array that can be used for the mini bar charts.
+ * Return array and min and max value of array.
+ */
+function getDataMninBars(data,food) {
+
+ var keys = data[food];
+ array = []
+
+ // Loop through every year
+ for (var key in keys) {
+
+   // Loop through every value of that year
+   for (var i = 1; i < weeks + 1 ; i += 4) {
+
+     array.push(parseInt(keys[key][i]))
+   }
+ }
+
+ return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
+}
+
+/*
+ * Convert data into usable format for the sunburst.
+ */
 function sunburstData(data, foodname) {
   var years = ["2004", "2005", "2006", "2007", "2008", "2009",
               "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
-  var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-                "Aug", "Sep", "Okt", "Nov", "Dec"]
   indexs = [0, 5, 9, 13, 17, 22, 26, 31, 35, 39, 44, 48]
 
   var flare = []
   testJson = []
 
-  // 13 years
+  // 13 years in total
   for (var j = 0, i = 0; j < 13; j++, i++) {
     testJson.push({"name" : years[i], "children" : getMonths(years[i])})
   }
@@ -150,9 +126,9 @@ function sunburstData(data, foodname) {
 
   function getArray(year) {
     var tempArr = []
-    for (var j = 0; j < 52; j++) {
+    for (var j = 0; j < weeks; j++) {
       dataArray = getDataArray3(data, foodname, year)
-      tempArr.push({"name" : dataArray[j][1].toString(), "size" :  parseInt(dataArray[j][0])})
+      tempArr.push({"name" : dataArray[j][1], "size" :  parseInt(dataArray[j][0])})
     }
     return tempArr
   }
@@ -161,14 +137,14 @@ function sunburstData(data, foodname) {
     var temp = []
     var tempArray = getArray(year)
 
-    for (var k = 0; k < 12; k++) {
+    for (var k = 0; k < yearsCount; k++) {
       temp.push({ "name" : "month", "children" : getMonth(indexs[k], tempArray) })
     }
     return temp;
   }
 
   flare.push({"name": "flare", "children" : testJson})
-  
+
   return flare;
 }
 
@@ -188,6 +164,11 @@ function getDataArray3(data, food, year) {
   return array
 }
 
+/*
+ * Define which week corresponds to which month.
+ * Input is a number between 0 and 51, output is a dataArray with
+ * data from that month.
+ */
 function getMonth(index, dataArray) {
 
   var monthsArray = []

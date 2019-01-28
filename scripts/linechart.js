@@ -280,7 +280,7 @@ function updateLegend(foodname) {
   var legendX = 650
 
   var legend = d3.selectAll("#linechart").selectAll(".legend")
-                  .data(array)
+                  .data(foodname)
                   .enter()
                     .append("g")
                     .attr("class", "legend")

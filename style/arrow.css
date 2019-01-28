@@ -39,7 +39,7 @@ section::after {
 
 .demo3 a {
   position: relative;
-  top: 680px;
+  top: 690px;
   left: 50%;
   z-index: 2;
   -webkit-transform: translate(0, -50%);

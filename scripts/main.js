@@ -1,4 +1,7 @@
-// Source: https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll
+/*
+ * Source: https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll
+ * Enables used to scroll to the next element by clicking on a button
+ */
 $(document).ready(function(){
 
   // Add smooth scrolling to all links
@@ -13,10 +16,9 @@ $(document).ready(function(){
       var hash = this.hash;
 
       // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
       $('html, body').animate({
         scrollTop: $(hash).offset().top
-      }, 600, function(){
+      }, 650, function(){
 
         // Add hash (#) to URL when done scrolling (default click behavior)
         window.location.hash = hash;
@@ -25,7 +27,10 @@ $(document).ready(function(){
   });
 });
 
-// Source: https://codepen.io/martinwolf/pen/ZGXKEX/
+/*
+ * Source: https://codepen.io/martinwolf/pen/ZGXKEX/
+ * Parallax effect on page header
+ */
 $(document).ready(function() {
     $(window).on('scroll', function() {
         var st = $(this).scrollTop();
@@ -36,14 +41,15 @@ $(document).ready(function() {
     });
 });
 
-
+/*
+ * Loads data and passes it on to several functions.
+ */
 function onload() {
 
   // Open file
   fetch('data/result.json').then(response => {
     return response.json();
   }).then(data => {
-
 
   // Set foodname to load data when page is opened
   var foodname = "anise"
@@ -82,7 +88,6 @@ function onload() {
 
   // Sort in alphabetical order, used in the dropdown
   foodnames.sort();
-
   foodnames.splice(0,0,"-")
 
   // Make a sunburst when page is opened
@@ -109,12 +114,10 @@ function onload() {
   // Add a few barchart examples to explore data
   exploreBarCharts(data)
 
-  // Make the second sunburst
-  // makeSunburst(data, "#sunburstOutro")
-
+  // Make the last sunburst without hidden layers
   makeUnderSunburst(data, "#sunburstOutro")
 
 }).catch(err => {
-  // TODO
+  alert(err)
 });
 }

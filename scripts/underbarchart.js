@@ -53,8 +53,8 @@ function makeUnderBarchart(data, foodname) {
           .append("rect")
           .attr("class", "bar")
           .attr("transform", "translate(30," + 1165 + ")")
-          .attr("x", function(d) {
-            return(xScale2(d[1]) + xPadding)})
+          .attr("x", function(d, i) {
+            return(xScale2(i) + xPadding)})
           .attr("y", function(d) {
             return(yScale2(d[0]) + yPadding + 100 - space)})
           .attr("width", 8)
@@ -69,8 +69,8 @@ function makeUnderBarchart(data, foodname) {
                 tip.show(d);
 
                 // Calculate corresponding month
-                if (d[1] == 0) {
-                  var month = 1
+                if (d[1] == 52) {
+                  var month = 12
                 }
                 else {
                   var month = Math.floor(d[1] / (4 + (1/3))) + 1
@@ -90,14 +90,14 @@ function makeUnderBarchart(data, foodname) {
           .on('mouseout', function(d) {
                 d3.select(this)
                 .transition()
-              .duration(250)
+              .duration(300)
               .style('opacity', '1')
               .attr("cursor", "default")
               tip.hide(d);
 
               // Calculate corresponding month
-              if (d[1] == 0) {
-                var month = 1
+              if (d[1] == 52) {
+                var month = 12
               }
               else {
                 var month = Math.floor(d[1] / (4 + (1/3))) + 1
@@ -160,9 +160,9 @@ function updateUnderBarChart(data, foodname, year) {
   // Update bars
   bars.data(getDataArray2(data, foodname, year)[0])
       .transition()
-      .duration(400)
-      .attr("x", function(d) {
-        return(xScale2(d[1]) + xPadding)})
+      .duration(800)
+      .attr("x", function(d, i) {
+        return(xScale2(i) + xPadding)})
       .attr("y", function(d) {
         return(yScale2(d[0]) + yPadding + 100 - space)})
       .attr("height", function(d) {

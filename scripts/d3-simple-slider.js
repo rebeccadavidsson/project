@@ -218,7 +218,7 @@
       if (displayValue && value.length === 1) {
         handleEnter
           .append('text')
-          .attr('font-size', 20) // TODO: Remove coupling to font-size in d3-axis
+          .attr('font-size', 17) // TODO: Remove coupling to font-size in d3-axis
           .attr(y, k * 27)
           .attr(
             'dy',

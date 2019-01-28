@@ -91,6 +91,7 @@ TODO:
 * Missende data eruit gehaald, ticks weggehaald
 * Ik ben heel blij, want het is gelukt om de data om te zetten in een bruikbaar format voor de sunburst. Ik heb hieruit ook een mooie sunburst kunnen maken die goed update!
 * Als ik tijd over heb wil ik ook nog een ring aan de sunburst toevoegen die de maanden weergeeft.
+* Ik heb ervoor gekozen om de weken altijd een vaste maand te geven. Deze afweging heeft als gevolg dat het makkelijker en sneller gaat om de maand van de week te weten maar dat deze niet altijd klopt. 
 
 # Dag 12: Dinsdag
 * Vandaag heb ik data toegevoegd aan de sunburst. Je kan nu ook de maanden bekijken.
@@ -124,7 +125,8 @@ TODO:
 * Nog een interactief element toevoegen aan de barchart
 
 # Dag 16: Maandag
-Ik heb een interactief element toegevoegd aan de barchart, namelijk dat je kan zien welk element in de sunburst wordt aangegeven in de barchart.
+* Ik heb een interactief element toegevoegd aan de barchart, namelijk dat je kan zien welk element in de sunburst wordt aangegeven in de barchart.
+* Gelukt om week 0 naar week 1 om te zetten.
 
 TODO:
 * Alle functies om data te verkrijgen in 1 bestand zetten

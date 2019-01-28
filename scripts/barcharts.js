@@ -10,8 +10,8 @@ function makeBarcharts(data, foodnames) {
   var yPadding = 100
   var xPadding = yPadding - 5
   colors = ["#660066", "#990099", "#ff00ff", "#ff99ff"]
-  foods = ["easter-egg", "asparagus", "mojito", "pasta-salad"]
-  yearsSelected = ["2006", "2010", "2007", "2012"]
+  foods = ["easter-egg", "apricot", "blueberry", "strawberry"]
+  yearsSelected = ["2004", "2004", "2004", "2004"]
   var datasvg = d3.select("#datasvg")
   var bar = datasvg.selectAll(".bar")
   var monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
@@ -32,7 +32,7 @@ function makeBarcharts(data, foodnames) {
   tip = d3.tip()
               .attr('class', 'd3-tip')
               .offset([-5, 0])
-              .html(function(d) {
+              .html(function(d, i) {
                 return "<span>" + "Week " + d[1] + "<br></span>"  +
                         "<span class='details'>" + "<strong> "+ "Rate: "
                         + d[0] + "</strong>" + "<br></span>" ;
@@ -55,8 +55,8 @@ function makeBarcharts(data, foodnames) {
         .append("rect")
         .attr("class", "bar")
         .attr("id", "bar" + i)
-        .attr("x", function(d) {
-          return(xScale(d[1]) + xPadding)})
+        .attr("x", function(d, i) {
+          return(xScale(i) + xPadding)})
         .attr("y", function(d) {
           return(yScale(d[0]) + yPadding + i - graphSpace)})
         .attr("width", 3.5)
@@ -97,8 +97,9 @@ function makeBarcharts(data, foodnames) {
             })
           .on("mousedown", function(d) {
             var x = d3.select(this).attr('id')
+            var year = d3.select(".yearcircle").text()
             updateSunburst(data, foods[x])
-            updateUnderBarChart(data, foods[x], yearsSelected[x])
+            updateUnderBarChart(data, foods[x], year)
             updateLineChart(data, foods[x])}
           );
 
@@ -108,16 +109,7 @@ function makeBarcharts(data, foodnames) {
             .attr("class", "foodname")
             .attr("text-anchor", "middle")
             .attr("x", textLoc)
-            .attr("y", i - 55)
-
-      datasvg.append("text")
-            .text(yearsSelected[j])
-            .attr("pointer-events", "none")
-            .attr("class", "barchartcircleyear")
-            .style("font-size", "10px")
-            .attr("text-anchor", "middle")
-            .attr("x", textLoc)
-            .attr("y", i - 30)
+            .attr("y", i - 50)
 
     }fillBars(foods[j], yearsSelected[j], colors[j])
   }
@@ -222,8 +214,8 @@ function updateYear(data, year) {
         .transition()
         .duration(1000)
         .ease(d3.easeBounceOut)
-        .attr("x", function(d) {
-          return(xScale(d[1]) + xPadding)})
+        .attr("x", function(d, i) {
+          return(xScale(i) + xPadding)})
         .attr("y", function(d) {
           return(yScale(d[0]) + yPadding + i - graphSpace)})
         .attr("width", 3.5)
@@ -282,8 +274,8 @@ function exploreBarCharts(data) {
             .append("rect")
             .attr("class", "bar")
             .attr("id", "bar" + h)
-            .attr("x", function(d) {
-              return(xScale(d[1]) + h)})
+            .attr("x", function(d, i) {
+              return(xScale(i) + h)})
             .attr("y", function(d) {
               return(yScale(d[0]) + yPadding + i - graphSpace)})
             .attr("width", 3.5)

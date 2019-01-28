@@ -4,11 +4,10 @@
  */
 function makeSunburst(dataX, tempFoodname){
 
-    // Get data
     var data = sunburstData(dataX, tempFoodname)[0]
-    console.log(data);
 
-    color = d3.scaleOrdinal(d3.interpolateReds).range(d3.quantize(d3.interpolatePlasma, data.children.length + 1))
+    color = d3.scaleOrdinal(d3.interpolateReds).range(d3.quantize(
+                  d3.interpolatePlasma, data.children.length + 1))
     width = 410
     radius = width / 4
     arc = d3.arc()
