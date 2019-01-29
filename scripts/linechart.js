@@ -2,7 +2,7 @@
  * Make the interactive linechart with tooltip for a specific food category.
  */
 function makeLinechart(data, foodname){
-  
+
   linechart = d3.selectAll("#linechart")
   years = ["2004", "2005", "2006", "2007", "2008", "2009",
               "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
@@ -36,8 +36,7 @@ function makeLinechart(data, foodname){
       .attr("opacity", 0.5)
       .call(makeGridlines()
           .tickSize(-width)
-          .tickFormat("")
-      )
+          .tickFormat(""))
 
   // Add lines to the graph
   var lineScale = d3.line()
@@ -53,8 +52,7 @@ function makeLinechart(data, foodname){
   // Source: https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3
   svg = d3.select("#linechart"),
       margin = {top: 200, right: 0, bottom: 0, left: 100},
-      height = 500,
-      width = 800;
+      height = 500, width = 800;
 
   // Convert years to date-format
   var parseTime = d3.timeParse("%Y")
@@ -84,10 +82,25 @@ function makeLinechart(data, foodname){
   y.domain([d3.min(dataset, function(d) { return d.value; }) / 1.05,
             d3.max(dataset, function(d) { return d.value; }) * 1.05]);
 
-  // Append x- and y-axis
+  // Add linechart and draw line
+  axisAndLine(dataset, line)
+
+  // Append the focus line (line that appears when hovered over the linechart)
+  focusLine()
+
+  // Add titles
+  linechartTitles()
+
+}
+
+/*
+* Append x- and y-axis to the linechart
+*/
+function axisAndLine(dataset, line) {
+
   g.append("g")
       .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + height + ")")
+      .attr("transform", "translate(0," + 500 + ")")
       .call(d3.axisBottom(x));
   g.append("g")
       .attr("class", "axis axis--y")
@@ -98,13 +111,6 @@ function makeLinechart(data, foodname){
       .datum(dataset)
       .attr("class", "line")
       .attr("d", line)
-
-  // Append the focus line (line that appears when hovered over the linechart)
-  focusLine()
-
-  // Add titles
-  linechartTitles()
-
 }
 
 /*

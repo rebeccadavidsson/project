@@ -3,6 +3,7 @@
  * Interactivity includes a tooltip that's linked to the sunburst.
  */
 function makeUnderBarchart(data, foodname) {
+
   underBarchart = d3.select("#sunburstsvg")
   space = 600
   yPadding = 230
@@ -36,49 +37,38 @@ function makeUnderBarchart(data, foodname) {
         .attr("transform", "translate(30," + 900 + ")")
         .call(d3.axisLeft(yScale2).ticks(2));
 
-  // Make y-axis title
-  underBarchart.append("text")
-            .text("Total search count")
-            .attr("transform", "translate(0,1000) rotate(270)")
-            .attr("fill", "white")
-            .style("font-size", "13px")
-
   // Append bars with tooltip
   bar.data(getDataArray2(data, foodname, tempYear)[0])
           .attr("id", "underBarchartbars")
-          .enter()
-          .append("rect")
-          .attr("class", "bar")
-          .attr("transform", "translate(30," + 1165 + ")")
-          .attr("x", function(d, i) {
-            return(xScale2(i) + xPadding)})
-          .attr("y", function(d) {
-            return(yScale2(d[0]) + yPadding + 100 - space)})
-          .attr("width", 8)
-          .attr("height", function(d) {
-            return d[0]
-          })
-          .attr("fill", "white")
-          .on('mouseover', function(d) {
-                d3.select(this)
-                    .style('opacity', 0.3)
-                    .attr("cursor", "pointer")
-                tip.show(d);
+          .enter().append("rect")
+            .attr("class", "bar")
+            .attr("transform", "translate(30," + 1165 + ")")
+            .attr("x", function(d, i) {return(xScale2(i) + xPadding)})
+            .attr("y", function(d) {
+return(yScale2(d[0]) + yPadding + 100 - space)})
+            .attr("width", 8)
+            .attr("height", function(d) {return d[0]})
+            .attr("fill", "white")
+            .on('mouseover', function(d) {
+                  d3.select(this)
+                      .style('opacity', 0.3)
+                      .attr("cursor", "pointer")
+                  tip.show(d);
 
-                // Highlight corresponding bar in sunburst
-                hoverBar(d, "mouseover", 0.1, "0s")
-            })
-          .on('mouseout', function(d) {
-                d3.select(this)
-                .transition()
-              .duration(300)
-              .style('opacity', '1')
-              .attr("cursor", "default")
-              tip.hide(d);
+                  // Highlight corresponding bar in sunburst
+                  hoverBar(d, "mouseover", 0.1, "0s")
+              })
+            .on('mouseout', function(d) {
+                  d3.select(this)
+                  .transition()
+                .duration(300)
+                .style('opacity', '1')
+                .attr("cursor", "default")
+                tip.hide(d);
 
-              // Go back to original color
-              hoverBar(d, "mouseout", 1, "2s")
-            });
+                // Go back to original color
+                hoverBar(d, "mouseout", 1, "2s")
+              });
 
       // Add circle with foodname
       barchartCircle(foodname)
@@ -111,6 +101,13 @@ function barchartCircle(foodname) {
           .attr("class", "foodnameBig")
           .attr("text-anchor", "middle")
           .style("font-size", "15px")
+
+  // Make y-axis title
+  underBarchart.append("text")
+            .text("Total search count")
+            .attr("transform", "translate(0,1000) rotate(270)")
+            .attr("fill", "white")
+            .style("font-size", "13px")
 }
 
 /*
