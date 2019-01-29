@@ -59,7 +59,7 @@ function makeSunburst(dataX, tempFoodname){
  */
 function makeSunburstWelcome(data, foodnames){
 
-  // Get preview data. 
+  // Get preview data.
   var set1 = getDataMeans(data, "frozen-yogurt")[0]
   var set2 = getDataMninBars(data, "pie")[0]
 
@@ -186,7 +186,6 @@ function makeUnderSunburst(dataX, svgX) {
 
   // get data
   var data = sunburstData(dataX, tempFoodname)[0]
-  // Source: https://beta.observablehq.com/@mbostock/d3-zoomable-sunburst
 
   var root = partition(data)
   root.each(d => d.current = d);

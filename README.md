@@ -28,7 +28,28 @@ The inner circle represents the sum of all data points for every year. As you ca
 **The linegraph** represents mean searching rates for a chosen food category. The graph can be used to find a year in which a topic was trending. For instance, 'coffee' was trending in the year 2012. Choose the food category with any dropdown bar.
 
 # Data and sources
-All data is downloaded from [kaggle.com](https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004) as a csv file. Other related datasets can be downloaded from [Google.com](https://trends.google.com/trends/?geo=US). 
+All data is downloaded from [kaggle.com](https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004) as a csv file.  
+Other related datasets can be downloaded from [Google.com](https://trends.google.com/trends/?geo=US).
+
+### Sunburst
+The sunburst is inspired by [beta.observablehq.com](https://beta.observablehq.com/@mbostock/d3-zoomable-sunburst).
+
+### Slider
+The slider is inspired by [W3schools.com](https://www.w3schools.com/howto/howto_js_rangeslider.asp).
+
+### Questionmark
+The questionmark is inspired by [tutorialzine.com](https://tutorialzine.com/2014/07/css-inline-help-tips).
+
+### Linechart
+The line that appears when user hovers over the linechart is inspired by [bl.ocks.org](https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3)
+
+### Tooltio
+Tooltip is downloaded from [github.com](https://github.com/jprichardson/d3-tooltip)
+
+### Moving arrow and scrolling
+* The arrow that the user can click on to scroll down is inspired by [codepen.io](https://codepen.io/priyankal/pen/zRvNyV).
+* The scrolling function is inspired by [W3schools.com](https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll).
+* The parallax effect is inspired by [codepen.io](https://codepen.io/martinwolf/pen/ZGXKEX/)
 
 
 # How to use this page with other dataset(s)
@@ -44,7 +65,7 @@ All data is downloaded from [kaggle.com](https://www.kaggle.com/GoogleNewsLab/fo
 
 
 
-<p align="center"><i>
+  <p align="center"><i>
 This project is licensed under the terms of the MIT license.</br>
 Rebecca Davidsson, 2019
 </i></p>

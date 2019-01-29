@@ -34,7 +34,7 @@ function makeLinechart(data, foodname){
       .range([height + marginTop, marginTop]);
 
   // function to add gridlines
-  function makeGridlines() { // TODO: deze functie hier onderin zetten
+  function makeGridlines() {
       return d3.axisLeft(yScale)
           .ticks(5)
   }
