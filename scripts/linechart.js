@@ -2,28 +2,20 @@
  * Make the interactive linechart with tooltip for a specific food category.
  */
 function makeLinechart(data, foodname){
-
-  var linechart = d3.selectAll("#linechart")
+  
+  linechart = d3.selectAll("#linechart")
   years = ["2004", "2005", "2006", "2007", "2008", "2009",
               "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
+  tempFoodname = "anise"
   var height = 500
   var width = 800
   var padding = 100
   var linePadding = 10
   var marginTop = 200
-
-  // Make an array that saves only 2 foodnames, used in compare function
   tempFoodname = "anise"
 
   // Update the legend
   updateLegend(tempFoodname)
-
-  // Append title to y-axis
-  linechart.append("text")
-            .text("Total search count")
-            .attr("transform", "translate(60,340) rotate(270)")
-            .attr("fill", "white")
-            .style("font-size", "14px")
 
   // Define range and domain for yScale
   var yScale = d3.scaleLinear()
@@ -61,8 +53,8 @@ function makeLinechart(data, foodname){
   // Source: https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3
   svg = d3.select("#linechart"),
       margin = {top: 200, right: 0, bottom: 0, left: 100},
-      width = 900 - margin.left - margin.right,
-      height = 700 - margin.top - margin.bottom;
+      height = 500,
+      width = 800;
 
   // Convert years to date-format
   var parseTime = d3.timeParse("%Y")
@@ -108,32 +100,9 @@ function makeLinechart(data, foodname){
       .attr("d", line)
 
   // Append the focus line (line that appears when hovered over the linechart)
-  focus = g.append("g")
-      .attr("class", "focus")
-      .style("display", "none");
-  focus.append("line")
-      .attr("class", "x-hover-line hover-line")
-      .attr("y1", 0)
-      .attr("y2", height);
+  focusLine()
 
-  // Append circles and text for a datapoint
-  focus.append("circle")
-      .attr("r", 3.5);
-  focus.append("text")
-       .attr("x", -15)
-     	.attr("dy", "-1.31em")
-      .style("fill", "white");
-
-  // Let focus line apear in the svg
-  svg.append("rect")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .attr("class", "overlay")
-      .attr("width", width)
-      .attr("height", height)
-      .on("mouseover", function() { focus.style("display", null); })
-      .on("mouseout", function() { focus.style("display", "none"); })
-      .on("mousemove", mousemove);
-
+  // Add titles
   linechartTitles()
 
 }
@@ -309,6 +278,13 @@ function linechartTitles() {
   var padding = 100
   var linechart = d3.selectAll("#linechart")
 
+  // Append title to y-axis
+  linechart.append("text")
+            .text("Total search count")
+            .attr("transform", "translate(60,340) rotate(270)")
+            .attr("fill", "white")
+            .style("font-size", "14px")
+
   linechart.append("text")
           .text("Mean searching rates of anise")
           .attr("class", "linechartTitle")
@@ -355,9 +331,43 @@ function linechartTitles() {
             .attr("y", yLoc + 60)
 }
 
-// Source: https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3
+/*
+ * Append the focus line (line that appears when hovered over the linechart)
+ */
+function focusLine() {
+  var height = 500
+  var width = 800
+
+  focus = g.append("g")
+      .attr("class", "focus")
+      .style("display", "none");
+  focus.append("line")
+      .attr("class", "x-hover-line hover-line")
+      .attr("y1", 0)
+      .attr("y2", height);
+
+  // Append circles and text for a datapoint
+  focus.append("circle")
+      .attr("r", 3.5);
+  focus.append("text")
+       .attr("x", -15)
+     	.attr("dy", "-1.31em")
+      .style("fill", "white");
+
+  // Let focus line apear in the svg
+  svg.append("rect")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      .attr("class", "overlay")
+      .attr("width", width)
+      .attr("height", height)
+      .on("mouseover", function() { focus.style("display", null); })
+      .on("mouseout", function() { focus.style("display", "none"); })
+      .on("mousemove", mousemove);
+}
+
 /*
  * Traces a mousemove and changes the focus-line location to the mousemove.
+ * Source: https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3
  */
 function mousemove() {
   var x0 = x.invert(d3.mouse(this)[0]),

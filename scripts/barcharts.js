@@ -49,8 +49,8 @@ function makeBarcharts(data, foodnames) {
         .call(d3.axisBottom(xAxis));
 
     // Fill in the barchart with rectangles
-    function fillBars(food, year, color){
-      bar.data(getDataArray(data, food, year))
+    function fillBars(food, color){
+      bar.data(getDataArray(data, food, "2004"))
         .enter()
         .append("rect")
         .attr("class", "bar")
@@ -99,7 +99,7 @@ function makeBarcharts(data, foodnames) {
             var x = d3.select(this).attr('id')
             var year = d3.select(".yearcircle").text()
             updateSunburst(data, foods[x])
-            updateUnderBarChart(data, foods[x], year)
+            updateUnderBarChart(data, foods[x], "2004")
             updateLineChart(data, foods[x])}
           );
 
@@ -111,7 +111,7 @@ function makeBarcharts(data, foodnames) {
             .attr("x", textLoc)
             .attr("y", i - 50)
 
-    }fillBars(foods[j], yearsSelected[j], colors[j])
+    }fillBars(foods[j], colors[j])
   }
 
   /*

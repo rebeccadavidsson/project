@@ -3,7 +3,7 @@
  * Interactivity includes a tooltip that's linked to the sunburst.
  */
 function makeUnderBarchart(data, foodname) {
-
+  underBarchart = d3.select("#sunburstsvg")
   space = 600
   yPadding = 230
   xPadding = -5
@@ -11,7 +11,6 @@ function makeUnderBarchart(data, foodname) {
   circleY = 960
   var tempYear = "2004"
   var barPadding = 9
-
   var bar = d3.select("#sunburstsvg").selectAll(".bar")
 
   xScale2 = d3.scaleLinear()
@@ -24,8 +23,6 @@ function makeUnderBarchart(data, foodname) {
         .domain([getDataArray2(data, foodname, tempYear)[1],
                  getDataArray2(data, foodname, tempYear)[2]])
         .range([100,5])
-
-  underBarchart = d3.select("#sunburstsvg")
 
   // Add x- and y-axis
   underBarchart.append("g")
@@ -83,29 +80,37 @@ function makeUnderBarchart(data, foodname) {
               hoverBar(d, "mouseout", 1, "2s")
             });
 
-    // Append circle with with year-text
-    underBarchart.append("circle")
-                .attr("cx", circleX)
-                .attr("cy", circleY)
-                .attr("r", 70)
-                .attr("fill", "silver");
+      // Add circle with foodname
+      barchartCircle(foodname)
+}
 
-    underBarchart.append("text")
-            .text("2004")
-            .attr("x", circleX)
-            .attr("y", circleY + 20)
-            .attr("class", "yearcircle")
-            .attr("text-anchor", "middle")
+/*
+ * Append circle to barchart with year-text and foodname
+ */
+function barchartCircle(foodname) {
 
-    // Append foodname-text
-    underBarchart.append("text")
-            .text(foodname)
-            .attr("x", circleX)
-            .attr("y", circleY - 5)
-            .attr("class", "foodnameBig")
-            .attr("text-anchor", "middle")
-            .style("font-size", "15px")
+  // Append circle with with year-text
+  underBarchart.append("circle")
+              .attr("cx", circleX)
+              .attr("cy", circleY)
+              .attr("r", 70)
+              .attr("fill", "silver");
 
+  underBarchart.append("text")
+          .text("2004")
+          .attr("x", circleX)
+          .attr("y", circleY + 20)
+          .attr("class", "yearcircle")
+          .attr("text-anchor", "middle")
+
+  // Append foodname-text
+  underBarchart.append("text")
+          .text(foodname)
+          .attr("x", circleX)
+          .attr("y", circleY - 5)
+          .attr("class", "foodnameBig")
+          .attr("text-anchor", "middle")
+          .style("font-size", "15px")
 }
 
 /*

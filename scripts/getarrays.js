@@ -170,15 +170,12 @@ function getDataArray3(data, food, year) {
  * data from that month.
  */
 function getMonth(index, dataArray) {
-
   var monthsArray = []
-
   if (index >= 0 && index < 5) {
     var dataArrayTotal = returnMonth(0, 5, dataArray)
     monthsArray.push({"name" : "January", "children" : dataArrayTotal})
     return monthsArray
   }
-
   else if (index >= 5 && index < 9) {
     var dataArrayTotal = returnMonth(5, 9, dataArray)
     monthsArray.push({"name" : "February", "children" : dataArrayTotal})

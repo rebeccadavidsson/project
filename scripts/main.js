@@ -76,7 +76,7 @@ function onload() {
   makeUnderSunburst(data, "#sunburstOutro")
 
 }).catch(err => {
-  alert(err)
+  throw(err)
 });
 }
 
