@@ -100,7 +100,7 @@ Another challenge was to get all elements in the correct position on the page. I
 These visualisation of Google search trends could also be used for other categoryies, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualisations by Google (see figure), I think these graphs are clear overview mainly because the line chart shows yearly mean searching rates instead of all measured points and because of the interactivity between the barchart and the sunburst.
 
 Google:
-![Alt text](doc/grapefruitGoogle.png)
+![Alt text](doc/grapfruitGoogle.png)
 
 My line chart:
 ![Alt text](doc/grapefruitMy.png)
