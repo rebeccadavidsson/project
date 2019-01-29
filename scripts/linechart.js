@@ -215,7 +215,7 @@ function updateLineChart(data, foodname) {
   // Update y-axis
   d3.selectAll(".axis--y")
           .transition()
-          .duration(400)
+          .duration(600)
           .call(d3.axisLeft(y).ticks(6).tickFormat(function(d)
               { return parseInt(d); }))
 

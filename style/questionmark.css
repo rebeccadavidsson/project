@@ -3,7 +3,8 @@
 .help-tip{
     position: relative;
     top: 18px;
-    /* right: 40%; */
+    right: 20px;
+    /* display: inline-block; */
     text-align: center;
     background-color: grey;
     border-radius: 70%;
@@ -14,7 +15,22 @@
     cursor: default;
 }
 
-.help-tip:before{
+.help-tip-right{
+    position: relative;
+    top: 18px;
+    right: -80%;
+    display: inline-block;
+    text-align: center;
+    background-color: grey;
+    border-radius: 70%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 26px;
+    cursor: default;
+}
+
+.help-tip:before, .help-tip-right:before{
     content:'?';
     font-weight: bold;
     color:#fff;
@@ -34,7 +50,7 @@
     text-align: left;
     background-color: #1E2021;
     padding: 20px;
-    width: 300px;
+    width: 400px;
     position: absolute;
     border-radius: 3px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);

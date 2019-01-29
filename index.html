@@ -23,6 +23,32 @@
   <script src="scripts/linechart.js"></script>
   <script src="scripts/main.js"></script>
 </head>
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+</script>
 <body onload="onload()">
   <p style="font-size:10px" class="name">Rebecca Davidsson || Programming project 2019 || Food searching trends</p>
   <header>
@@ -90,6 +116,9 @@
   <a href="#between2" ><span></span><span></span><span></span></a>
 </section>
 <div class="dropdowndiv" id="dropdowndiv">
+  <div class="help-tip-right">
+    <p>blabla</p>
+  </div>
   <button class="button"">Choose category:</button>
 </div>
 <svg class="sunburstsvg"  id="sunburstsvg" viewBox="0 25 800 1100">
@@ -156,7 +185,7 @@
 <section id="section07" class="demo4">
   <a href="#sunburstOutro"></a>
 </section>
-<svg class="sunburstOutro" id="sunburstOutro" viewBox="-360 300 1500 100">
+<svg class="sunburstOutro" id="sunburstOutro" viewBox="-360 140 1500 100">
   <foreignObject x="-2.7cm" y="-9.3cm" width="26cm" height="10cm">
     <p xmlns="http://www.w3.org/1999/xhtml"
     style="font-size:24px;">Behind the scenes of the sunburst.</p>

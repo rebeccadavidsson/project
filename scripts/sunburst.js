@@ -193,8 +193,18 @@ function makeUnderSunburst(dataX, svgX) {
   const svg = d3.select(svgX)
       .style("font", "10px sans-serif");
 
+  // Make a new arc with new radius
+  var radius = 90
+  var arc = d3.arc()
+      .startAngle(d => d.x0)
+      .endAngle(d => d.x1)
+      .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.05))
+      .padRadius(radius * 1.1)
+      .innerRadius(d => d.y0 * radius)
+      .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius))
+
   var g = svg.append("g")
-      .attr("transform", `translate(${width / 1.2},${width / 1.1})`);
+      .attr("transform", `translate(${width / 1.2},${width / 1.6})`);
 
   // Make paths with
   var path = g.append("g")
@@ -219,7 +229,7 @@ function makeUnderSunburst(dataX, svgX) {
       })
 
   // Add title to svg
-  addTitle(tempFoodname, width, svg, 1.1)
+  addTitle(tempFoodname, width, svg, 1.6)
 
 }
 

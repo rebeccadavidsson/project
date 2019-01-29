@@ -3,10 +3,14 @@ Minor programming UvA
 Name: Rebecca Davidsson
 Student number: 11252138
 
+## Goal
+The goal of this project was to give user a clear overview of food trends based on Google searches over the years 2004 - 2016. Another goal of this project was to give users the possibility to use these visualisations for other Google datasets such as search rates of political parties.  
+
 ![Alt text](doc/page1.png)
 ![Alt text](doc/page2.png)
 
 ## Visual design
+This page contains three interactive visualisations: a sunburst, bar graph and a line graph. All visualisations show the flow of Google searching trends based on food over the years 2004 - 2016.
 
 ## Technical design
 ![Alt text](doc/numbers.png)
@@ -69,7 +73,7 @@ The only HTML-file in this repository is 'index.html' and includes all visualisa
 * arrow.css: styling for the arrow that lets the user scroll down.
 
 ### Python
-The only python file in this repository is converter.py. This file converts the downloaded data into a format that can be used in Javascript. 
+The only python file in this repository is converter.py. This file converts the downloaded data into a format that can be used in Javascript.
 
 ### Data
 
@@ -80,7 +84,7 @@ The only python file in this repository is converter.py. This file converts the 
 The hardest part of this project was creating a sunburst diagram and especially converting the data into a format that could be used for the sunburst. First, I tried to convert the data with a python script that made a dictionary. I wrote a recursive function that added nodes to a dictionary until the highest depth was reached. Then I encountered another problem; the dictionary did not handle differend key-names. After some research, I tried to write a recursive function in Javascript to convert the data, which was harder than I initially thought, because every depth of the dictionary had a different lenght (13 years, 12 months, 52 weeks). Eventually, I wrote some different functions to get the structure that I wanted (see figure).
 ![Alt text](doc/sunburst_format.png)
 
-Another challenge was to get all elements in the correct position on the page. I did not use bootstrap, because I was under the impression that using bootstrap-columns also ruled out other possibilities. Looking back, I don't know if that actually was a wise choice. On the other side, I learned so much about positioning of elements in HTML.
+Another challenge was to get all elements in the correct position on the page. I did not use bootstrap, because I was under the impression that using bootstrap-columns also ruled out other possibilities. Looking back, I don't know if that actually was a wise choice. On the other side, I learned a lot about positioning of elements in HTML and CSS.
 
 ### Acquired Skills
 * Never before had I heared of D3.partition(). I learned to partition data into parent, child, value and depth, which is useful for several things such as treemaps, packed circles or network graphs.
@@ -89,3 +93,14 @@ Another challenge was to get all elements in the correct position on the page. I
 * Most of all, I learned about Javascript. Before starting this project, I didn't understand neither the onload-function nor the asynchronity of Javascript. For the first time, I used more than one Javascript-file to devide all functions.  
 
 ### Important changes
+
+
+
+## Conclusion
+These visualisation of Google search trends could also be used for other categoryies, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualisations by Google (see figure), I think these graphs are clear overview mainly because the line chart shows yearly mean searching rates instead of all measured points and because of the interactivity between the barchart and the sunburst.
+
+Google:
+![Alt text](doc/grapefruitGoogle.png)
+
+My line chart:
+![Alt text](doc/grapefruitMy.png)

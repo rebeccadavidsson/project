@@ -32,10 +32,10 @@ https://beta.observablehq.com/@mbostock/d3-zoomable-sunburst
 ### Moeilijkheden
 1. De eerste moeilijkheid is het verwerken van de data zodat alles met goede datums in een json file staat. Hiervoor kan ik gebruik maken van een converter module die geschreven kan worden in Python.
 Uiteindelijk wil ik de data in dit format:
-
 ![Alt text](doc/json_example.jpg)
+
 2. Het maken van de sunburst gaat lastig worden, vooral om een smooth transition te maken. Als dit echt niet lukt is een andere data visualisatie zoals een barchart ook mogelijk.
-3. Als het niet lukt om 2 of meer voedingsstoffen te kiezen voor de stacked bar chart dan kan er ook een normale barchart of line chart gemaakt worden van 1 voeding.
+
 
 ## Design
 ![Alt text](doc/design.jpeg)
