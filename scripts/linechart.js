@@ -54,52 +54,6 @@ function makeLinechart(data, foodname){
     .x(function(d, i) { return xScale(i); })
     .y(function(d) { return yScale(d); });
 
-  // Append text and title to the linechart
-  linechart.append("text")
-          .text("Mean searching rates of anise")
-          .attr("class", "linechartTitle")
-          .attr("id", "linechartTitle")
-          .attr("x", padding)
-          .attr("y", yLoc)
-
-  linechart.append("text")
-            .text("Line graph of the mean searching rate for a specific food \
-                  category over the years 2004 - 2016.")
-            .attr("class", "linechartTitle")
-            .style("font-size", "14px")
-            .attr("x", padding)
-            .attr("y", 120)
-
-  // Append line to seperate the two sections
-  linechart.append("rect")
-            .attr("fill", "grey")
-            .attr("x", xLoc - 100)
-            .attr("y", yLoc + 20)
-            .attr("width", 2)
-            .attr("height", 800)
-
-  // Append title to example linecharts
-  linechart.append("text")
-            .text("Examples of line graphs")
-            .attr("class", "linechartTitle")
-            .attr("x", xLoc)
-            .attr("y", yLoc)
-
-  linechart.append("text")
-            .text("Line graphs of the mean searching rates for 'empanada', \
-                  'quinoa', 'cauliflower' ")
-            .attr("class", "linechartTitle")
-            .style("font-size", "14px")
-            .attr("x", xLoc)
-            .attr("y", yLoc + 40)
-
-  linechart.append("text")
-            .text("and 'coffee' over the years 2004 - 2016. ")
-            .attr("class", "linechartTitle")
-            .style("font-size", "14px")
-            .attr("x", xLoc)
-            .attr("y", yLoc + 60)
-
   // Convert data to usable format
   dataset = []
   for (i = 0; i < 13; i++) {
@@ -181,6 +135,8 @@ function makeLinechart(data, foodname){
       .on("mouseover", function() { focus.style("display", null); })
       .on("mouseout", function() { focus.style("display", "none"); })
       .on("mousemove", mousemove);
+
+  linechartTitles(linechart, padding, yLoc, xLoc)
 
 }
 
@@ -364,6 +320,58 @@ function makeMiniLinecharts(data) {
   }
 
 }
+
+/*
+ * Append text and title to the linechart
+ */
+function linechartTitles(linechart, padding, yLoc, xLoc) {
+
+  linechart.append("text")
+          .text("Mean searching rates of anise")
+          .attr("class", "linechartTitle")
+          .attr("id", "linechartTitle")
+          .attr("x", padding)
+          .attr("y", yLoc)
+
+  linechart.append("text")
+            .text("Line graph of the mean searching rate for a specific food \
+                  category over the years 2004 - 2016.")
+            .attr("class", "linechartTitle")
+            .style("font-size", "14px")
+            .attr("x", padding)
+            .attr("y", 120)
+
+  // Append line to seperate the two sections
+  linechart.append("rect")
+            .attr("fill", "grey")
+            .attr("x", xLoc - 100)
+            .attr("y", yLoc + 20)
+            .attr("width", 2)
+            .attr("height", 800)
+
+  // Append title to example linecharts
+  linechart.append("text")
+            .text("Examples of line graphs")
+            .attr("class", "linechartTitle")
+            .attr("x", xLoc)
+            .attr("y", yLoc)
+
+  linechart.append("text")
+            .text("Line graphs of the mean searching rates for 'empanada', \
+                  'quinoa', 'cauliflower' ")
+            .attr("class", "linechartTitle")
+            .style("font-size", "14px")
+            .attr("x", xLoc)
+            .attr("y", yLoc + 40)
+
+  linechart.append("text")
+            .text("and 'coffee' over the years 2004 - 2016. ")
+            .attr("class", "linechartTitle")
+            .style("font-size", "14px")
+            .attr("x", xLoc)
+            .attr("y", yLoc + 60)
+}
+
 // Source: https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3
 /*
  * Traces a mousemove and changes the focus-line location to the mousemove.

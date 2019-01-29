@@ -73,10 +73,10 @@ Tooltip is downloaded from [github.com](https://github.com/jprichardson/d3-toolt
 * The parallax effect is inspired by [codepen.io](https://codepen.io/martinwolf/pen/ZGXKEX/)
 
 ## Plugins
-* D3
+* D3, License: BSD 3-Clause "New" or "Revised" License (https://github.com/d3/d3/blob/master/LICENSE)
 * D3 simple slider
 * D3 Tooltip
-* jQuery
+* jQuery, https://jquery.com/ License: MIT license
 
 # How to use this page with other dataset(s)
 1. Download dataset as a csv file from https://trends.google.com/trends/?geo=US or https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004 . Make sure dataset has this format:

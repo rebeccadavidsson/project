@@ -1,18 +1,4 @@
 /*
- * Source: https://codepen.io/martinwolf/pen/ZGXKEX/
- * Parallax effect on page header
- */
-$(document).ready(function() {
-    $(window).on('scroll', function() {
-        var st = $(this).scrollTop();
-
-        $('#box-one').css({
-            'transform': 'translateY('+ ((st)/1.3) +'px)'
-        });
-    });
-});
-
-/*
  * Loads data and passes it on to several functions.
  */
 function onload() {
@@ -92,3 +78,17 @@ function onload() {
   alert(err)
 });
 }
+
+/*
+ * Source: https://codepen.io/martinwolf/pen/ZGXKEX/
+ * Parallax effect on page header
+ */
+$(document).ready(function() {
+    $(window).on('scroll', function() {
+        var st = $(this).scrollTop();
+
+        $('#box-one').css({
+            'transform': 'translateY('+ ((st)/1.3) +'px)'
+        });
+    });
+});

@@ -73,37 +73,27 @@ function makeSunburstWelcome(data, foodnames){
   var outerRadiusBig2 = 350
 
   var sunburst = d3.select("#welcomesvg")
-    .append('g')
-    .attr('transform', 'translate(' + width + ',' + height + ')');
+      .append('g')
+      .attr('transform', 'translate(' + width + ',' + height + ')');
 
-  var colors = d3.scaleSequential(d3.interpolateReds)
-                  .domain([0,3000])
-  var colorsBlue = d3.scaleSequential(d3.interpolateReds)
-                  .domain([0,40])
-
-  var arc = d3.arc()
-              .innerRadius(radius)
-              .outerRadius(outerRadius);
-  var labelArc = d3.arc()
-            .outerRadius(radius - 40)
-            .innerRadius(outerRadius - 40);
-  var arc2 = d3.arc()
-              .innerRadius(radiusBig)
-              .outerRadius(outerRadiusBig);
-  var arc3 = d3.arc()
-              .innerRadius(radiusBig2)
-              .outerRadius(outerRadiusBig2);
+  var arc = d3.arc().innerRadius(radius).outerRadius(outerRadius);
+  var labelArc = d3.arc().outerRadius(radius - 40).innerRadius(outerRadius - 40);
+  var arc2 = d3.arc().innerRadius(radiusBig).outerRadius(outerRadiusBig);
+  var arc3 = d3.arc().innerRadius(radiusBig2).outerRadius(outerRadiusBig2);
   var pie = d3.pie()
               .value(function(d, i) {return d; })
               .sort(null);
-
   var dataList = [set1, set1, set2]
   var arcList = [arc, arc2, arc3]
   var opacityList = [0.7, 0.1, 0.3]
+  var colors = d3.scaleSequential(d3.interpolateReds)
+                  .domain([0,3000])
+  var colorsBlue = d3.scaleSequential(d3.interpolateReds).domain([0,40])
+
 
   // Loop over the three arcs
   for (var j = 0; j < 3; j++) {
-
+    
     // Append paths for the sunburst
     sunburst.selectAll("#sunburstsvg")
           .data(pie(dataList[j]))
