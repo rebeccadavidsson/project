@@ -89,6 +89,7 @@ Tooltip is downloaded from [github.com](https://github.com/jprichardson/d3-toolt
   * in `linechart.js`, an array of foodnames is made out of 'dataset = ["empanada", "quinoa", "cauliflower", "coffee"]'
 5. If you want to change the years (for example to 2004-2019 instead of 2004-2016), add these years to the years array in `main.js` and other files.
 
+  [![BCH compliance](https://bettercodehub.com/edge/badge/rebeccadavidsson/project?branch=master)](https://bettercodehub.com/)  
 
 
   <p align="center"><i>

@@ -174,101 +174,72 @@ function getMonth(index, dataArray) {
   var monthsArray = []
 
   if (index >= 0 && index < 5) {
-    dataArrayTotal = []
-    for (var i = 0; i < 5; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(0, 5, dataArray)
     monthsArray.push({"name" : "January", "children" : dataArrayTotal})
     return monthsArray
   }
 
   else if (index >= 5 && index < 9) {
-    dataArrayTotal = []
-    for (var i = 5; i < 9; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(5, 9, dataArray)
     monthsArray.push({"name" : "February", "children" : dataArrayTotal})
     return monthsArray
   }
   else if (index >= 9 && index < 13) {
-    dataArrayTotal = []
-    for (var i = 9; i < 13; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(9, 13, dataArray)
     monthsArray.push({"name" : "March", "children" : dataArrayTotal})
     return monthsArray
   }
   else if (index >= 13 && index < 17) {
-    dataArrayTotal = []
-    for (var i = 13; i < 17; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(13, 17, dataArray)
     monthsArray.push({"name" : "April", "children" : dataArrayTotal})
     return monthsArray
   }
   else if (index >= 17 && index < 22) {
-    dataArrayTotal = []
-    for (var i = 17; i < 22; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(17, 22, dataArray)
     monthsArray.push({"name" : "May", "children" : dataArrayTotal})
     return monthsArray
   }
   else if (index >= 22 && index < 26) {
-    dataArrayTotal = []
-    for (var i = 22; i < 26; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(22, 26, dataArray)
     monthsArray.push({"name" : "June", "children" : dataArrayTotal})
     return monthsArray
   }
   else if (index >= 26 && index < 31) {
-    dataArrayTotal = []
-    for (var i = 26; i < 31; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(26, 31, dataArray)
     monthsArray.push({"name" : "July", "children" : dataArrayTotal})
     return monthsArray
   }
   else if (index >= 31 && index < 35) {
-    dataArrayTotal = []
-    for (var i = 31; i < 35; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(31, 35, dataArray)
     monthsArray.push({"name" : "August", "children" : dataArrayTotal})
     return monthsArray
   }
   else if (index >= 35 && index < 39) {
-    dataArrayTotal = []
-    for (var i = 35; i < 39; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(35, 39, dataArray)
     monthsArray.push({"name" : "September", "children" : dataArrayTotal})
     return monthsArray
   }
   else if (index >= 39 && index < 44) {
-    dataArrayTotal = []
-    for (var i = 39; i < 44; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(39, 44, dataArray)
     monthsArray.push({"name" : "October", "children" : dataArrayTotal})
     return monthsArray
   }
   else if (index >= 44 && index < 48) {
-    dataArrayTotal = []
-    for (var i = 44; i < 48; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(44, 48, dataArray)
     monthsArray.push({"name" : "November", "children" : dataArrayTotal})
     return monthsArray
   }
   else if (index >= 48 && index < 52) {
-    dataArrayTotal = []
-    for (var i = 48; i < 52; i++) {
-      dataArrayTotal.push(dataArray[i])
-    }
+    var dataArrayTotal = returnMonth(48, 52, dataArray)
     monthsArray.push({"name" : "December", "children" : dataArrayTotal})
     return monthsArray
   }
+}
 
+function returnMonth(a, b, dataArray) {
+  var dataArrayTotal = []
+  for (var i = a; i < b; i++) {
+    dataArrayTotal.push(dataArray[i])
+  }
+  return dataArrayTotal
 }

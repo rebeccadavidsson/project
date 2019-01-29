@@ -99,15 +99,10 @@
         ]);
       } else {
         scale = domain[0] instanceof Date ? d3Scale.scaleTime() : d3Scale.scaleLinear();
-
-        scale = scale
-          .domain(domain)
-          .range([
-            0,
-            orientation === top || orientation === bottom ? width : height,
-          ])
-          .clamp(true);
-      }
+        scale = scale.domain(domain)
+        .range([0, orientation === top || orientation === bottom
+          ? width : height,])
+          .clamp(true);}
 
       identityClamped = d3Scale.scaleLinear()
         .range(scale.range())
@@ -127,8 +122,7 @@
 
       var axis = selection.selectAll('.axis').data([null]);
 
-      axis
-        .enter()
+      axis.enter()
         .append('g')
         .attr('transform', transformAcross(k * 7))
         .attr('class', 'axis');
@@ -199,13 +193,8 @@
         .attr('font-family', 'sans-serif')
         // .attr("stroke", "white")
         .attr("fill", "white")
-        .attr(
-          'text-anchor',
-          orientation === right
-            ? 'start'
-            : orientation === left
-            ? 'end'
-            : 'middle'
+        .attr('text-anchor', orientation === right ? 'start'
+            : orientation === left ? 'end': 'middle'
         );
 
       handleEnter
@@ -213,40 +202,30 @@
         .attr('transform', 'rotate(' + (orientation + 1) * 90 + ')')
         .attr('d', handle)
         .attr('fill', 'white')
-        // .attr('stroke', '#777');
+        .attr('stroke', '#777');
 
       if (displayValue && value.length === 1) {
         handleEnter
           .append('text')
           .attr('font-size', 17) // TODO: Remove coupling to font-size in d3-axis
           .attr(y, k * 27)
-          .attr(
-            'dy',
-            orientation === top
-              ? '0em'
-              : orientation === bottom
-              ? '.81em'
-              : '.32em'
-          )
+          .attr('dy', orientation === top? '0em': orientation === bottom
+              ? '.81em': '.32em')
           .text(tickFormat(value[0]));
       }
 
-      context
-        .select('.track')
+      context.select('.track')
         .attr(x + '2', scale.range()[1] + SLIDER_END_PADDING);
 
-      context
-        .select('.track-inset')
+      context.select('.track-inset')
         .attr(x + '2', scale.range()[1] + SLIDER_END_PADDING);
 
       if (fill) {
-        context
-          .select('.track-fill')
+        context.select('.track-fill')
           .attr(x + '2', value.length === 1 ? scale(value[0]) : scale(value[1]));
       }
 
-      context
-        .select('.track-overlay')
+      context.select('.track-overlay')
         .attr(x + '2', scale.range()[1] + SLIDER_END_PADDING);
 
       context.select('.axis').call(
@@ -257,28 +236,21 @@
       );
 
       // https://bl.ocks.org/mbostock/4323929
-      selection
-        .select('.axis')
+      selection.select('.axis')
         .select('.domain')
         .remove();
 
       context.select('.axis').attr('transform', transformAcross(k * 7));
 
-      context
-        .selectAll('.axis text')
+      context.selectAll('.axis text')
         .attr('fill', '#aaa')
         .attr(y, k * 20)
         .attr(
           'dy',
           orientation === top ? '0em' : orientation === bottom ? '.71em' : '.32em'
         )
-        .attr(
-          'text-anchor',
-          orientation === right
-            ? 'start'
-            : orientation === left
-            ? 'end'
-            : 'middle'
+        .attr('text-anchor',orientation === right? 'start'
+            : orientation === left? 'end': 'middle'
         );
 
       context.selectAll('.axis line').attr('stroke', '#aaa');
@@ -380,8 +352,9 @@
         var index = d3Array.scan(distances);
 
         selection.selectAll('.axis .tick text').attr('opacity', function(d, i) {
-          return i === index ? 0 : 1;
-        });
+          return i === index ? 0 : 0.9;
+        })
+        .attr("fill", "white");
       }
     }
 
