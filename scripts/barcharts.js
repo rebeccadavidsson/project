@@ -119,28 +119,7 @@ function makeBarcharts(data, foodnames) {
    */
   function addDropdown() {
 
-    var dropdown = d3.select("#dropdowndiv")
-            .attr("id", "dropdown") // TODO
-
-    // Add dropdown menu
-    dropdown.append("select")
-            .attr("id", "select")
-            .selectAll("option")
-            .data(foodnames) // TODO sort
-            .enter()
-              .append("option")
-              .property("selected", function(d){ return d === "-"; })
-              .attr("value", function(d){
-                  return d;
-              })
-              .text(function(d){
-
-                // Disable first option
-                if (d === "-") {
-                  d3.select(this).property("disabled", true)
-                }
-                  return d;
-              });
+    var dropdown = initialDropdown(foodnames, "#dropdowndiv")
 
     // Update function on dropdown selection
     dropdown.on('change', function(){
@@ -339,4 +318,35 @@ function getDataArray(data, food, year) {
 
   return array
 }
-// TODO
+
+/*
+ * Initialize dropdown with all foodnames
+ */
+function initialDropdown(foodnames, div) {
+
+  var dropdown = d3.select(div)
+          .attr("id", "dropdown")
+
+  // Add dropdown menu
+  dropdown.append("select")
+          .attr("id", "select")
+          .selectAll("option")
+          .data(foodnames)
+          .enter()
+            .append("option")
+            .property("selected", function(d){ return d === "-"; })
+            .attr("value", function(d){
+                return d;
+            })
+            .text(function(d){
+
+              // Disable first option
+              if (d === "-") {
+                d3.select(this).property("disabled", true)
+              }
+                return d;
+            });
+
+  return dropdown
+
+}

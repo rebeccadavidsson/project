@@ -134,4 +134,5 @@ TODO:
 * Dropdown functies bij elkaar voegen
 
 # Dag 17: Dinsdag
-* Ik heb een LINCENSE, README en REPORT geschreven. 
+* Ik heb een LINCENSE, README en REPORT geschreven.
+* Ik heb ervoor gekozen om sommige functies bi elkaar te voegen, ondanks dat ze dan langer worden. Ik vind het persoonlijk toch overzichtelijker omdat de functies anders heel veel parameters krijgen als input.

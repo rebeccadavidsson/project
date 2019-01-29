@@ -1,6 +1,7 @@
 /*
  * Loads data and passes it on to several functions.
  */
+
 function onload() {
 
   // Open file
@@ -48,7 +49,7 @@ function onload() {
   foodnames.splice(0,0,"-")
 
   // Make a sunburst when page is opened
-  makeSunburstWelcome(data, foodnames) // TODO
+  makeSunburstWelcome(data, foodnames)
 
   // Make the first sunburst
   makeSunburst(data, foodname)

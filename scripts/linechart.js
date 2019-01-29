@@ -11,8 +11,6 @@ function makeLinechart(data, foodname){
   var padding = 100
   var linePadding = 10
   var marginTop = 200
-  var xLoc = 1100
-  var yLoc = 80
 
   // Make an array that saves only 2 foodnames, used in compare function
   tempFoodname = "anise"
@@ -136,7 +134,7 @@ function makeLinechart(data, foodname){
       .on("mouseout", function() { focus.style("display", "none"); })
       .on("mousemove", mousemove);
 
-  linechartTitles(linechart, padding, yLoc, xLoc)
+  linechartTitles()
 
 }
 
@@ -194,26 +192,7 @@ function updateLineChart(data, foodname) {
  */
 function linechartDropdown(data, foodnames) {
 
-  var dropdownLinechart = d3.selectAll("#comparediv")
-
-  //
-  dropdownLinechart.append("select")
-          .selectAll("option")
-          .data(foodnames)
-          .enter()
-            .append("option")
-            .property("selected", function(d){ return d === "-"; })
-            .attr("value", function(d){
-                return d;
-            })
-            .text(function(d){
-
-              // Disable first option
-              if (d === "-") {
-                d3.select(this).property("disabled", true)
-              }
-                return d;
-            });
+  var dropdownLinechart = initialDropdown(foodnames, "#comparediv")
 
   // Update linechart, sunburst and barchart on click
   dropdownLinechart.on('change', function(d){
@@ -324,7 +303,11 @@ function makeMiniLinecharts(data) {
 /*
  * Append text and title to the linechart
  */
-function linechartTitles(linechart, padding, yLoc, xLoc) {
+function linechartTitles() {
+  var xLoc = 1100
+  var yLoc = 80
+  var padding = 100
+  var linechart = d3.selectAll("#linechart")
 
   linechart.append("text")
           .text("Mean searching rates of anise")

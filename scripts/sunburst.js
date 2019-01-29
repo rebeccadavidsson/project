@@ -59,6 +59,7 @@ function makeSunburst(dataX, tempFoodname){
  */
 function makeSunburstWelcome(data, foodnames){
 
+
   // Get preview data.
   var set1 = getDataMeans(data, "frozen-yogurt")[0]
   var set2 = getDataMninBars(data, "pie")[0]
@@ -93,7 +94,7 @@ function makeSunburstWelcome(data, foodnames){
 
   // Loop over the three arcs
   for (var j = 0; j < 3; j++) {
-    
+
     // Append paths for the sunburst
     sunburst.selectAll("#sunburstsvg")
           .data(pie(dataList[j]))
