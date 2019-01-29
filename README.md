@@ -1,7 +1,7 @@
 # Programming project 2019 - Food trends based on Google searches
 Minor programming UvA  
 Name: Rebecca Davidsson  
-Student number: 11252138
+Student number: 11252138  
 E-mail: rebeccadavidsson3@gmail.com
 
 # [Github Page](https://rebeccadavidsson.github.io/project/index.html)
@@ -13,7 +13,7 @@ The page starts with a header than can be scrolled down by clicking on the scrol
 After scrolling down, a page with information about the visualisations appears as an introduction to the page. An (interactive) sunburst preview is presented on the background. The other visualisations are presented as the user scrolls down.
 ![Alt text](doc/page0.png)
 
-### Sunburst and barchart(s)
+## Sunburst and barchart(s)
 ![Alt text](doc/page1.png)
 **The sunburst** diagram represents data from a specific food category over the years 2004 up until 2016. The first thing you get to see when you scroll down is an interactive sunburst diagram. A preview is represented on the right.
 
@@ -21,11 +21,32 @@ The outer circle represents every weekly data point. For instance, the total sea
 
 The inner circle represents the sum of all data points for every year. As you can see, the number of inner circles is 13, each representing one year between 2004 and 2016. Zoom in to a more detailed sunburst by clicking on an element. Go back by clicking in the middle.
 
-**The bargraph** automatically changes by choosing a food category. The graph represents a yearly overview of search rates for a specific food category. Change the year by moving the slider.
+**The bargraph** changes automatically by choosing a food category. The graph represents a yearly overview of search rates for a specific food category. Change the year by moving the slider.
 
-### Linechart
+## Linechart
 ![Alt text](doc/page2.png)
 **The linegraph** represents mean searching rates for a chosen food category. The graph can be used to find a year in which a topic was trending. For instance, 'coffee' was trending in the year 2012. Choose the food category with any dropdown bar.
+
+## Additional info
+![Alt text](doc/page3.png)
+![Alt text](doc/page4.png)
+These barcharts and extra sunburst let the user explore the data. The sunburst lets the user view the hidden layers under the sunburst.
+
+# Repository structure
+1. data: downloaded and converted dataset.
+2. doc: all images used for md-files in this repository.
+3. scripts: all javascript files and one python file.
+4. style: all CSS-files.
+
+* DESIGN.md: the desired design of this project (technical design and style)
+* LICENSCE.md: MIT license
+* PROCESS.md: a daily process update of 'the making of' of the project including all decisions made regarding code and visualisation.
+* PROPOSAL.md: the initial idea for the project
+* README.md: you are reading this :)
+* REPORT.md: final report about the project
+* STYLE.md: a few rules for writing code in Javascript
+* index.html: the main HTML-file where the page is based on.
+
 
 # Data and sources
 All data is downloaded from [kaggle.com](https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004) as a csv file.  
@@ -43,7 +64,7 @@ The questionmark is inspired by [tutorialzine.com](https://tutorialzine.com/2014
 ### Linechart
 The line that appears when user hovers over the linechart is inspired by [bl.ocks.org](https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3)
 
-### Tooltio
+### Tooltip
 Tooltip is downloaded from [github.com](https://github.com/jprichardson/d3-tooltip)
 
 ### Moving arrow and scrolling
@@ -51,6 +72,11 @@ Tooltip is downloaded from [github.com](https://github.com/jprichardson/d3-toolt
 * The scrolling function is inspired by [W3schools.com](https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll).
 * The parallax effect is inspired by [codepen.io](https://codepen.io/martinwolf/pen/ZGXKEX/)
 
+## Plugins
+* D3
+* D3 simple slider
+* D3 Tooltip
+* jQuery
 
 # How to use this page with other dataset(s)
 1. Download dataset as a csv file from https://trends.google.com/trends/?geo=US or https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004 . Make sure dataset has this format:

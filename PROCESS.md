@@ -91,7 +91,7 @@ TODO:
 * Missende data eruit gehaald, ticks weggehaald
 * Ik ben heel blij, want het is gelukt om de data om te zetten in een bruikbaar format voor de sunburst. Ik heb hieruit ook een mooie sunburst kunnen maken die goed update!
 * Als ik tijd over heb wil ik ook nog een ring aan de sunburst toevoegen die de maanden weergeeft.
-* Ik heb ervoor gekozen om de weken altijd een vaste maand te geven. Deze afweging heeft als gevolg dat het makkelijker en sneller gaat om de maand van de week te weten maar dat deze niet altijd klopt. 
+* Ik heb ervoor gekozen om de weken altijd een vaste maand te geven. Deze afweging heeft als gevolg dat het makkelijker en sneller gaat om de maand van de week te weten maar dat deze niet altijd klopt.
 
 # Dag 12: Dinsdag
 * Vandaag heb ik data toegevoegd aan de sunburst. Je kan nu ook de maanden bekijken.
@@ -132,3 +132,6 @@ TODO:
 * Alle functies om data te verkrijgen in 1 bestand zetten
 * Jaartallen van voorbeeld barcharts op 2004 zetten.
 * Dropdown functies bij elkaar voegen
+
+# Dag 17: Dinsdag
+* Ik heb een LINCENSE, README en REPORT geschreven. 
