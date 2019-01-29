@@ -59,6 +59,7 @@ function makeSunburst(dataX, tempFoodname){
  */
 function makeSunburstWelcome(data, foodnames){
 
+  // Get preview data. 
   var set1 = getDataMeans(data, "frozen-yogurt")[0]
   var set2 = getDataMninBars(data, "pie")[0]
 
