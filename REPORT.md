@@ -100,15 +100,15 @@ There were no important changes relative to PROPOSAL.md. However, I made some im
 
 ## Other solutions
 In an ideal world where there was more time for this project, I would have chosen to:
-* make a tooltip on the sunburst, showing the year, month or week and the search rate;
 * calculate which month corresponds to which exact week;
 * made a smooth transition of the sunburst when user switches to another food category;
+* find a solution for the invisible ring.
 * let the user add and delete lines from the linechart;
 * Keep track of the user's choices history by presenting the chosen foods at the right of the page.
 
 
 ## Conclusion
-These visualization of Google search trends could also be used for other categories, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualizations by Google (see figure), I think these graphs are clear overview mainly because the line chart shows yearly mean searching rates instead of all measured points and because of the interactivity between the barchart and the sunburst.
+These visualization of Google search trends could also be used for other categories, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualizations by Google (see figure), I think the graphs from this page give a clear overview, mainly because the line chart shows mean searching rates instead of all measured points. Additionally, the interactivity between the barchart and the sunburst makes it easy to understand the information. 
 
 Google:
 ![Alt text](doc/grapfruitGoogle.png)
