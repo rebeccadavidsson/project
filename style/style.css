@@ -17,11 +17,6 @@ body {
   max-width: 93%;
 }
 
-section {
-  min-height: 100%;
-}
-
-
 header {
   height: 140px;
   background-color: #00003D;
