@@ -52,13 +52,39 @@ function makeSunburst(dataX, tempFoodname){
 
     addTitle(tempFoodname, width, svg, 0.97)
 
+    invisiblerRing()
+
+}
+
+/*
+ * Make an outer ring on top of the sunburst hiding other layers.
+ */
+function invisiblerRing() {
+
+  var width = 345;
+  var height = 420;
+  var radius = 400;
+  var outerRadius = 515;
+  var arc = d3.arc().innerRadius(radius).outerRadius(outerRadius);
+  var pie = d3.pie()
+              .value(function(d, i) {return d; })
+              .sort(null);
+
+  var sunburst = d3.select("#sunburstsvg")
+        .append('g')
+        .attr('transform', 'translate(' + width + ',' + height + ')');
+
+  sunburst.selectAll("#sunburstsvg").data(pie([1]))
+        .enter()
+        .append("path")
+        .attr("d", arc)
+        .attr("fill", "darkgrey")
 }
 
 /*
  * Make a sunburst with low opacity on the background.
  */
 function makeSunburstWelcome(data, foodnames){
-
 
   // Get preview data.
   var set1 = getDataMeans(data, "frozen-yogurt")[0]
@@ -165,6 +191,8 @@ function updateSunburst(dataX, food) {
   d3.selectAll("#sunburstsvg").selectAll("#sunburstTitle").remove()
 
   addTitle(food, width, svg, 0.97)
+
+  invisiblerRing()
 }
 
 /*
@@ -249,11 +277,27 @@ function labelTransform(d) {
  * opacity of outer circles is 0, making them invisible.
  */
 function makePaths(g, root) {
+
+  // Add tooltip that shows one datapoint.
+  var tipSunburst = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([25, 0])
+              .html(function(d, i) {
+                  return "<span>" + "Total: " + d.value + "<br></span>";
+              })
+  d3.selectAll("#sunburstsvg").call(tipSunburst)
+
   var path = g.append("g")
     .attr("class", "path")
     .selectAll("path")
     .data(root.descendants().slice(1))
     .enter().append("path")
+    .on("mouseover", function(d) {
+      tipSunburst.show(d)
+    })
+    .on("mouseout", function(d) {
+      tipSunburst.hide(d)
+    })
     .attr("fill", function(d) {
         while (d.depth > 1) {
           d = d.parent
@@ -266,12 +310,10 @@ function makePaths(g, root) {
     .attr("class", function(d) {
       if (d.parent.data.name) {
         return (d.parent.data.name + d.data.name);
-
       }
       else {
         return d.data.name
       }
-
     })
 
     return path

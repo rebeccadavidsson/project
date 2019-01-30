@@ -108,6 +108,28 @@ function getDataMninBars(data,food) {
 }
 
 /*
+ * Create an array of [week, rate] for every datapoint in a year.
+ * Output is an array of [week, rate] and min and max value of array.
+ */
+function getDataArray2(data, food, year) {
+
+  var keys = data[food][year];
+  array = []
+  arr2 = []
+  for (var key in keys) {
+    array.push([keys[key]]);
+    arr2.push(keys[key])
+  }
+
+  // Fill in the week-numbers
+  for (var i = 0; i < weeks; i++) {
+    array[i].push(weeksArray[i])
+  }
+
+  return [array, Math.min.apply(null,arr2), Math.max.apply(null,arr2)]
+}
+
+/*
  * Convert data into usable format for the sunburst.
  */
 function sunburstData(data, foodname) {
@@ -127,7 +149,7 @@ function sunburstData(data, foodname) {
   function getArray(year) {
     var tempArr = []
     for (var j = 0; j < weeks; j++) {
-      dataArray = getDataArray3(data, foodname, year)
+      dataArray = getDataArray2(data, foodname, year)[0]
       tempArr.push({"name" : dataArray[j][1], "size" :  parseInt(dataArray[j][0])})
     }
     return tempArr
@@ -146,22 +168,6 @@ function sunburstData(data, foodname) {
   flare.push({"name": "flare", "children" : testJson})
 
   return flare;
-}
-
-
-function getDataArray3(data, food, year) {
-
-  var keys = data[food][year];
-  array = []
-  for (var key in keys) {
-    array.push([keys[key]]);
-  }
-  // Fill in the week-numbers
-  for (var i = 0; i < weeks; i++) {
-    array[i].push(weeksArray[i])
-  }
-
-  return array
 }
 
 /*

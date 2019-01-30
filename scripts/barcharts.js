@@ -10,7 +10,7 @@ function makeBarcharts(data, foodnames) {
   var yPadding = 100
   var xPadding = yPadding - 5
   colors = ["#660066", "#990099", "#ff00ff", "#ff99ff"]
-  foods = ["easter-egg", "apricot", "blueberry", "strawberry"]
+  foods = ["persimmon", "apricot", "blueberry", "strawberry"]
   yearsSelected = ["2004", "2004", "2004", "2004"]
   var datasvg = d3.select("#datasvg")
   var bar = datasvg.selectAll(".bar")
@@ -39,7 +39,6 @@ function makeBarcharts(data, foodnames) {
               })
   datasvg.call(tip);
   d3.selectAll("#storysvg").call(tip)
-  d3.select("#sunburstsvg").call(tip)
 
   // Load first bar charts when page is opened
   for (i = graphSpace, j = 0; i < 1000; i += graphSpace, j++) {
@@ -50,7 +49,7 @@ function makeBarcharts(data, foodnames) {
 
     // Fill in the barchart with rectangles
     function fillBars(food, color){
-      bar.data(getDataArray(data, food, "2004"))
+      bar.data(getDataArray2(data, food, "2004")[0])
         .enter()
         .append("rect")
         .attr("class", "bar")
@@ -248,7 +247,7 @@ function exploreBarCharts(data) {
 
         // Fill in the barchart with rectangles
         function fillBars(food, year, color){
-          bar.data(getDataArray(data, food, year))
+          bar.data(getDataArray2(data, food, year)[0])
             .enter()
             .append("rect")
             .attr("class", "bar")
@@ -298,25 +297,6 @@ function exploreBarCharts(data) {
         }fillBars(foods[j], yearsSelected[j], colors[j])
       }
     }
-}
-
-/*
- * Create an array of [week, rate] for every datapoint in a year.
- */
-function getDataArray(data, food, year) {
-
-  // Process data
-  var keys = data[food][year];
-  array = []
-  for (var key in keys) {
-    array.push([keys[key]]);
-  }
-  // Fill in the week-numbers
-  for (var i = 0; i < weeks; i++) {
-    array[i].push(weeksArray[i])
-  }
-
-  return array
 }
 
 /*

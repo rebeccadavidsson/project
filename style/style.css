@@ -144,6 +144,7 @@ header {
 }
 
 .d3-tip {
+  position: absolute;
   line-height: 1.5;
   font-weight: 400;
   font-family:"avenir next", Arial, sans-serif;
@@ -200,4 +201,8 @@ header {
   width: 100%;
   height: 1100px;
   background-image: linear-gradient(to bottom, grey , #000058);
+}
+
+.d3-toolip {
+  position: absolute !important;
 }

@@ -6,7 +6,7 @@ function makeUnderBarchart(data, foodname) {
 
   underBarchart = d3.select("#sunburstsvg")
   space = 600
-  yPadding = 230
+  yPadding = 250
   xPadding = -5
   circleX = 740
   circleY = 960
@@ -28,13 +28,13 @@ function makeUnderBarchart(data, foodname) {
   // Add x- and y-axis
   underBarchart.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(30," + 1000 + ")")
+        .attr("transform", "translate(30," + 1020 + ")")
         .call(d3.axisBottom(xAxis2).tickSize(2));
 
   underBarchart.append("g")
         .append("g")
         .attr("class", "y axis")
-        .attr("transform", "translate(30," + 900 + ")")
+        .attr("transform", "translate(30," + 920 + ")")
         .call(d3.axisLeft(yScale2).ticks(2));
 
   // Append bars with tooltip
@@ -46,7 +46,7 @@ function makeUnderBarchart(data, foodname) {
             .attr("x", function(d, i) {return(xScale2(i) + xPadding)})
             .attr("y", function(d) {
 return(yScale2(d[0]) + yPadding + 100 - space)})
-            .attr("width", 8)
+            .attr("width", 10)
             .attr("height", function(d) {return d[0]})
             .attr("fill", "white")
             .on('mouseover', function(d) {
@@ -56,7 +56,7 @@ return(yScale2(d[0]) + yPadding + 100 - space)})
                   tip.show(d);
 
                   // Highlight corresponding bar in sunburst
-                  hoverBar(d, "mouseover", 0.1, "0s")
+                  hoverBar(d, "mouseover", 0.1)
               })
             .on('mouseout', function(d) {
                   d3.select(this)
@@ -124,6 +124,7 @@ function updateUnderBarChart(data, foodname, year) {
                  getDataArray2(data, foodname, year)[2]])
         .range([100,0])
 
+  var sunburst = d3.selectAll("#sunburstsvg")
   var bars = d3.selectAll("#sunburstsvg").selectAll("rect")
 
   // Update bars
@@ -140,16 +141,16 @@ function updateUnderBarChart(data, foodname, year) {
       .ease(d3.easeBounceOut)
 
     // Update y-axis
-    d3.selectAll("#sunburstsvg").selectAll(".y")
-      .transition()
-      .duration(400)
-      .call(d3.axisLeft(yScale).ticks(5));
+    sunburst.selectAll(".y")
+          .transition()
+          .duration(400)
+          .call(d3.axisLeft(yScale).ticks(5));
 
     // Update year text
-    d3.selectAll("#sunburstsvg").selectAll(".yearcircle, .foodnameBig").remove()
+    sunburst.selectAll(".yearcircle, .foodnameBig").remove()
 
     // Append year
-    d3.select("#sunburstsvg").append("text")
+    sunburst.append("text")
             .text(year)
             .attr("x", circleX)
             .attr("y", circleY + 20)
@@ -157,7 +158,7 @@ function updateUnderBarChart(data, foodname, year) {
             .attr("text-anchor", "middle")
 
     // Append foodname
-    d3.select("#sunburstsvg").append("text")
+    sunburst.append("text")
             .text(foodname)
             .attr("x", circleX)
             .attr("y", circleY - 5)
@@ -174,7 +175,7 @@ function updateUnderBarChart(data, foodname, year) {
  * When a bar in the barchart gets hovered, highlight the
  * corresponding burst (in the sunburst) by selecting class names.
  */
-function hoverBar(d, mouse, opacity, transition) {
+function hoverBar(d, mouse, opacity) {
 
   // Calculate corresponding month
   if (d[1] == 52) {
@@ -187,39 +188,31 @@ function hoverBar(d, mouse, opacity, transition) {
   // Get classname from child and change opacity
   var y =  d3.select(".yearcircle").text() + "month"
   document.getElementsByClassName(y)[month - 1].style.opacity = opacity
-  document.getElementsByClassName(y)[month - 1].style.transition = transition;
 
   // Get classname from parent and change opacity
   var x =  "flare" + d3.select(".yearcircle").text()
   var xTarget  = document.getElementsByClassName(x)
 
-  if (mouse === "mouseover") {
-    xTarget.item(0).style.opacity = opacity;
-    xTarget.item(0).style.transition = transition;
-  }
-  else if (mouse ==="mouseout") {
-    xTarget.item(0).style.transition = transition;
-    xTarget.item(0).style.opacity = opacity;
-  }
+  xTarget.item(0).style.opacity = opacity;
 
 }
 
 
-// TODO
-function getDataArray2(data, food, year) {
-
-  var keys = data[food][year];
-  array = []
-  arr2 = []
-  for (var key in keys) {
-    array.push([keys[key]]);
-    arr2.push(keys[key])
-  }
-
-  // Fill in the week-numbers
-  for (var i = 0; i < weeks; i++) {
-    array[i].push(weeksArray[i])
-  }
-
-  return [array, Math.min.apply(null,arr2), Math.max.apply(null,arr2)]
-}
+// // TODO
+// function getDataArray2(data, food, year) {
+//
+//   var keys = data[food][year];
+//   array = []
+//   arr2 = []
+//   for (var key in keys) {
+//     array.push([keys[key]]);
+//     arr2.push(keys[key])
+//   }
+//
+//   // Fill in the week-numbers
+//   for (var i = 0; i < weeks; i++) {
+//     array[i].push(weeksArray[i])
+//   }
+//
+//   return [array, Math.min.apply(null,arr2), Math.max.apply(null,arr2)]
+// }
