@@ -79,7 +79,7 @@ Tooltip is downloaded from [github.com](https://github.com/jprichardson/d3-toolt
 * jQuery, https://jquery.com/ License: MIT license
 
 # How to use this page with other dataset(s)
-These visualization of Google search trends could also be used for other categories, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualizations by Google (see figure), I think the graphs from this page give a clear overview, mainly because the line chart shows mean searching rates instead of all measured points. Additionally, the interactivity between the barchart and the sunburst makes it easy to understand the information. 
+These visualization of Google search trends could also be used for other categories, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualizations by Google (see figure), I think the graphs from this page give a clear overview, mainly because the line chart shows mean searching rates instead of all measured points. Additionally, the interactivity between the barchart and the sunburst makes it easy to understand the information.
 
 1. Download dataset as a csv file from https://trends.google.com/trends/?geo=US or https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004 . Make sure dataset has this format:
 ![Alt text](doc/format.png)
@@ -90,6 +90,7 @@ These visualization of Google search trends could also be used for other categor
   * In `barcharts.js` an array of foodnames is made out of 'foods = ["easter-egg", "apricot", "blueberry", "strawberry"]'
   * in `linechart.js`, an array of foodnames is made out of 'dataset = ["empanada", "quinoa", "cauliflower", "coffee"]'
 5. If you want to change the years (for example to 2004-2019 instead of 2004-2016), add these years to the years array in `main.js` and other files.
+6. Main functions are called from `main.js`. Take out unnecessary functions such as exploreBarCharts() and makeUnderSunburst() if you don't want to use them.   
 
   [![BCH compliance](https://bettercodehub.com/edge/badge/rebeccadavidsson/project?branch=master)](https://bettercodehub.com/)  
 

@@ -108,7 +108,7 @@ In an ideal world where there was more time for this project, I would have chose
 
 
 ## Conclusion
-These visualization of Google search trends could also be used for other categories, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualizations by Google (see figure), I think the graphs from this page give a clear overview, mainly because the line chart shows mean searching rates instead of all measured points. Additionally, the interactivity between the barchart and the sunburst makes it easy to understand the information. 
+These visualization of Google search trends could also be used for other categories, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualizations by Google, I think the graphs from this page give a clear overview, mainly because the line chart shows mean searching rates instead of all measured points. Additionally, the interactivity between the barchart and the sunburst makes it easy to understand the information. 
 
 Google:
 ![Alt text](doc/grapfruitGoogle.png)
