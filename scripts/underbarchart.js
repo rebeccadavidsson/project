@@ -196,23 +196,3 @@ function hoverBar(d, mouse, opacity) {
   xTarget.item(0).style.opacity = opacity;
 
 }
-
-
-// // TODO
-// function getDataArray2(data, food, year) {
-//
-//   var keys = data[food][year];
-//   array = []
-//   arr2 = []
-//   for (var key in keys) {
-//     array.push([keys[key]]);
-//     arr2.push(keys[key])
-//   }
-//
-//   // Fill in the week-numbers
-//   for (var i = 0; i < weeks; i++) {
-//     array[i].push(weeksArray[i])
-//   }
-//
-//   return [array, Math.min.apply(null,arr2), Math.max.apply(null,arr2)]
-// }
