@@ -9,8 +9,8 @@ E-mail: rebeccadavidsson3@gmail.com
 # [Demonstration video](https://www.youtube.com/watch?v=DO8v0WpsI3Q&frags=pl%2Cwn)
 
 # Page walkthrough
-The page starts with a header than can be scrolled down by clicking on the scroll button (or by scrolling down).
-After scrolling down, a page with information about the visualisations appears as an introduction to the page. An (interactive) sunburst preview is presented on the background. The other visualisations are presented as the user scrolls down.
+This page gives a user a clear overview of food trends based on Google searches. For example, the word 'easter-egg' reached a maximum of search rates at easter. This page could be practical for companies selling a product, to know when to advertise.  
+The page starts with a header than can be scrolled down by clicking on the scroll button (or by scrolling down). After scrolling down, a page with information about the visualisations appears as an introduction to the page. An (interactive) sunburst preview is presented on the background. The other visualisations are presented as the user scrolls down.
 ![Alt text](doc/page0.png)
 
 ## Sunburst and barchart(s)
@@ -49,7 +49,7 @@ These barcharts and extra sunburst let the user explore the data. The sunburst l
 
 
 # Data and sources
-All data is downloaded from [kaggle.com](https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004) as a csv file.  
+All data is downloaded from [kaggle.com](https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004) as a csv file. Not all data from this download page is used, due to missing data. This page does not include all food categories that have ever been searched on Google.   
 Other related datasets can be downloaded from [Google.com](https://trends.google.com/trends/?geo=US).
 
 ### Sunburst

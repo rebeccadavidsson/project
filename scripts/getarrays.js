@@ -16,43 +16,9 @@ function fillArrayWithNumbers(n) {
 var weeksArray = fillArrayWithNumbers(weeks)
 
 /*
- * Make an array of of datapoints of one year for a chosen food
- * Return array and min and max value of array.
- */
-function getDataArrayMinMax(data, food, year) {
-
- var keys = data[food][year];
- array = []
- for (var key in keys) {
-   array.push(parseInt(keys[key]));
- }
-
- return [array, Math.min.apply(null,array), Math.max.apply(null,array)]
-}
-
-/*
- * Make an array of all data points of every year for a chosen food
- */
-function getDataArrayYears(data, food) {
-
-   // Process data
-   var keys = data[food];
-   array = []
-
-   // Loop through every year
-   for (var key in keys) {
-
-     // Loop through every value of that year
-     for (var i = 1; i < weeks + 1; i++) {
-       array.push(parseInt(keys[key][i]))
-     }
-   }
-   return array
- }
-
-/*
 * Make an array of ALL searching rates per year.
 * Return array and min and max value of array.
+* This function is used for "welcome-sunburst".
 */
 function getDataMeans(data, food) {
  array = []

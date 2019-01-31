@@ -4,7 +4,7 @@ Name: Rebecca Davidsson
 Student number: 11252138  
 
 ## Goal
-The goal of this project was to give user a clear overview of food trends based on Google searches over the years 2004 - 2016. Another goal of this project was to give users the possibility to use these visualizations for other Google datasets such as search rates of political parties.  
+Google has a page that lets users select for a word to view a line graph of searching rates of this word. For example, when you select 'easter-egg', you see can see that the search rates for this word had its maximum at easter. However, this Google page is not that clear. The page doesn't really visualize the yearly maximum points. The goal of this project was to give user a clear overview of food trends based on Google searches over the years 2004 - 2016. This could be practical for companies selling a product, to know when to advertise. Another goal of this project was to give users the possibility to use these visualizations for other Google datasets such as search rates of political parties. This repository could function as a base for other visualizations.
 
 ![Alt text](doc/page1.png)
 ![Alt text](doc/page2.png)
@@ -57,17 +57,15 @@ Functions:
     * updateLegend
     * makeMiniLinecharts
     * mousemove: [source](https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3)  
-6. **getarrays.js:** converts data into useable arrays.
+6. **getarrays.js:** converts data into useable arrays. Every visualization requires a different array format.
 Functions:
-    * getDataArrayMinMax
-    * getDataArrayYears
-    * getDataMeans
-    * getDataMeansLineChart
-    * getDataMninBars
-    * getDataArray2
-    * sunburstData
-    * getMonth
-    * returnMonth
+    * getDataMeans: this function is used for the "welcome" sunburst.
+    * getDataMeansLineChart: used in the linechart
+    * getDataMninBars: used for the mini barcharts
+    * getDataArray2: used for main barchart and mini barcharts
+    * sunburstData: used for the sunburst
+    * getMonth: used for the function sunburstData() for the sunburst
+    * returnMonth: used for getMonth() for the sunburst
 7. **d3-simple-slider.js:** script to make a slider: [source](https://github.com/johnwalley/d3-simple-slider   ).
 8. **d3-tip.js:** tooltip script: [source](https://github.com/jprichardson/d3-tooltip).
 
@@ -102,6 +100,7 @@ Another challenge was to get all elements in the correct position on the page. I
 ### Important changes
 There were no important changes relative to PROPOSAL.md. However, I made some important changes during the project itself.
 * I decided to use Javascript to convert the data into a format that can be used for the sunburst.
+* After making a huge unclear function that converted data into usable arrays (in getarrays.js), I chose to change this function (with loads of parameters) into little ones. This resulted in functions with the same structure but with minor changes. The functions all look a lot like each other, but I thought it was way more clear to write seperate functions.
 * I decided to make another layer of months in the data format, so it will be clear which month the user has chosen after clicking on an element in the sunburst. See the figure below to see the effect of this decision.
 ![Alt text](doc/monthSunbursteffect.png)
 ![Alt text](doc/monthSunbursteffect0.png)

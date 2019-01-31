@@ -21,7 +21,7 @@ Bij het openen van de pagina zullen een stuk of 4 kleine line charts wordt weerg
 De sunburst geeft aan welke voedingsstof in welk jaar het meest wordt opgezocht en geeft ook informatie over de periodes van het jaar wanneer een voedingsstof wordt opgezocht.
 
 ### 3. Barchart
-In de stacked barchart kunnen opzoekwaardes van voedingsstoffen makkelijk met elkaar worden vergeleken over tijd.
+In de barchart kunnen opzoekwaardes van voedingsstoffen makkelijk met elkaar worden vergeleken over tijd.
 
 ## D3 plugins
 * D3 tip
