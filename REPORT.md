@@ -10,7 +10,7 @@ Google has a page that lets users select for a word to view a line graph of sear
 ![Alt text](doc/page2.png)
 
 ## Visual design
-This page contains three interactive visualizations: a sunburst, bar graph and a line graph. All visualizations show the flow of Google searching trends based on food over the years 2004 - 2016.
+This page contains three interactive visualizations: a sunburst, bar graph and a line graph. All visualizations show the flow of Google searching trends based on food over the years 2004 - 2016. The colors that I used don't represent any values but only have a function to make the page look good :-). The page has a structure that the user has to scroll down to view the next visualization. I chose a red line for the linechart because it's a good contrast to the background. 
 
 ## Technical design
 ![Alt text](doc/numbers.png)
