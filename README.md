@@ -6,7 +6,7 @@ E-mail: rebeccadavidsson3@gmail.com
 
 # [Github Page](https://rebeccadavidsson.github.io/project/index.html)
 
-# Demonstration video TODO
+# [Demonstration video](https://www.youtube.com/watch?v=DO8v0WpsI3Q&frags=pl%2Cwn)
 
 # Page walkthrough
 The page starts with a header than can be scrolled down by clicking on the scroll button (or by scrolling down).
@@ -78,7 +78,7 @@ Tooltip is downloaded from [github.com](https://github.com/jprichardson/d3-toolt
 * D3 Tooltip
 * jQuery, https://jquery.com/ License: MIT license
 
-# How to use this page with other dataset(s)
+# How to use this page with other datasets
 These visualization of Google search trends could also be used for other categories, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualizations by Google (see figure), I think the graphs from this page give a clear overview, mainly because the line chart shows mean searching rates instead of all measured points. Additionally, the interactivity between the barchart and the sunburst makes it easy to understand the information.
 
 1. Download dataset as a csv file from https://trends.google.com/trends/?geo=US or https://www.kaggle.com/GoogleNewsLab/food-searches-on-google-since-2004 . Make sure dataset has this format:

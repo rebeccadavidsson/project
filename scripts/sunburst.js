@@ -281,7 +281,7 @@ function makePaths(g, root) {
   // Add tooltip that shows one datapoint.
   var tipSunburst = d3.tip()
               .attr('class', 'd3-tip')
-              .offset([25, 0])
+              .offset([5, 0])
               .html(function(d, i) {
                   return "<span>" + "Total: " + d.value + "<br></span>";
               })

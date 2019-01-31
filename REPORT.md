@@ -20,8 +20,8 @@ This repository consists of 9 Javascript files and are all placed in the 'script
 1. **main.js:** main script to load data and call other functions.
 Functions:
     * onload;
-    * function to control scrolling events, [source: ](https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll)
-    * function to control parallax effect, [source: ](https://codepen.io/martinwolf/pen/ZGXKEX/)
+    * function to control scrolling events: [source](https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_eff_animate_smoothscroll)
+    * function to control parallax effect: [source](https://codepen.io/martinwolf/pen/ZGXKEX/)
 2. **barcharts.js:** makes a few interactive barcharts (see number 1 in the figure above). Features of this script are the tooltip and some onclick-events.
 Also, this script consists of a function to make a dropdown and a slider.
 Functions:
@@ -56,12 +56,20 @@ Functions:
     * linechartDropdown
     * updateLegend
     * makeMiniLinecharts
-    * mousemove, [source: ](https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3)  
+    * mousemove: [source](https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3)  
 6. **getarrays.js:** converts data into useable arrays.
-    *
-
-7. **d3-simple-slider.js:** script to make a slider, [source: ](https://github.com/johnwalley/d3-simple-slider   ).
-8. **d3-tip.js:** tooltip script, [source: ](https://github.com/jprichardson/d3-tooltip).
+Functions:
+    * getDataArrayMinMax
+    * getDataArrayYears
+    * getDataMeans
+    * getDataMeansLineChart
+    * getDataMninBars
+    * getDataArray2
+    * sunburstData
+    * getMonth
+    * returnMonth
+7. **d3-simple-slider.js:** script to make a slider: [source](https://github.com/johnwalley/d3-simple-slider   ).
+8. **d3-tip.js:** tooltip script: [source](https://github.com/jprichardson/d3-tooltip).
 
 ### HTML
 The only HTML-file in this repository is 'index.html' and includes all visualizations.
@@ -108,7 +116,7 @@ In an ideal world where there was more time for this project, I would have chose
 
 
 ## Conclusion
-These visualization of Google search trends could also be used for other categories, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualizations by Google, I think the graphs from this page give a clear overview, mainly because the line chart shows mean searching rates instead of all measured points. Additionally, the interactivity between the barchart and the sunburst makes it easy to understand the information. 
+These visualization of Google search trends could also be used for other categories, such as search rates for political parties or universities. By downloading the dataset (from Google) and using the python converter in this repository, other datasets can easily be used too. In comparison to the visualizations by Google, I think the graphs from this page give a clear overview, mainly because the line chart shows mean searching rates instead of all measured points. Additionally, the interactivity between the barchart and the sunburst makes it easy to understand the information.
 
 Google:
 ![Alt text](doc/grapfruitGoogle.png)
